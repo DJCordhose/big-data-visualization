@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Big Data in the Browser</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <!--<style>-->
+    <!--pre code {-->
+    <!--display: block;-->
+    <!--padding: 0.5em;-->
+    <!--background: #FFFFFF !important;-->
+    <!--color: #000000 !important;-->
+    <!--}-->
+    <!--.right-img {-->
+    <!--margin-left: 10px !important;-->
+    <!--float: right;-->
+    <!--height: 500px;-->
+    <!--}-->
+    <!--</style>-->
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h2>Big Data in the Browser</h2>
+
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <p>Online-Version: <a href="http://bit.ly/1VTfUZX">http://bit.ly/1VTfUZX</a></p>
+        </section>
+        <section>
+            <h2>Oliver Zeigermann</h2>
+            <img src="embarc13.png" height="50" align="left">
+            <img src="SF-Olli.jpg" height="100" align="right">
+            <ul>
+                <li>Developer, Architect, Consultant, and Coach
+                <li>Hamburg, Germany
+                <li><a target="_blank" href="http://zeigermann.eu">http://zeigermann.eu</a>
+                <li>Working for <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting
+                    GmbH</i></a>
+                <li><a target="_blank" href="https://twitter.com/DJCordhose">@DJCordhose</a>
+                <li><a target="_blank"
+                       href="https://entwickler.de/press/javascript-fuer-java-entwickler-4-168852.html">Book:
+                    JavaScript für
+                    Java-Entwickler</a>
+            </ul>
+        </section>
+        <section>
+    <!-- 60 minutes -->
+            <!--https://webtechcon.de/2015/sessions/big-data-im-browser-->
+
+            <!--Big Data, d.h. große Datenmengen im Browser anzeigen? Warum sollte man das machen und wie soll das denn-->
+            <!--überhaupt gehen? Wir werden uns dazu interaktive Visualisierung von Daten mit D3, Methoden zur kompakten-->
+            <!--Visualisierung von großen Datenmengen und interaktive Filterung von Datensätzen im Millionenbereich mit-->
+            <!--Crossfilter ansehen.            -->
+    <h2>Contents</h2>
+    <ol>
+        <!-- 5 minutes -->
+        <li class="fragment">Motivation: Why big data in the browser in the first place?
+        <!-- 10 minutes -->
+        <li class="fragment">D3.js: Dynamic graphics in the browser
+        <!-- 10 minutes -->
+        <li class="fragment">Crossfilter: Filtering millions of data sets in real time
+        <!-- 10 minutes -->
+        <li class="fragment">dc.js: Charting with D3 and Crossfilter
+        <!-- 5 minutes -->
+        <li class="fragment">Summary
+        <!-- 15 minutes -->
+        <li class="fragment">Questions and discussion
+    </ol>
+</section>
+        <section>
+            <h2>Motivation: Why big data in the browser in the first place?</h2>
+            <ul>
+                <li class="fragment">
+            </ul>
+        </section>
+        <section>
+            <h2>D3.js: Dynamic graphics in the browser</h2>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
+            </ul>
+        </section>
+        <section>
+            <h2>Crossfilter: Filtering millions of data sets in real time</h2>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
+            </ul>
+        </section>
+        <section>
+            <h2>dc.js: Charting with D3 and Crossfilter</h2>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Thank you!</h1>
+
+            <h3>Questions / Discussion</h3>
+
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <a href="http://www.embarc.de/"><img src="embarc13.png"
+                                                 height="150"></a>
+        </section>
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
