@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Big Data in the Browser</title>
+    <title>Big Data im Browser?</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -58,23 +58,23 @@
     <div class="slides">
 
         <section>
-            <h2>Big Data in the Browser</h2>
-
+            <h2>Big Data im Browser?</h2>
+            <h3>Dynamische Visualisierung im Browser</h3>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p>Online-Version: <a href="http://bit.ly/1VTfUZX">http://bit.ly/1VTfUZX</a></p>
+            <p>Online-Version: <a href="http://bit.ly/1DXcRtP">http://bit.ly/1DXcRtP</a></p>
         </section>
         <section>
             <h2>Oliver Zeigermann</h2>
             <img src="embarc13.png" height="50" align="left">
             <img src="SF-Olli.jpg" height="100" align="right">
             <ul>
-                <li>Developer, Architect, Consultant, and Coach
+                <li>Developer, Architect, Consultant und Coach
                 <li>Hamburg, Germany
                 <li><a target="_blank" href="http://zeigermann.eu">http://zeigermann.eu</a>
-                <li>Working for <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting
+                <li>Arbeitet für <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting
                     GmbH</i></a>
                 <li><a target="_blank" href="https://twitter.com/DJCordhose">@DJCordhose</a>
                 <li><a target="_blank"
@@ -91,51 +91,154 @@
             <!--überhaupt gehen? Wir werden uns dazu interaktive Visualisierung von Daten mit D3, Methoden zur kompakten-->
             <!--Visualisierung von großen Datenmengen und interaktive Filterung von Datensätzen im Millionenbereich mit-->
             <!--Crossfilter ansehen.            -->
-    <h2>Contents</h2>
+    <h2>Inhalt</h2>
     <ol>
         <!-- 5 minutes -->
-        <li class="fragment">Motivation: Why big data in the browser in the first place?
-        <!-- 10 minutes -->
+        <li class="fragment">Motivation: Warum denn überhaupt Big Data im Browser?
+        <!-- 15 minutes -->
         <li class="fragment">D3.js: Dynamic graphics in the browser
-        <!-- 10 minutes -->
+        <!-- 15 minutes -->
         <li class="fragment">Crossfilter: Filtering millions of data sets in real time
-        <!-- 10 minutes -->
+        <!-- 15 minutes -->
         <li class="fragment">dc.js: Charting with D3 and Crossfilter
         <!-- 5 minutes -->
-        <li class="fragment">Summary
-        <!-- 15 minutes -->
-        <li class="fragment">Questions and discussion
+        <li class="fragment">Zusammenfassung
+        <!-- 5 minutes -->
+        <li class="fragment">Fragen / Diskussion
     </ol>
 </section>
         <section>
-            <h2>Motivation: Why big data in the browser in the first place?</h2>
+            <h3>Motivation: Warum denn überhaupt Big Data im Browser?</h3>
             <ul>
-                <li class="fragment">
+                <li class="fragment">Diagramme sind eine großartige Art, viele Daten in ein übersichtliches Format zu bringen
+                <li class="fragment">Erst dynamische, interaktive Diagramme ermöglichen die optimiale Nutzung von Daten
+                <li class="fragment">Damit dynamische Diagramme im Browser optimal funktionieren, braucht man verzögerungsfreie Interaktionen
+                <li class="fragment">Verzögerungsfreie Interaktionen sind nur durch lokalen Programmcode und lokale Daten möglich
+                <li class="fragment">Das kann die Verarbeitung von bis zu mehreren Millionen Datensätzen im Browser erfordern
             </ul>
         </section>
         <section>
-            <h2>D3.js: Dynamic graphics in the browser</h2>
+            <h3>Ein Beispiel</h3>
+            <ul>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a>
+                <li><a target="_blank" href="http://localhost:8888/web/crime/">Major Canadian City Crime Stats 1998-2011 (lokal)</a>
+            </ul>
+        </section>
+
+        <section>
+            <h3>D3.js: Dynamic graphics in the browser</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
             </ul>
         </section>
         <section>
-            <h2>Crossfilter: Filtering millions of data sets in real time</h2>
+            <h3>D3.js Demo</h3>
+            <ul>
+                <li><a target="_blank" href="http://bl.ocks.org/mbostock/1353700">Planeten-Getriebe</a>
+            </ul>
+        </section>
+        <section>
+            <h3>D3.js Demo</h3>
+            <ul>
+                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#8">Planeten-Getriebe</a>
+                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#9">
+                    Hierarchische Bar-Charts</a>
+                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">
+                    Flexible Übergänge zwischen Darstellungsarten</a>
+                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
+                    Kollisionen</a>
+
+            </ul>
+        </section>
+        <section>
+            <h3>D3.js Demo (lokal)</h3>
+            <ul>
+                <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#8">Planeten-Getriebe</a>
+                <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#9">
+                Hierarchische Bar-Charts</a>
+                <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#11">
+                    Flexible Übergänge zwischen Darstellungsarten</a>
+                <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111018/index.html#33">
+                    Kollisionen</a>
+            </ul>
+        </section>
+        <section>
+            <h3>D3.js Code Samples aus den Beispielen</h3>
+<pre><code data-trim contenteditable>
+    1
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+    2
+</code></pre>
+        </section>
+        <section>
+            <h3>Crossfilter: Filtering millions of data sets in real time</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
             </ul>
         </section>
         <section>
-            <h2>dc.js: Charting with D3 and Crossfilter</h2>
+            <h3>Crossfilter Demo</h3>
             <ul>
-                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance</a>
+                <li class="fragment"><a target="_blank" href="http://localhost:63342/visualization/crossfilter/index.html">Airline on-time performance (lokal)</a>
             </ul>
+        </section>
+        <section>
+            <h3>Crossfilter Code Samples aus dem Beispiel</h3>
+<pre><code data-trim contenteditable>
+    1
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+    2
+</code></pre>
         </section>
 
         <section>
-            <h1>Thank you!</h1>
+            <h3>dc.js: Charting with D3 and Crossfilter</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+                <li class="fragment">D3 und Crossfilter sind beide für sich sehr mächtig und nützlich
+                <li class="fragment">Die Integration beider ist allerdings mühsam
+                <li class="fragment">dc.js übernimmt die Integration
+                <li class="fragment">dc.js stellt eine ganze Reihe dynamischer Diagramm-Typen für euch zur Verfügung
+            </ul>
+        </section>
+        <section>
+            <h3>dc.js Demo</h3>
+            <ul>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/">Nasdaq 100 Index 1985-2012</a>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/vc">US Venture Capital Landscape 2011</a>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">Überblick über alle Diagramm-Typen</a>
+            </ul>
+        </section>
+        <section>
+            <h3>dc.js Demo (lokal)</h3>
+            <ul>
+                <li><a target="_blank" href="http://localhost:8888/web/">Nasdaq 100 Index 1985-2012</a>
+                <li><a target="_blank" href="http://localhost:8888/web/vc/">US Venture Capital Landscape 2011</a>
+                <li><a target="_blank" href="http://localhost:8888/web/crime/">Major Canadian City Crime Stats 1998-2011</a>
+                <li><a target="_blank" href="http://localhost:8888/web/examples/">Überblick über alle Diagramm-Typen</a>
+            </ul>
+        </section>
+        <section>
+            <h3>dc.js Code Samples aus den Beispielen</h3>
+<pre><code data-trim contenteditable>
+    1
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+    2
+</code></pre>
+        </section>
 
-            <h3>Questions / Discussion</h3>
+        <section>
+            <h1>Zusammenfassung</h1>
+        </section>
+        <section>
+            <h1>Vielen Dank!</h1>
+
+            <h3>Fragen / Diskussion</h3>
 
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
