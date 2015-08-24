@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Sandbox</title>
+</head>
+<body>
+</body>
+<script src="lib/d3.js"></script>
+<script>
+    var w = 1280,
+            h = 800;
+
+    var svg = d3.select("body").append("svg:svg")
+            .attr("width", w)
+            .attr("height", h);
+    var data = [{"x": 100, "y": 50, color: "red"}, {"x": 200, "y": 25, color: "green"}];
+    svg.selectAll("circle")
+            .data(data)
+            .enter().append("circle")
+            .attr("cx", function (d) {
+                return d.x;
+            })
+            .attr("cy", function (d) {
+                return d.y;
+            })
+            .attr("fill", function (d) {
+                return d.color;
+            })
+            .attr("r", 0)
+            .transition()
+            .ease("cubic-in-out")
+            .duration(2000)
+            .attr("r", 25);
+</script>
+</html>

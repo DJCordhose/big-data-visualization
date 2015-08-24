@@ -91,6 +91,7 @@
             <!--überhaupt gehen? Wir werden uns dazu interaktive Visualisierung von Daten mit D3, Methoden zur kompakten-->
             <!--Visualisierung von großen Datenmengen und interaktive Filterung von Datensätzen im Millionenbereich mit-->
             <!--Crossfilter ansehen.            -->
+
     <h2>Inhalt</h2>
     <ol>
         <!-- 5 minutes -->
@@ -129,16 +130,18 @@
             <h3>D3.js: Dynamic graphics in the browser</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
+                <li class="fragment">Daten werden in Darstellung transformiert
+                <li class="fragment">Transformationsvorschrift ist deklarativ
+                <li class="fragment">Grundsätzlich ist D3 sehr allgemein gehalten
+                <li class="fragment">Haupteinsatzgebiet sind aber Diagrammer mit SVG (Vektor-Grafiken im Browser)
+                <li class="fragment">Darstellungsdaten werden dabei an SVG-Elemente gebunden
             </ul>
         </section>
         <section>
             <h3>D3.js Demo</h3>
-            <ul>
-                <li><a target="_blank" href="http://bl.ocks.org/mbostock/1353700">Planeten-Getriebe</a>
-            </ul>
-        </section>
-        <section>
-            <h3>D3.js Demo</h3>
+            <!--Videos-->
+            <!--https://vimeo.com/29458354-->
+            <!--http://simonebertuccioli.it/archives/w3conf/index-day2.html-->
             <ul>
                 <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#8">Planeten-Getriebe</a>
                 <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#9">
@@ -155,7 +158,7 @@
             <ul>
                 <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#8">Planeten-Getriebe</a>
                 <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#9">
-                Hierarchische Bar-Charts</a>
+                    Hierarchische Bar-Charts</a>
                 <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111116/index.html#11">
                     Flexible Übergänge zwischen Darstellungsarten</a>
                 <li><a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111018/index.html#33">
@@ -163,25 +166,61 @@
             </ul>
         </section>
         <section>
-            <h3>D3.js Code Samples aus den Beispielen</h3>
-<pre><code data-trim contenteditable>
-    1
+            <h4>D3 Beispiel-Code</h4>
+<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
+    .selectAll("p")  // select all p tags which are children
+    .data([4, 8, 15, 16, 23, 42]) // bind elements with data
+    .text(function (d) { // data gets passed in
+        return "I’m number " + d + "!"; // result gets displayed
+    })
+    .style("font-size", function (d) {
+        return 2 * d + "px";
+    });
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable>
-    2
+&lt;p>First p&lt;/p>
+&lt;p>Second p&lt;/p>
+&lt;p>Third p&lt;/p>
 </code></pre>
+            <div><img class="fragment" src="basic-d3.png" height="150px"></div>
+            <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
+        </section>
+        <section>
+            <h3>Data-Joins</h3>
+            <p>Daten werden über <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a> mit Darstellung verknüpft
+            </p>
+            <img src="data-join.png" height="400px">
+            <p><small>Copyright 2012, Mike Bostock http://bost.ocks.org/mike/join/</small></p>
+        </section>
+        <section>
+            <h4>Enter und Exit</h4>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// add a paragraph for each data not bound to an element
+updateSelection.enter()
+    .append("p");
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// remove all elements that are not bound to data
+updateSelection
+    .data([1, 2, 3]).exit().remove();
+</code></pre>
+            <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
         </section>
         <section>
             <h3>Crossfilter: Filtering millions of data sets in real time</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
+                <li class="fragment">Kann im Browser Millionen von Datensätze in Echtzeit filtern
+                <li class="fragment">Datensätze werden nach dem Laden indiziert
+                <li class="fragment">Kann mit D3 kombiniert werden
+                <li class="fragment">Von Crossfilter gefilterte Daten dienen dann als Daten für D3
             </ul>
         </section>
         <section>
             <h3>Crossfilter Demo</h3>
             <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance</a>
-                <li class="fragment"><a target="_blank" href="http://localhost:63342/visualization/crossfilter/index.html">Airline on-time performance (lokal)</a>
+                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance (5.3MB in ca. 230.000 Datensätzen)</a>
+                <li class="fragment"><a target="_blank" href="http://localhost:63342/visualization/crossfilter/index.html">Airline on-time performance (lokal) (5.3MB in ca. 230.000 Datensätzen)</a>
             </ul>
         </section>
         <section>
