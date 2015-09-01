@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crossfilter Basics</title>
+</head>
+<body>
+</body>
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script>
+    var dsv = d3.dsv(";", "text/plain");
+    dsv("../data/Daten_fuer_die_Stadtteilprofile_2014.csv", function (error, stadtteile) {
+//    d3.csv("../data/Daten_fuer_die_Stadtteilprofile_2014.csv", function(error, stadtteile) {
+
+        function normalize(data) {
+            var noSpaces = data.replace(/ /g, "");
+            var decimalPoint = noSpaces.replace(/,/g, ".");
+            return decimalPoint;
+        }
+
+        stadtteile.forEach(function (d, i) {
+            var keys = Object.keys(d);
+            keys.forEach(function (key) {
+                var value = d[key];
+                var nomalized = normalize(value);
+                d[key] = nomalized;
+            });
+        });
+
+        var stadtteil = crossfilter(stadtteile);
+    });
+</script>
+</html>
