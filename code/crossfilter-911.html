@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crossfilter Basics</title>
+</head>
+<body>
+</body>
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script>
+    console.log('Loading 85 MB');
+    console.log(new Date());
+    d3.csv("../data/07to12.csv", function (error, flights) {
+        console.log('Loaded');
+        console.log(new Date());
+        console.log('Number of flights: ' + flights.length);
+        console.log(flights[0]);
+        console.log(flights[flights.length - 1]);
+
+        console.log('Creating 9 dimensions');
+        var flight = crossfilter(flights);
+        var all = flight.groupAll();
+        var carrier = flight.dimension(function (d) {
+            return d.UniqueCarrier;
+        });
+        console.log('.');
+        var month = flight.dimension(function (d) {
+            return d.Month;
+        });
+        console.log('.');
+        var day = flight.dimension(function (d) {
+            return d.DayofMonth;
+        });
+        console.log('.');
+        var airTime = flight.dimension(function (d) {
+            return d.AirTime;
+        });
+        console.log('.');
+        var arrDelay = flight.dimension(function (d) {
+            return d.ArrDelay;
+        });
+        console.log('.');
+        var depDelay = flight.dimension(function (d) {
+            return d.DepDelay;
+        });
+        console.log('.');
+        var origin = flight.dimension(function (d) {
+            return d.Origin;
+        });
+        console.log('.');
+        var dest = flight.dimension(function (d) {
+            return d.Dest;
+        });
+        console.log('.');
+        var distance = flight.dimension(function (d) {
+            return d.Distance;
+        });
+        console.log('.');
+
+        console.log('Crossfiltering done');
+        console.log(new Date());
+
+    });
+</script>
+</html>
