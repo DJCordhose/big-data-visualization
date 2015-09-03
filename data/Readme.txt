@@ -78,5 +78,7 @@ Vorverarbeitung
   - wc -l selection.csv : 2864541 (fast 3 Millionen Datensätze)
   - ls -l selection.csv : 84499516 (fast 85 MB)
 - Das kann von Chrome in wenigen Sekunden lokal geladen werden
+- Jede Dimension dauert ordentlich (2-3 Sekunden)
+- Für Demo das ganze vorher einmal laden
 
 

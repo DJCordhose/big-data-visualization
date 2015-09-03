@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Big Data in the Browser?</title>
+    <title>Big Data im Browser?</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -58,7 +58,8 @@
     <div class="slides">
 
         <section>
-            <h1>Big Data in the Browser?</h1>
+            <h2>Big Data im Browser?</h2>
+            <h3>Dynamische Visualisierung im Browser</h3>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
@@ -70,35 +71,21 @@
             <img src="embarc13.png" height="50" align="left">
             <img src="SF-Olli.jpg" height="100" align="right">
             <ul>
-                <li>Developer, Architect, Consultant, and Coach
+                <li>Programmierer, Architekt, Berater und Coach
                 <li>Hamburg, Germany
                 <li><a target="_blank" href="http://zeigermann.eu">http://zeigermann.eu</a>
-                <li>Working for <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting GmbH</i></a>
+                <li>Arbeitet für <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting
+                    GmbH</i></a>
                 <li><a target="_blank" href="https://twitter.com/DJCordhose">@DJCordhose</a>
-                <li><a target="_blank" href="https://entwickler.de/press/buecher/javascript-fuer-java-entwickler-2-119804.html">Book: JavaScript für
+                <li><a target="_blank"
+                       href="https://entwickler.de/press/javascript-fuer-java-entwickler-4-168852.html">Buch:
+                    JavaScript für
                     Java-Entwickler</a>
             </ul>
         </section>
-
-        <!--<section>-->
-            <!--<h2>Oliver Zeigermann</h2>-->
-            <!--<img src="embarc13.png" height="50" align="left">-->
-            <!--<img src="SF-Olli.jpg" height="100" align="right">-->
-            <!--<ul>-->
-                <!--<li>Programmierer, Architekt, Berater und Coach-->
-                <!--<li>Hamburg, Germany-->
-                <!--<li><a target="_blank" href="http://zeigermann.eu">http://zeigermann.eu</a>-->
-                <!--<li>Arbeitet für <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting-->
-                    <!--GmbH</i></a>-->
-                <!--<li><a target="_blank" href="https://twitter.com/DJCordhose">@DJCordhose</a>-->
-                <!--<li><a target="_blank"-->
-                       <!--href="https://entwickler.de/press/javascript-fuer-java-entwickler-4-168852.html">Buch:-->
-                    <!--JavaScript für-->
-                    <!--Java-Entwickler</a>-->
-            <!--</ul>-->
-        <!--</section>-->
-        <!--<section>-->
+        <section>
     <!-- 60 minutes -->
+            <!--https://webtechcon.de/2015/sessions/big-data-im-browser-->
 
 <!--
             Big Data, d.h. große Datenmengen im Browser anzeigen? Warum sollte man das machen und wie soll das denn
@@ -110,7 +97,7 @@
 <!--
 Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             Story: Visualisierung von Big Data
-            - Kontakt mit Visualisierung von Big Data: Graylog Sources Tab (Screenshot von Edmundo)
+            - Kontakt mit Visualisierung von Big Data: Graylog Sources Tab (Screenshot von Edmundo?)
             - Frage: Wie hat sich der Luftverkehr nach 9/11 verändert?
             - Frage zu allgemein. Die konkrete Frage kenne ich nicht
             - Was macht man wenn man die Frage nicht kennt? Interaktivität: D3 Collision
@@ -124,120 +111,39 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             - Intro DC
             - Darstellung mit DC.js
 -->
-        <section>
-            <h4>Inspiration: Interactive big data @graylog</h4>
-            <img src="graylog-sources-full-screenshot.png" height="250px">
-            <br>
-            <img src="graylog-sources-filtered-screenshot.png" height="250px">
-        </section>
 
+    <h2>Inhalt</h2>
+    <ol>
+        <!-- 5 minutes -->
+        <li class="fragment">Motivation: Warum denn überhaupt Big Data im Browser?
+        <!-- 15 minutes -->
+        <li class="fragment">D3.js: Dynamic graphics in the browser
+        <!-- 15 minutes -->
+        <li class="fragment">Crossfilter: Filtering millions of data sets in real time
+        <!-- 15 minutes -->
+        <li class="fragment">dc.js: Charting with D3 and Crossfilter
+        <!-- 5 minutes -->
+        <li class="fragment">Zusammenfassung
+        <!-- 5 minutes -->
+        <li class="fragment">Fragen / Diskussion
+    </ol>
+</section>
         <section>
-            <h2>My Question for today: How did US air-traffic change after 9/11?</h2>
-        </section>
-
-        <section>
-            <h2>However: That question is really vague</h2>
-        </section>
-
-        <section>
-            <h2>Problem #1: Often you do not even know the question</h2>
-        </section>
-
-        <section>
-            <h2>What do you do when you have no clue?</h2>
-        </section>
-
-        <section>
-            <h2>Solution #1: You play around</h2>
-        </section>
-
-        <section>
-            <h3>D3.js: Dynamic graphics in the browser</h3>
-            <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
-            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
-                <img src="d3-collision-screenshot.png" height="400px">
-            </a>
-<!--
-            Local version (needs WebStorm and an open visualization project)
-            http://localhost:63342/visualization/d3/talk/20111018/index.html#33
--->
-        </section>
-
-        <section>
-            <h3>D3.js: Dynamic graphics in the browser</h3>
+            <h3>Motivation: Warum denn überhaupt Big Data im Browser?</h3>
             <ul>
-                <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
-                <li class="fragment">Daten werden in Darstellung transformiert
-                <li class="fragment">Transformationsvorschrift ist deklarativ
-                <li class="fragment">Grundsätzlich ist D3 sehr allgemein gehalten
-                <li class="fragment">Haupteinsatzgebiet sind aber Diagrammer mit SVG (Vektor-Grafiken im Browser)
-                <li class="fragment">Darstellungsdaten werden dabei an SVG-Elemente gebunden
-            </ul>
-        </section>
-
-        <section>
-            <h2>Problem #2: Data might be really big and multivariate</h2>
-        </section>
-
-        <section>
-            <h2>Solution #2: Use indexes and multidimensional filtering in the browser</h2>
-        </section>
-
-        <section>
-            <h3>Crossfilter: Filtering millions of data sets in real time</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
-                <li class="fragment">Kann im Browser Millionen von Datensätzen in Echtzeit filtern
-                <li class="fragment">Datensätze werden nach dem Laden indiziert
-                <li class="fragment">Kann mit D3 kombiniert werden
-                <li class="fragment">Von Crossfilter gefilterte Daten dienen dann als Daten für D3
+                <li class="fragment">Diagramme sind eine großartige Art, viele Daten in ein übersichtliches Format zu bringen
+                <li class="fragment">Erst dynamische, interaktive Diagramme ermöglichen die optimiale Nutzung von Daten
+                <li class="fragment">Damit dynamische Diagramme im Browser optimal funktionieren, braucht man verzögerungsfreie Interaktionen
+                <li class="fragment">Verzögerungsfreie Interaktionen sind nur durch lokalen Programmcode und lokale Daten möglich
+                <li class="fragment">Das kann die Verarbeitung von bis zu mehreren Millionen Datensätzen im Browser erfordern
             </ul>
         </section>
         <section>
-            <h2>Problem #3: Data might be multivariate and connections might be non-obvious</h2>
-        </section>
-
-        <section>
-            <h2>Solution #3: Use coordinated visualizations with multidimensional filtering</h2>
-        </section>
-
-        <section>
-            <h3>dc.js: Charting with D3 and Crossfilter</h3>
+            <h3>Ein Beispiel</h3>
             <ul>
-                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
-                <li class="fragment">D3 und Crossfilter sind beide für sich sehr mächtig und nützlich
-                <li class="fragment">Die Integration beider ist allerdings mühsam
-                <li class="fragment">dc.js übernimmt die Integration
-                <li class="fragment">dc.js stellt eine ganze Reihe dynamischer Diagramm-Typen für euch zur Verfügung
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a>
+                <li><a target="_blank" href="http://localhost:8888/web/crime/">Major Canadian City Crime Stats 1998-2011 (lokal: grunt server in dc.js)</a>
             </ul>
-        </section>
-
-        <section>
-            <h2>Wrapup</h2>
-            <ul>
-                <li class="fragment">D3 helps you to interactively explore your data visually
-                <li class="fragment">For large amounts of multivariate datasets
-                    <ul>
-                        <li class="fragment">Crossfilter allows for fast multidimensional filtering
-                        <li class="fragment">there are limitations to data size, number of data sets, and dimensions
-                        <li class="fragment">you might have to make a pre-selection
-                    </ul>
-                </li>
-                <li class="fragment">Use DC for coordinated visualizations with powerful widgets
-            </ul>
-        </section>
-
-        <section>
-            <h1>Thank you!</h1>
-
-            <h3>Questions / Discussion</h3>
-
-            <p>
-                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </small>
-            </p>
-            <a href="http://www.embarc.de/"><img src="embarc13.png"
-                                                 height="150"></a>
         </section>
 
         <section>
@@ -280,13 +186,10 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             </ul>
         </section>
         <section>
-            <h3>Interactive Graphics with D3</h3>
+            <h3>Data-Joins</h3>
             <p>Daten werden über <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a> mit Darstellung verknüpft
             </p>
-            <a target="_blank" href="http://localhost:63342/visualization/d3/talk/20111018/index.html#33">
-                Kollisionen
             <img src="d3-collision-screenshot.png" height="400px">
-            </a>
         </section>
         <section>
             <h4>D3 Beispiel-Code</h4>
@@ -399,6 +302,21 @@ updateSelection
 </code></pre>
         </section>
 
+        <section>
+            <h1>Zusammenfassung</h1>
+        </section>
+        <section>
+            <h1>Vielen Dank!</h1>
+
+            <h3>Fragen / Diskussion</h3>
+
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <a href="http://www.embarc.de/"><img src="embarc13.png"
+                                                 height="150"></a>
+        </section>
     </div>
 
 </div>
