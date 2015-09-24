@@ -266,12 +266,32 @@ newSelection.exit().remove();
             <h3>Crossfilter: Filtering millions of data sets in real time</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
-                <li class="fragment">Kann im Browser Millionen von Datensätzen in Echtzeit filtern
-                <li class="fragment">Datensätze werden nach dem Laden indiziert
-                <li class="fragment">Kann mit D3 kombiniert werden
-                <li class="fragment">Von Crossfilter gefilterte Daten dienen dann als Daten für D3
+                <li class="fragment">Can filter up to millions of data sets in real time in the browser
+                <li class="fragment">Data sets are indexed when loaded
+                <li class="fragment">You specify what you want to filter using dimensions
+                <li class="fragment">Can be used to feed data to D3
             </ul>
         </section>
+        <section>
+            <h3>Crossfilter Demo</h3>
+            <a target="_blank" href="http://square.github.io/crossfilter/"><img src="crossfilter-demo-screenshot.png" height="400px"></a>
+            <p><small><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance (5.3MB in approx. 230,000 data sets)</a></small></p>
+            <!--
+            Local version (needs WebStorm and an open visualization project)
+            http://localhost:63342/visualization/crossfilter/index.html
+            -->
+
+        </section>
+        <section>
+            <h3>Crossfilter Sample Code</h3>
+<pre><code data-trim contenteditable>
+    TODO: Mit der API herumspielen und eine Folie mit Beispieln machen
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+    TODO: Nächster Schritt: Crossfilter Beispiel kopieren und an meins anpassen
+</code></pre>
+        </section>
+
         <section>
             <h2>Problem #3: Data might be multivariate and connections might be non-obvious</h2>
         </section>
@@ -284,12 +304,38 @@ newSelection.exit().remove();
             <h3>dc.js: Charting with D3 and Crossfilter</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
-                <li class="fragment">D3 und Crossfilter sind beide für sich sehr mächtig und nützlich
-                <li class="fragment">Die Integration beider ist allerdings mühsam
-                <li class="fragment">dc.js übernimmt die Integration
-                <li class="fragment">dc.js stellt eine ganze Reihe dynamischer Diagramm-Typen für euch zur Verfügung
+                <li class="fragment">Prebuilt integration of D3 and Crossfilter
+                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for interactive big data</a>
+                    <ul>
+                        <li>bar
+                        <li>pie
+                        <li>many more
+                    </li>
+                </li>
             </ul>
         </section>
+        <section>
+            <h3>dc.js Demo</h3>
+            <a target="_blank" href="http://dc-js.github.io/dc.js/"><img src="dc-nasdaq-screenshot.png" height="400px"></a>
+            <p><small><a target="_blank" href="http://dc-js.github.io/dc.js/">Nasdaq 100 Index 1985-2012</a></small></p>
+
+            <!--
+            Local version (needs WebStorm and an open visualization project)
+            http://localhost:8888/web
+            http://localhost:8888/web/vc
+            http://localhost:8888/web/examples
+            -->
+        </section>
+        <section>
+            <h3>dc.js Code Samples</h3>
+<pre><code data-trim contenteditable>
+    1
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+    2
+</code></pre>
+        </section>
+
 
         <section>
             <h2>Wrapup</h2>
@@ -300,6 +346,7 @@ newSelection.exit().remove();
                         <li class="fragment">Crossfilter allows for fast multidimensional filtering
                         <li class="fragment">there are limitations to data size, number of data sets, and dimensions
                         <li class="fragment">you might have to make a pre-selection
+                        <li class="fragment">still millions of data sets are possible
                     </ul>
                 </li>
                 <li class="fragment">Use DC for coordinated visualizations with powerful widgets
@@ -329,77 +376,6 @@ newSelection.exit().remove();
             <a href="http://www.embarc.de/"><img src="embarc13.png"
                                                  height="150"></a>
         </section>
-
-        <section>
-            <h3>Crossfilter: Filtering millions of data sets in real time</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
-                <li class="fragment">Kann im Browser Millionen von Datensätzen in Echtzeit filtern
-                <li class="fragment">Datensätze werden nach dem Laden indiziert
-                <li class="fragment">Kann mit D3 kombiniert werden
-                <li class="fragment">Von Crossfilter gefilterte Daten dienen dann als Daten für D3
-            </ul>
-        </section>
-        <section>
-            <h3>Crossfilter Demo</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance (5.3MB in ca. 230.000 Datensätzen)</a>
-                <li class="fragment"><a target="_blank" href="http://localhost:63342/visualization/crossfilter/index.html">Airline on-time performance (lokal) (5.3MB in ca. 230.000 Datensätzen)</a>
-            </ul>
-            <p>Mögliche Fragen</p>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">Airline on-time performance (5.3MB in ca. 230.000 Datensätzen)</a>
-                <li class="fragment"><a target="_blank" href="http://localhost:63342/visualization/crossfilter/index.html">Airline on-time performance (lokal) (5.3MB in ca. 230.000 Datensätzen)</a>
-            </ul>
-        </section>
-        <section>
-            <h3>Crossfilter Code Samples aus dem Beispiel</h3>
-<pre><code data-trim contenteditable>
-    1
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-    2
-</code></pre>
-        </section>
-
-        <section>
-            <h3>dc.js: Charting with D3 and Crossfilter</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
-                <li class="fragment">D3 und Crossfilter sind beide für sich sehr mächtig und nützlich
-                <li class="fragment">Die Integration beider ist allerdings mühsam
-                <li class="fragment">dc.js übernimmt die Integration
-                <li class="fragment">dc.js stellt eine ganze Reihe dynamischer Diagramm-Typen für euch zur Verfügung
-            </ul>
-        </section>
-        <section>
-            <h3>dc.js Demo</h3>
-            <ul>
-                <li><a target="_blank" href="http://dc-js.github.io/dc.js/">Nasdaq 100 Index 1985-2012</a>
-                <li><a target="_blank" href="http://dc-js.github.io/dc.js/vc">US Venture Capital Landscape 2011</a>
-                <li><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a>
-                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">Überblick über alle Diagramm-Typen</a>
-            </ul>
-        </section>
-        <section>
-            <h3>dc.js Demo (lokal)</h3>
-            <ul>
-                <li><a target="_blank" href="http://localhost:8888/web/">Nasdaq 100 Index 1985-2012</a>
-                <li><a target="_blank" href="http://localhost:8888/web/vc/">US Venture Capital Landscape 2011</a>
-                <li><a target="_blank" href="http://localhost:8888/web/crime/">Major Canadian City Crime Stats 1998-2011</a>
-                <li><a target="_blank" href="http://localhost:8888/web/examples/">Überblick über alle Diagramm-Typen</a>
-            </ul>
-        </section>
-        <section>
-            <h3>dc.js Code Samples aus den Beispielen</h3>
-<pre><code data-trim contenteditable>
-    1
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-    2
-</code></pre>
-        </section>
-
     </div>
 
 </div>
