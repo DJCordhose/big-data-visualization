@@ -6,30 +6,38 @@
 </head>
 <body>
 <button class="enter">Enter</button>
+<button class="update">Update</button>
 <button class="exit">Exit</button>
 <p>First p</p>
-
 <p>Second p</p>
-
-<p>Third p</p>
 </body>
 <script src="lib/d3.js"></script>
 <script>
+    var data = [4, 8, 15, 16, 23, 42];
     var updateSelection = d3.select("body") // select the body tag
             .selectAll("p")  // select all p tags which are children
-            .data([4, 8, 15, 16, 23, 42]) // bind with data, one value each element
+            .data(data) // bind with data, one value each element
             .text(function (d) {
                 return "I’m number " + d + "!";
             })
             .style("font-size", function (d) {
                 return 2 * d + "px";
             });
+    d3.select('button.update').on('click', function (event) {
+        data[1] = 40;
+        var newSelection = updateSelection.data(data);
+        newSelection.text(function (d) {
+            return "I’m number " + d + "!";
+        });
+    });
     d3.select('button.exit').on('click', function (event) {
-        updateSelection
-                .data([1, 2, 3]).exit().remove();
+        var newSelection = updateSelection
+                .data([1, 2]);
+        newSelection.exit().remove();
     });
     d3.select('button.enter').on('click', function (event) {
-        updateSelection.enter()
+        var enterSelection = updateSelection.enter();
+        enterSelection
                 .append("p")
                 .text(function (d) {
                     return "I’m number " + d + "!";

@@ -12,6 +12,7 @@
     }
 </style>
 <body>
+<a href="https://gist.github.com/mbostock/3808218">https://gist.github.com/mbostock/3808218</a>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
     var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -48,9 +49,9 @@
     // The initial display.
     update(alphabet);
     // Grab a random sample of letters from the alphabet, in alphabetical order.
-//    setInterval(function() {
-//        update(d3.shuffle(alphabet)
-//                .slice(0, Math.floor(Math.random() * 26))
-//                .sort());
-//    }, 1500);
+    setInterval(function() {
+        update(d3.shuffle(alphabet)
+                .slice(0, Math.floor(Math.random() * 26))
+                .sort());
+    }, 1500);
 </script>
