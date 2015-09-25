@@ -5,68 +5,12 @@
     <title>Crossfilter Basics</title>
 </head>
 <body>
-</body>
 <script src="lib/d3.js"></script>
 <script src="lib/crossfilter.v1.js"></script>
+<script src="processing.js"></script>
+<script src="flights.js"></script>
 <script>
-    console.log('Loading');
-    console.log(new Date());
-    d3.csv(
-//            "../data/07to12.csv",
-            "../data/09.csv",
-            function (error, flights) {
-                console.log('Loaded');
-                console.log(new Date());
-                console.log('Number of flights: ' + flights.length);
-                console.log(flights[0]);
-                console.log(flights[flights.length - 1]);
-
-                console.log('Creating dimensions');
-                var flight = crossfilter(flights);
-                var all = flight.groupAll();
-                // TODO: Pie chart with filtering
-                var carrier = flight.dimension(function (d) {
-                    return d.UniqueCarrier;
-                });
-                console.log("Distinct carriers: " + carrier.group().size());
-                console.log(carrier.group().all());
-                console.log('.');
-                // TODO: Bar chart with brushing
-                var date = flight.dimension(function (d) {
-                    return new Date(2001, d.Month - 1, d.DayofMonth);
-                });
-                console.log('.');
-                var airTime = flight.dimension(function (d) {
-                    return d.AirTime;
-                });
-                console.log('.');
-                var arrDelay = flight.dimension(function (d) {
-                    return d.ArrDelay;
-                });
-                console.log('.');
-                var depDelay = flight.dimension(function (d) {
-                    return d.DepDelay;
-                });
-                console.log('.');
-                var origin = flight.dimension(function (d) {
-                    return d.Origin;
-                });
-                console.log("Distinct origins: " + origin.group().size());
-                console.log('.');
-                var dest = flight.dimension(function (d) {
-                    return d.Dest;
-                });
-                console.log("Distinct destinatons: " + dest.group().size());
-                console.log('.');
-                var distance = flight.dimension(function (d) {
-                    return d.Distance;
-                });
-                console.log('.');
-
-                console.log('Crossfiltering done');
-                console.log(flight.size());
-                console.log(new Date());
-
-            });
+    load(process);
 </script>
+</body>
 </html>

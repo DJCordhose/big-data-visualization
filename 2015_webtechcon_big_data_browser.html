@@ -283,21 +283,73 @@ newSelection.exit().remove();
 
         </section>
         <section>
-            <h3>Crossfilter Sample Code</h3>
+            <h3>Sample Code: Creating a Crossfilter</h3>
 <pre><code data-trim contenteditable>
-    TODO: Mit der API herumspielen und eine Folie mit Beispieln machen
+// this is how the data for our flights looks like
+console.log(flights[0]);
+{
+  "Month": "9",
+  "DayofMonth": "5",
+  "UniqueCarrier": "US",
+  "AirTime": "67",
+  "ArrDelay": "22",
+  "DepDelay": "31",
+  "Origin": "MCO",
+  "Dest": "CLT",
+  "Distance": "468"
+}
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable>
-    TODO: Nächster Schritt: Crossfilter Beispiel kopieren und an meins anpassen
+// creating a new crossfilter (multi-dimensional dataset)
+flight = crossfilter(flights);
+console.log(flight.size()); // 490698
 </code></pre>
         </section>
-
         <section>
-            <h2>Problem #3: Data might be multivariate and connections might be non-obvious</h2>
+            <h3>Sample Code: Creating Dimensions</h3>
+<pre><code data-trim contenteditable>
+// creating a dimension for all carriers of all flights
+carrier = flight.dimension(function (d) {
+    return d.UniqueCarrier;
+});
+// dates properly constructed
+date = flight.dimension(function (d) {
+    return new Date(2001, d.Month - 1, d.DayofMonth);
+});
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+console.log("Distinct carriers: " + carrier.group().size()); // 12
+var carriers = carrier.group().all().map(function (carrier) {
+    return carrier.key;
+});
+console.log(carriers);
+// ["AA", "AQ", "AS", "CO", "DL", "HP",
+    "MQ", "NW", "TW", "UA", "US", "WN"]
+</code></pre>
+        </section>
+        <section>
+            <h3>Sample Code: Filtering</h3>
+<pre><code data-trim contenteditable>
+    TODO: Keep adding filters and display the results as in processing.js
+</code></pre>
+</code></pre>
+        </section>
+        <section>
+            <h2>Run sample code</h2>
+            <p>Open in Chrome for performance</p>
+            <p>Might take a while</p>
+            <p>Open developer console in browser to see any result</p>
+            <p>You might have to wait until run through for the first time, then open console and reload</p>
+            <p>Experiment with the dimensions</p>
+            <div><a target="_blank" href="code/crossfilter-911.html">Run</a></div>
         </section>
 
         <section>
-            <h2>Solution #3: Use coordinated visualizations with multidimensional filtering</h2>
+            <h2>Problem #3: How to display dimensions in a connected way?</h2>
+        </section>
+
+        <section>
+            <h2>Solution #3: Combine crossfilter with D3</h2>
         </section>
 
         <section>
