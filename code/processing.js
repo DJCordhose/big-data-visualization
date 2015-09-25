@@ -21,12 +21,19 @@ function process() {
     console.log("Distinct destinatons: " + dest.group().size());
 
     console.log("All flights:", flight.groupAll().value());
-    carrier.filter("UA");
-    console.log("All United flights", flight.groupAll().value());
+    //carrier.filter("UA");
+    //console.log("All United flights", flight.groupAll().value());
+    //carrier.filter("AA");
     //dest.filter("STL");
     //console.log("All United flights going to STL", flight.groupAll().value());
+    carrier.filter("TW");
+    console.log("TW flights", flight.groupAll().value());
     origin.filter("EWR");
-    dest.filter("EWR");
     console.log("coming from EWR", flight.groupAll().value());
+    dest.filter("STL");
+    console.log("going to STL", flight.groupAll().value());
+    carrier.filterAll();
+    console.log("all flights from EWR to STL", flight.groupAll().value());
+    console.log(JSON.stringify(dest.top(1), null, '  '));
 }
 

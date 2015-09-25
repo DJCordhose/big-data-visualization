@@ -330,8 +330,21 @@ console.log(carriers);
         <section>
             <h3>Sample Code: Filtering</h3>
 <pre><code data-trim contenteditable>
-    TODO: Keep adding filters and display the results as in processing.js
+carrier.filter("TW");
+console.log("TW flights", flight.groupAll().value()); // 19427
 </code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+origin.filter("EWR");
+console.log("coming from EWR", flight.groupAll().value()); // 179
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+dest.filter("STL");
+console.log("going to STL", flight.groupAll().value()); // 179
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+carrier.filterAll();
+console.log("all flights from EWR to STL", flight.groupAll().value());
+// 203
 </code></pre>
         </section>
         <section>
