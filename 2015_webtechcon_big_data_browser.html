@@ -57,7 +57,7 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section>
+        <section data-background="airline-pictures/delta-container.jpg">
             <h1>Big Data in the Browser?</h1>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -125,17 +125,21 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             - Darstellung mit DC.js
 -->
         <section>
-            <h4>Inspiration: Interactive big data @graylog</h4>
+            <h4>Inspiration: Interactive big data for logging with Graylog</h4>
             <img src="graylog-sources-full-screenshot.png" height="250px">
             <br>
-            <img src="graylog-sources-filtered-screenshot.png" height="250px">
+            <img class="fragment" src="graylog-sources-filtered-screenshot.png" height="250px">
         </section>
 
-        <section data-background="airline-pictures/aa.jpg">
-            <h1 style="color: black;">My Question for today: How did US air-traffic change after 9/11?</h1>
+        <!--<section data-background="airline-pictures/aa.jpg">-->
+            <!--<h1 style="color: black;">My Question for today: How did US air-traffic change after 9/11?</h1>-->
+        <!--</section>-->
+        <section>
+            <h1>My Question for today: How did US air-traffic change after 9/11?</h1>
         </section>
 
-        <section data-background="airline-pictures/delta-container.jpg">
+        <!--<section data-background="airline-pictures/delta-container.jpg">-->
+        <section data-background="airline-pictures/landing-far.jpg">
             <h2>However: That question is really vague</h2>
             <h3>
             <ul>
@@ -294,8 +298,8 @@ newSelection.exit().remove();
 
         </section>
         <section>
-            <h3>Sample Code: Creating a Crossfilter</h3>
-<pre><code data-trim contenteditable>
+            <h3>Creating a Crossfilter</h3>
+<pre><code data-trim contenteditable class="javascript">
 // this is how the data for our flights looks like
 console.log(flights[0]);
 {
@@ -317,32 +321,53 @@ console.log(flight.size()); // 490698
 </code></pre>
         </section>
         <section>
-            <h3>Sample Code: Creating Dimensions</h3>
+            <h3>Creating Dimensions</h3>
 <pre><code data-trim contenteditable>
 // creating a dimension for all carriers of all flights
 carrier = flight.dimension(function (d) {
     return d.UniqueCarrier;
 });
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
 // dates properly constructed
 date = flight.dimension(function (d) {
     return new Date(2001, d.Month - 1, d.DayofMonth);
 });
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable>
-console.log("Distinct carriers: " + carrier.group().size()); // 12
-var carriers = carrier.group().all().map(function (carrier) {
+// early coercion is a good idea for better performance
+airTime = flight.dimension(function (d) {
+    return parseInt(d.AirTime);
+});
+</code></pre>
+        </section>
+        <section>
+            <h3>Reducing Dimensions</h3>
+<pre><code data-trim contenteditable>
+// group() reduces this dimension to a group
+// you can also supply a mapping function
+// identity is used as default
+var distrinctCarriersGroup = carrier.group();
+console.log("Distinct carrierNames: " + distrinctCarriersGroup.size());
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// all() returns all grouped results as an array
+var distinctCarriers = distrinctCarriersGroup.all();
+var carrierNames = distinctCarriers.map(function (carrier) {
+    // contain key and value
     return carrier.key;
 });
-console.log(carriers);
+console.log(carrierNames);
 // ["AA", "AQ", "AS", "CO", "DL", "HP",
     "MQ", "NW", "TW", "UA", "US", "WN"]
 </code></pre>
         </section>
         <section>
-            <h3>Sample Code: Filtering</h3>
+            <h3>Filtering</h3>
 <pre><code data-trim contenteditable>
 // filter just for TW
 carrier.filter("TW");
+// groupAll() creates a group intersecting all current filters
 console.log("TW flights", flight.groupAll().value()); // 19427
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable class="javascript">
@@ -399,8 +424,9 @@ dimension.bottom(k)
 
         <section>
             <h2>Problem #3: How to display dimensions in a connected way?</h2>
-            <h3 class="fragment">Writing JavaScript code is not most convenient</h3>
-            <h3 class="fragment">Also not accesible to most people</h3>
+            <h3 class="fragment">Writing JavaScript code is not most convenient to do that</h3>
+            <h3 class="fragment">Also not accessible to most people</h3>
+            <h3 class="fragment">How do you find connections?</h3>
         </section>
 
         <section>
@@ -448,6 +474,7 @@ dimension.bottom(k)
         </section>
 
         <section>
+            <h1 class="fragment">NO</h1>
             <h2>Solution #4: That is the hard part</h2>
             <h3 class="fragment">Rather an art than a craft</h3>
         </section>

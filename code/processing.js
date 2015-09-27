@@ -10,16 +10,27 @@ var flight;
 var all;
 
 function process() {
-    console.log("Distinct carriers: " + carrier.group().size());
-    var carriers = carrier.group().all().map(function (carrier) {
+    // group() reduces this dimension to a group
+    // you can also supply a mapping function
+    // identity is used as default
+    var distrinctCarriersGroup = carrier.group();
+    console.log("Distinct carrierNames: " + distrinctCarriersGroup.size());
+    // all() returns all grouped results as an array
+    var distinctCarriers = distrinctCarriersGroup.all();
+    var carrierNames = distinctCarriers.map(function (carrier) {
+        // contain key and value
         return carrier.key;
     });
-    console.log(carriers);
+    console.log(carrierNames);
+    var count = distrinctCarriersGroup.reduceCount().all();
+    console.log(count);
 
     console.log("Distinct origins: " + origin.group().size());
 
     console.log("Distinct destinatons: " + dest.group().size());
 
+    // https://github.com/square/crossfilter/wiki/API-Reference#wiki-crossfilter_groupAll
+    // groupAll() creates a group intersecting all current filters
     console.log("All flights:", flight.groupAll().value());
     //carrier.filter("UA");
     //console.log("All United flights", flight.groupAll().value());

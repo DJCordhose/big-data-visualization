@@ -49,7 +49,7 @@ function load(callback) {
         });
         console.log('.');
         airTime = flight.dimension(function (d) {
-            return d.AirTime;
+            return coerceToInt(d.AirTime);
         });
         console.log('.');
         arrDelay = flight.dimension(function (d) {
