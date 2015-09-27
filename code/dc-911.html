@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DC Basics</title>
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+</head>
+<body>
+<div id="pie"></div>
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script src="lib/dc.js"></script>
+<script src="processing.js"></script>
+<script src="flights.js"></script>
+<script>
+    function render() {
+        var pieChartCarriers = dc.pieChart("#pie");
+        pieChartCarriers
+                .width(768)
+                .height(480)
+                .slicesCap(4)
+                .innerRadius(100)
+                .dimension(carrier)
+                .group(carrier.group().reduceCount())
+                .legend(dc.legend());
+
+        pieChartCarriers.render();
+    }
+</script>
+<script>
+    load(function() { render(); });
+</script>
+</body>
+</html>

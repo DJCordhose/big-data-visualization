@@ -9,7 +9,7 @@ var carrier;
 var flight;
 var all;
 
-function process() {
+function process(callback) {
     // group() reduces this dimension to a group
     // you can also supply a mapping function
     // identity is used as default
@@ -51,5 +51,6 @@ function process() {
     var filteredFlights = arrDelay.bottom(1);
     console.log(JSON.stringify(filteredFlights, null, '  '));
     console.log(filteredFlights);
+    callback && callback();
 }
 

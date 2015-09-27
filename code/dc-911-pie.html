@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DC Basics</title>
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+</head>
+<body>
+<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+<h1 id="title" style="display: none">All US flights September 2001 grouped by carrier (total number of flights <span id="total">???</span>)</h1>
+<div id="pie"></div>
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script src="lib/dc.js"></script>
+<script src="processing.js"></script>
+<script src="flights.js"></script>
+<script>
+    function render() {
+        var numberOfFlights = flight.size();
+        var total = document.getElementById('total');
+        total.innerHTML = numberOfFlights;
+        var title = document.getElementById('title');
+        title.style.display = 'block';
+        var loading = document.getElementById('loading');
+        loading.style.display = 'none';
+        var pieChartCarriers = dc.pieChart("#pie");
+        pieChartCarriers
+                .width(768)
+                .height(480)
+                .slicesCap(5)
+                .innerRadius(100)
+                .dimension(carrier)
+                .group(carrier.group().reduceCount())
+                .legend(dc.legend());
+
+        pieChartCarriers.render();
+    }
+</script>
+<script>
+    load(function() { render(); });
+</script>
+</body>
+</html>

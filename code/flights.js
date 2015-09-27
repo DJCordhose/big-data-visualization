@@ -75,7 +75,7 @@ function load(callback) {
 
         console.log('Crossfiltering done');
         console.log(new Date());
-        callback();
+        callback && callback();
     });
 }
 
