@@ -131,12 +131,22 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             <img src="graylog-sources-filtered-screenshot.png" height="250px">
         </section>
 
-        <section>
-            <h2>My Question for today: How did US air-traffic change after 9/11?</h2>
+        <section data-background="airline-pictures/aa.jpg">
+            <h1 style="color: black;">My Question for today: How did US air-traffic change after 9/11?</h1>
         </section>
 
-        <section>
+        <section data-background="airline-pictures/delta-container.jpg">
             <h2>However: That question is really vague</h2>
+            <h3>
+            <ul>
+                <li class="fragment">In which respect?
+                <li class="fragment">Overall frequency?
+                <li class="fragment">For a specific airport?
+                <li class="fragment">For a specific airline?
+                <li class="fragment">For a specific date?
+            </ul>
+            </h3>
+
         </section>
 
         <section>
@@ -221,6 +231,7 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
 <pre class="fragment"><code data-trim contenteditable>
 &lt;p>First p&lt;/p>
 &lt;p>Second p&lt;/p>
+&lt;p>Third p&lt;/p>
 </code></pre>
             <div><img class="fragment" src="basic-d3.png" height="150px"></div>
             <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
@@ -330,10 +341,12 @@ console.log(carriers);
         <section>
             <h3>Sample Code: Filtering</h3>
 <pre><code data-trim contenteditable>
+// filter just for TW
 carrier.filter("TW");
 console.log("TW flights", flight.groupAll().value()); // 19427
 </code></pre>
-<pre class="fragment"><code data-trim contenteditable>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// dimensions are statestul: result is a combination of all filters
 origin.filter("EWR");
 console.log("coming from EWR", flight.groupAll().value()); // 179
 </code></pre>
@@ -342,9 +355,36 @@ dest.filter("STL");
 console.log("going to STL", flight.groupAll().value()); // 179
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable>
+// this resets the filter on carrier
 carrier.filterAll();
 console.log("all flights from EWR to STL", flight.groupAll().value());
 // 203
+</code></pre>
+        </section>
+        <section>
+            <h3>Sample Code: Accessing filtered data</h3>
+<pre><code data-trim contenteditable class="javascript">
+// intersection of all filters,
+// but descending order by this dimension
+// parameter could be any number of results, even Infinity
+var filteredFlights = dest.top(1);
+[
+  {
+    "Month": "9",
+    "DayofMonth": "28",
+    "UniqueCarrier": "TW",
+    "AirTime": "119",
+    "ArrDelay": "-40",
+    "DepDelay": "-9",
+    "Origin": "EWR",
+    "Dest": "STL",
+    "Distance": "872"
+  }
+]
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+// also possible
+dimension.bottom(k)
 </code></pre>
         </section>
         <section>
@@ -359,6 +399,8 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
 
         <section>
             <h2>Problem #3: How to display dimensions in a connected way?</h2>
+            <h3 class="fragment">Writing JavaScript code is not most convenient</h3>
+            <h3 class="fragment">Also not accesible to most people</h3>
         </section>
 
         <section>
@@ -401,6 +443,20 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
 </code></pre>
         </section>
 
+        <section>
+            <h2>Problem #4: Which diagram types to choose and how to arrange them?</h2>
+        </section>
+
+        <section>
+            <h2>Solution #4: That is the hard part</h2>
+            <h3 class="fragment">Rather an art than a craft</h3>
+        </section>
+
+        <section>
+            <h2>Possisbly first pie chart ever</h2>
+            <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="500px">
+            <p><small>via http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
+        </section>
 
         <section>
             <h2>Wrapup</h2>
@@ -415,6 +471,7 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
                     </ul>
                 </li>
                 <li class="fragment">Use DC for coordinated visualizations with powerful widgets
+                <li class="fragment">Choosing dimensions, chart types, and how to connect them is an art rather than a craft
             </ul>
         </section>
 
@@ -429,17 +486,19 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
         </section>
 
 
-        <section>
-            <h1>Thank you!</h1>
-
-            <h3>Questions / Discussion</h3>
-
-            <p>
-                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </small>
-            </p>
+        <section  data-background="airline-pictures/stl.jpg">
             <a href="http://www.embarc.de/"><img src="embarc13.png"
                                                  height="150"></a>
+            <h2><br></h2>
+            <h2><br></h2>
+            <h1>Thank you!</h1>
+
+            <h2>Questions / Discussion</h2>
+
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
         </section>
     </div>
 

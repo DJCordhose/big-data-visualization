@@ -9,6 +9,18 @@ var carrier;
 var flight;
 var all;
 
+function coerceToInt(number) {
+    if (number === 'NA') {
+        return null;
+    }
+    var int = parseInt(number);
+    if (isNaN(int)) {
+        return null;
+    } else {
+        return int;
+    }
+}
+
 function load(callback) {
 
     console.log('Loading');
@@ -41,11 +53,11 @@ function load(callback) {
         });
         console.log('.');
         arrDelay = flight.dimension(function (d) {
-            return d.ArrDelay;
+            return coerceToInt(d.ArrDelay);
         });
         console.log('.');
         depDelay = flight.dimension(function (d) {
-            return d.DepDelay;
+            return coerceToInt(d.DepDelay);
         });
         console.log('.');
         origin = flight.dimension(function (d) {
@@ -57,7 +69,7 @@ function load(callback) {
         });
         console.log('.');
         distance = flight.dimension(function (d) {
-            return d.Distance;
+            return coerceToInt(d.Distance);
         });
         console.log('.');
 

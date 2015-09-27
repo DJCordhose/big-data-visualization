@@ -34,6 +34,11 @@ function process() {
     console.log("going to STL", flight.groupAll().value());
     carrier.filterAll();
     console.log("all flights from EWR to STL", flight.groupAll().value());
-    console.log(JSON.stringify(dest.top(1), null, '  '));
+    // https://github.com/square/crossfilter/wiki/API-Reference#wiki-dimension_top
+    // also intersection of all filters, but descending order by this dimension
+    //var filteredFlights = arrDelay.top(1);
+    var filteredFlights = arrDelay.bottom(1);
+    console.log(JSON.stringify(filteredFlights, null, '  '));
+    console.log(filteredFlights);
 }
 
