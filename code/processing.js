@@ -37,6 +37,7 @@ function process(callback) {
     //carrier.filter("AA");
     //dest.filter("STL");
     //console.log("All United flights going to STL", flight.groupAll().value());
+    // south west
     carrier.filter("TW");
     console.log("TW flights", flight.groupAll().value());
     origin.filter("EWR");
