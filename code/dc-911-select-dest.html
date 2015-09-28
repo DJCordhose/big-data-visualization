@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DC Basics</title>
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+    <style type="text/css">
+        select {
+            width: 80px;
+            margin-top: 5px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+
+<h1 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of flights <span
+        id="total">???</span>)</h1>
+
+<div>
+<div style="float: left"><div>Origin:</div><div id="select-origin"></div></div>
+<div><div>Destination:</div><div id="select-dest"></div></div>
+<div id="pie"></div>
+
+</div>
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script src="lib/dc.js"></script>
+<script src="processing.js"></script>
+<script src="flights.js"></script>
+<script>
+    function render() {
+        var numberOfFlights = flight.size();
+        var total = document.getElementById('total');
+        total.innerHTML = numberOfFlights;
+        var title = document.getElementById('title');
+        title.style.display = 'block';
+        var loading = document.getElementById('loading');
+        loading.style.display = 'none';
+        var selectOrigin = dc.selectMenu('#select-origin');
+        selectOrigin
+                .multiple(true)
+                .size(15)
+                .dimension(origin)
+                .group(origin.group().reduceCount());
+        var selectDestination = dc.selectMenu('#select-dest');
+        selectDestination
+                .multiple(true)
+                .size(15)
+                .dimension(dest)
+                .group(dest.group().reduceCount());
+
+        var pieChartCarriers = dc.pieChart("#pie");
+        pieChartCarriers
+                .width(250)
+                .height(250)
+                .slicesCap(5)
+                .innerRadius(50)
+                .dimension(carrier)
+                .group(carrier.group().reduceCount());
+
+        dc.renderAll();
+    }
+</script>
+<script>
+    load(function () {
+        render();
+    });
+</script>
+</body>
+</html>
