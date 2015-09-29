@@ -488,8 +488,25 @@ dimension.bottom(k)
         </section>
 
         <section>
+            <h3>Code for creating the pie chart</h3>
+<pre><code data-trim contenteditable>
+var pieChartCarriers = dc.pieChart("#pie");
+pieChartCarriers
+        .slicesCap(5)
+        .dimension(carrier)
+        .group(carrier.group().reduceCount());
+</code></pre>
+        </section>
+
+        <section>
             <h3>Part #2: Origin, Destination, Carriers combined</h3>
             <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
+            <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+        </section>
+
+        <section>
+            <h3>Use case: Destinations reached by Delta flights from Austin</h3>
+            <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>
             <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
         </section>
 
