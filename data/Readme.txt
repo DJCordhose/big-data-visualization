@@ -80,5 +80,6 @@ Vorverarbeitung
 - Das kann von Chrome in wenigen Sekunden lokal geladen werden
 - Jede Dimension dauert ordentlich (2-3 Sekunden)
 - Für Demo das ganze vorher einmal laden
-
-
+- Um aus 07to12 nur einige Monate herauszulösen
+  - awk -F, '$1 == "9" || $1 == "10"' 07to12.csv > 09_10.csv
+  - awk -F, '$1 == "9" || $1 == "10" || $1 == "11"' 07to12.csv > 09to11.csv

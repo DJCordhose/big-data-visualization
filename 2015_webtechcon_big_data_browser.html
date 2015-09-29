@@ -511,21 +511,33 @@ pieChartCarriers
         </section>
 
         <section>
-            <h3 style="color: red">Part #3-n: TODO: Create SEPARATE more widgets for other dimensions</h3>
+            <h3>Added linechart for Part #3: Flights to NVC by carriers of terror flights</h3>
+            <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
+            <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little patience)</a></div>
         </section>
 
         <section>
-            <h3 style="color: red">TODOdc.js Code Samples</h3>
+            <h3>Code for creating the line chart</h3>
 <pre><code data-trim contenteditable>
-    1
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-    2
+var chart = dc.lineChart("#series");
+chart
+    .dimension(date)
+    .group(date.group())
+    .x(d3.scale.linear().domain([new Date(2001, 08, 01),
+                                 new Date(2001, 08, 30)]))
+    .brushOn(true)
+    .xAxis().ticks(30).tickFormat(
+        function (e) {
+            return new Date(e).getDate() + 1;
+        }
+    );
 </code></pre>
         </section>
 
         <section>
-            <h2 style="color: red">TODO: Complete application with all the widgets combined AND complete data (pre-load for talk)</h2>
+            <h2>Complete application (>40 MB, >1M data sets)</h2>
+            <a target="_blank" href="code/dc-911-complete.html"><img src="screenshot-complete-data.png" height="400px"></a>
+            <div><a target="_blank" href="code/dc-911-complete.html">Run (use latest Chrome, give it some time, especially when loading over Internet)</a></div>
         </section>
 
         <section data-background-image="backgrounds/dark-cabin.jpg">
