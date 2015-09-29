@@ -9,21 +9,19 @@ var carrier;
 var flight;
 var all;
 
-function load(callback, complete) {
-    function coerceToInt(number) {
-        if (complete) {
-            return number;
-        }
-        if (number === 'NA') {
-            return null;
-        }
-        var int = parseInt(number);
-        if (isNaN(int)) {
-            return null;
-        } else {
-            return int;
-        }
+function coerceToInt(number) {
+    if (number === 'NA') {
+        return null;
     }
+    var int = parseInt(number);
+    if (isNaN(int)) {
+        return null;
+    } else {
+        return int;
+    }
+}
+
+function load(callback, complete) {
 
     console.log('Loading');
     console.log(new Date());
