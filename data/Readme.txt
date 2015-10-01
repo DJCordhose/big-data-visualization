@@ -83,3 +83,19 @@ Vorverarbeitung
 - Um aus 07to12 nur einige Monate herauszulösen
   - awk -F, '$1 == "9" || $1 == "10"' 07to12.csv > 09_10.csv
   - awk -F, '$1 == "9" || $1 == "10" || $1 == "11"' 07to12.csv > 09to11.csv
+
+Hadoop
+
+- Import all 2001 flights (600MB) into hdfs: bin/hdfs dfs -put 2001.csv flights
+- is it there?: bin/hdfs dfs -ls flights
+  - Found 1 items
+  - -rw-r--r--   1 olli supergroup  600411462 2015-09-29 13:47 flights/2001.csv
+- how to to the other stuff above with hadoop
+  - http://www.sasanalysis.com/2014/04/10-popular-linux-commands-for-hadoop.html?m=1
+
+
+Cassandra
+- Import and Export CSV directly into table using cqlsh
+  - http://docs.datastax.com/en/cql/3.1/cql/cql_reference/copy_r.html
+- https://github.com/killrweather/killrweather/wiki/6.-Cassandra-Exercises-on-Killrvideo-Data
+-
