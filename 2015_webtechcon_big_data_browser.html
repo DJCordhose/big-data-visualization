@@ -131,6 +131,18 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             <img class="fragment" src="graylog-sources-filtered-screenshot.png" height="250px">
         </section>
 
+        <section>
+            <h3>A more complex example (no big data, though)</h3>
+            <p><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a></p>
+            <a target="_blank" href="http://dc-js.github.io/dc.js/crime">
+                <img src="dc-crime-stats-screenshot.png" height="400px">
+            </a>
+            <!--
+                        Local version (needs visualization project and `grunt server in dc.js`)
+                        http://localhost:8888/web/crime/
+            -->
+        </section>
+
         <!--<section data-background="airline-pictures/aa.jpg">-->
             <!--<h1 style="color: black;">My Question for today: How did US air-traffic change after 9/11?</h1>-->
         <!--</section>-->
@@ -167,31 +179,19 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
 
         <section>
             <h3>D3.js: Dynamic graphics in the browser</h3>
-            <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
-            <p>Interactive graphics are the basis of playing around</p>
-            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
-                <img src="d3-collision-screenshot.png" height="400px">
+                <p>Interactive graphics are the basis of playing around</p>
+
+            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#9">
+                <img src="hierarchical-barchart-screenshot.png" height="400px">
             </a>
 <!--
             Local version (needs WebStorm and an open visualization project)
-            http://localhost:63342/visualization/d3/talk/20111018/index.html#33
+            http://localhost:63342/visualization/d3/talk/20111116/index.html#11
 -->
         </section>
 
         <section>
-            <h3>A more complex example to play around (no big data, yet)</h3>
-            <p><a target="_blank" href="http://dc-js.github.io/dc.js/crime">Major Canadian City Crime Stats 1998-2011</a></p>
-            <a target="_blank" href="http://dc-js.github.io/dc.js/crime">
-                <img src="dc-crime-stats-screenshot.png" height="400px">
-            </a>
-            <!--
-                        Local version (needs visualization project and `grunt server in dc.js`)
-                        http://localhost:8888/web/crime/
-            -->
-        </section>
-
-        <section>
-            <h3>D3.js: Dynamic graphics in the browser</h3>
+            <h3>D3.js: More Details</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
                 <li class="fragment">Transform your data into visualizations in the browser
@@ -201,25 +201,25 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             </ul>
         </section>
 
-        <section>
-            <h3>More D3.js Demos</h3>
-            <!--Videos-->
-            <!--https://vimeo.com/29458354-->
-            <!--http://simonebertuccioli.it/archives/w3conf/index-day2.html-->
-            <ul>
-                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#8">Planetary Gear</a>
-                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#9">Hierarchical Bar Charts</a>
-                <li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">
-                    Flexible transistions between display types</a>
-                <!--
-                            Local version (needs WebStorm and an open visualization project)
-                            http://localhost:63342/visualization/d3/talk/20111116/index.html#8
-                            http://localhost:63342/visualization/d3/talk/20111116/index.html#9
-                            http://localhost:63342/visualization/d3/talk/20111116/index.html#11
-                -->
+        <!--<section>-->
+            <!--<h3>More D3.js Demos</h3>-->
+            <!--&lt;!&ndash;Videos&ndash;&gt;-->
+            <!--&lt;!&ndash;https://vimeo.com/29458354&ndash;&gt;-->
+            <!--&lt;!&ndash;http://simonebertuccioli.it/archives/w3conf/index-day2.html&ndash;&gt;-->
+            <!--<ul>-->
+                <!--<li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#8">Planetary Gear</a>-->
+                <!--<li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#9">Hierarchical Bar Charts</a>-->
+                <!--<li><a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">-->
+                    <!--Flexible transistions between display types</a>-->
+                <!--&lt;!&ndash;-->
+                            <!--Local version (needs WebStorm and an open visualization project)-->
+                            <!--http://localhost:63342/visualization/d3/talk/20111116/index.html#8-->
+                            <!--http://localhost:63342/visualization/d3/talk/20111116/index.html#9-->
+                            <!--http://localhost:63342/visualization/d3/talk/20111116/index.html#11-->
+                <!--&ndash;&gt;-->
 
-            </ul>
-        </section>
+            <!--</ul>-->
+        <!--</section>-->
         <section>
             <h4>D3 Example Code</h4>
 <pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
@@ -240,34 +240,34 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             <div><img class="fragment" src="basic-d3.png" height="150px"></div>
             <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
         </section>
-        <section>
-            <h3>Data-Joins</h3>
-            <p>Data is being linked to elements using <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a></p>
-            <p><a href="https://gist.github.com/mbostock/3808218" target="_blank">Example</a></p>
-            <img src="data-join.png" height="400px">
-            <p><small>Copyright 2012, Mike Bostock http://bost.ocks.org/mike/join/</small></p>
-        </section>
-        <section>
-            <h4>Enter, Update, Exit</h4>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
-// add a paragraph for each data not bound to an element
-updateSelection.enter()
-    .append("p")
-    .text(function (d) {return "I’m number " + d + "!";});
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
-// update data and update elements
-data[1] = 40;
-var newSelection = updateSelection.data(data);
-newSelection.text(function (d) {return "I’m number " + d + "!";});
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
-// remove all elements that are not bound to data
-var newSelection = updateSelection.data([1, 2]);
-newSelection.exit().remove();
-</code></pre>
-            <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Data-Joins</h3>-->
+            <!--<p>Data is being linked to elements using <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a></p>-->
+            <!--<p><a href="https://gist.github.com/mbostock/3808218" target="_blank">Example</a></p>-->
+            <!--<img src="data-join.png" height="400px">-->
+            <!--<p><small>Copyright 2012, Mike Bostock http://bost.ocks.org/mike/join/</small></p>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h4>Enter, Update, Exit</h4>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// add a paragraph for each data not bound to an element-->
+<!--updateSelection.enter()-->
+    <!--.append("p")-->
+    <!--.text(function (d) {return "I’m number " + d + "!";});-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// update data and update elements-->
+<!--data[1] = 40;-->
+<!--var newSelection = updateSelection.data(data);-->
+<!--newSelection.text(function (d) {return "I’m number " + d + "!";});-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// remove all elements that are not bound to data-->
+<!--var newSelection = updateSelection.data([1, 2]);-->
+<!--newSelection.exit().remove();-->
+<!--</code></pre>-->
+            <!--<div><a target="_blank" href="code/d3-basics.html">Run</a></div>-->
+        <!--</section>-->
 
         <section>
             <h2>Problem #2: Data might be really big and multivariate</h2>
@@ -348,7 +348,8 @@ airTime = flight.dimension(function (d) {
 // you can also supply a mapping function
 // identity is used as default
 var distrinctCarriersGroup = carrier.group();
-console.log("Distinct carrierNames: " + distrinctCarriersGroup.size());
+console.log("Distinct carriers: " + distrinctCarriersGroup.size());
+// 12
 </code></pre>
 <pre class="fragment"><code data-trim contenteditable class="javascript">
 // all() returns all grouped results as an array
@@ -471,13 +472,8 @@ dimension.bottom(k)
         </section>
 
         <section>
-            <h2>How you make a design</h2>
-            <img class="fragment" src="design.jpg" height="500px">
-        </section>
-
-        <section>
-            <h4>Choose the graphical encodings...</h4>
-            <h4 class="fragment">... that are best visually decoded.</h4>
+            <h3>Choose the graphical encodings...</h3>
+            <h3 class="fragment">... that are best visually decoded.</h3>
         </section>
 
         <section>
@@ -490,6 +486,11 @@ dimension.bottom(k)
             <h2>Ordering Values: Possisbly first pie chart ever</h2>
             <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="500px">
             <p><small>via http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
+        </section>
+
+        <section>
+            <h2>How do you really make a design?</h2>
+            <img class="fragment" src="design.jpg" height="500px">
         </section>
 
 
