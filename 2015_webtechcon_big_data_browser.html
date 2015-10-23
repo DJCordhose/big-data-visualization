@@ -75,8 +75,8 @@
                 <li><a target="_blank" href="http://zeigermann.eu">http://zeigermann.eu</a>
                 <li>Working for <a target="_blank" href="http://www.embarc.de/"><i>embarc Software Consulting GmbH</i></a>
                 <li><a target="_blank" href="https://twitter.com/DJCordhose">@DJCordhose</a>
-                <li><a target="_blank" href="https://entwickler.de/press/buecher/javascript-fuer-java-entwickler-2-119804.html">Book: JavaScript für
-                    Java-Entwickler</a>
+                <!--<li><a target="_blank" href="https://entwickler.de/press/buecher/javascript-fuer-java-entwickler-2-119804.html">Book: JavaScript für-->
+                    <!--Java-Entwickler</a>-->
             </ul>
         </section>
 
@@ -147,7 +147,7 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
             <!--<h1 style="color: black;">My Question for today: How did US air-traffic change after 9/11?</h1>-->
         <!--</section>-->
         <section>
-            <h1>My Question for today: How did US air-traffic change after 9/11?</h1>
+            <h1>My Question for today: How did domestic US air-traffic change after 9/11?</h1>
         </section>
 
         <!--<section data-background="airline-pictures/delta-container.jpg">-->
@@ -199,6 +199,17 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
                 <li class="fragment">Main field of use are diagrams using SVG (but D3 is not limited to that)
                 <li class="fragment">Data is bound to SVG elements which change once the data changes
             </ul>
+        </section>
+
+        <section>
+            <h3>More playful stuff using D3</h3>
+            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
+                <img src="d3-collision-screenshot.png" height="400px">
+            </a>
+            <!--
+                        Local version (needs WebStorm and an open visualization project)
+                        http://localhost:63342/visualization/d3/talk/20111018/index.html#33
+            -->
         </section>
 
         <!--<section>-->
@@ -298,7 +309,7 @@ Sprache: Doch Englisch, da das hier auch noch mehr Interesse erregen könnte
 
         <!--</section>-->
         <section>
-            <h3>Creating a Crossfilter</h3>
+            <h3>The data</h3>
 <pre><code data-trim contenteditable class="javascript">
 // this is how the data for our flights looks like
 console.log(flights[0]);
@@ -314,7 +325,22 @@ console.log(flights[0]);
   "Distance": "468"
 }
 </code></pre>
-<pre class="fragment"><code data-trim contenteditable>
+        </section>
+        <section data-background="airline-pictures/sw.jpg">
+            <h3>Where does the data come from?</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a>
+                <li class="fragment">All domestic US flights from 1987 to 2008, grouped per year
+                <li class="fragment">Format CSV
+                <li class="fragment">2001 data reduced using <em>awk</em>
+                <li class="fragment">Small set: Just September 2001
+                <li class="fragment">Larger set: Just September to November 2001
+                <li class="fragment">Some columns cut off using <em>cut</em>
+            </ul>
+        </section>
+        <section>
+            <h3>Creating a Crossfilter</h3>
+<pre><code data-trim contenteditable>
 // creating a new crossfilter (multi-dimensional dataset)
 flight = crossfilter(flights);
 console.log(flight.size()); // 490698
@@ -324,6 +350,7 @@ console.log(flight.size()); // 490698
             <h3>Creating Dimensions</h3>
 <pre><code data-trim contenteditable>
 // creating a dimension for all carriers of all flights
+// data of dimension needs to be comparable
 carrier = flight.dimension(function (d) {
     return d.UniqueCarrier;
 });
@@ -497,8 +524,10 @@ dimension.bottom(k)
 
         <section>
             <h3>Order (Part #1): Display Carriers as a Pie Chart</h3>
-            <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
-            <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little patience)</a></div>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little patience)</a></div>
+            </div>
         </section>
 
         <section>
@@ -514,20 +543,26 @@ pieChartCarriers
 
         <section>
             <h3>Map and Connect (Part #2): Origin, Destination, Carriers combined</h3>
-            <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
-            <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+            </div>
         </section>
 
         <section>
             <h3>Use case: Destinations reached by Delta flights from Austin</h3>
-            <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>
-            <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+            </div>
         </section>
 
         <section>
             <h3>Time (Part #3): Flights to NVC by carriers of terror flights</h3>
-            <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
-            <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little patience)</a></div>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little patience)</a></div>
+            </div>
         </section>
 
         <section>
