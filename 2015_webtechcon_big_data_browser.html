@@ -22,19 +22,20 @@
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
-    <!--<style>-->
-    <!--pre code {-->
-    <!--display: block;-->
-    <!--padding: 0.5em;-->
-    <!--background: #FFFFFF !important;-->
-    <!--color: #000000 !important;-->
-    <!--}-->
-    <!--.right-img {-->
-    <!--margin-left: 10px !important;-->
-    <!--float: right;-->
-    <!--height: 500px;-->
-    <!--}-->
-    <!--</style>-->
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    </style>
 
     <!-- Printing and PDF exports -->
     <script>
@@ -349,7 +350,7 @@ console.log(flight.size()); // 490698
         </section>
         <section>
             <h3>Creating Dimensions</h3>
-<pre><code data-trim contenteditable>
+<pre><code data-trim contenteditable class="javascript">
 // creating a dimension for all carriers of all flights
 // data of dimension needs to be comparable
 carrier = flight.dimension(function (d) {
@@ -522,7 +523,6 @@ dimension.bottom(k)
             <p><small>via http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
         </section>
 
-
         <section>
             <h3>Order (Part #1): Display Carriers as a Pie Chart</h3>
             <div class="fragment">
@@ -556,6 +556,12 @@ pieChartCarriers
                 <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
             </div>
+        </section>
+
+        <section>
+            <h2>Time: London Underground ad from 1928</h2>
+            <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
+            <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
         </section>
 
         <section>
