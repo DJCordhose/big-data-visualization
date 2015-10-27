@@ -84,6 +84,20 @@ Vorverarbeitung
   - awk -F, '$1 == "9" || $1 == "10"' 07to12.csv > 09_10.csv
   - awk -F, '$1 == "9" || $1 == "10" || $1 == "11"' 07to12.csv > 09to11.csv
 
+Cancelled herausfiltern:
+- awk -F, '$22 == "0"' 2001.csv >2001_not_canceled.csv
+- awk -F, '$22 != "0"' 2001.csv >2001_canceled.csv
+- Cancelled: 1
+- Anzahl der gecancelten 2001 (5%)
+  - 0231198
+- Gesamt-Flüge:
+  - 5967781
+- awk -F, '$2 == "9" || $2 == "10" || $2 == "11"' 2001_not_canceled.csv >2001_09to11.csv
+- cat head_complete.csv 2001_09to11.csv >2001_09to11_head.csv
+- cut -f2,3,9,14,15,16,17,18,19 -d, 2001_09to11_head.csv >09to11.csv
+- awk -F, '$1 == "9"' 09to11.csv >09.csv
+- cat head_selection.csv 09.csv >09_with_head.csv
+
 Hadoop
 
 - Import all 2001 flights (600MB) into hdfs: bin/hdfs dfs -put 2001.csv flights

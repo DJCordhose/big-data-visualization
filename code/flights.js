@@ -30,7 +30,8 @@ function load(callback, complete) {
         // a LOT
         //'../data/07to12.csv' :
         //'../data/09to10.csv' :
-        '../data/09to11.csv' :
+        //'../data/09to11.csv' :
+        '../data/09to11_not_cancelled.csv' :
     // just september
         '../data/09.csv';
 
