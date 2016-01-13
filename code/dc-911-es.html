@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DC Timeline</title>
+    <link rel="stylesheet" type="text/css" href="css/dc.css"/>
+    <style type="text/css">
+        select {
+            width: 80px;
+            margin-top: 5px;
+            margin-right: 20px;
+            margin-botton: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+
+<h1 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of
+    flights <span
+            id="total">???</span>)</h1>
+
+<div>
+    <div style="float: left">
+        <div>Origin:</div>
+        <div id="select-origin"></div>
+    </div>
+    <div>
+        <div>Destination:</div>
+        <div id="select-dest"></div>
+    </div>
+    <div id="pie"></div>
+</div>
+<div style="margin-top: 20px" id="series"></div>
+
+<script src="lib/d3.js"></script>
+<script src="lib/crossfilter.v1.js"></script>
+<script src="lib/dc.js"></script>
+<script src="flights-from-es.js"></script>
+<script>
+    function render(cf) {
+
+        const all = cf.groupAll();
+        const carrier = cf.dimension(function (d) {
+            return d.UniqueCarrier;
+        });
+        console.log('.');
+        const date = cf.dimension(function (d) {
+            return new Date(d.Year, d.Month - 1, d.DayofMonth);
+        });
+        console.log('.');
+        const origin = cf.dimension(function (d) {
+            return d.Origin;
+        });
+        console.log('.');
+        const dest = cf.dimension(function (d) {
+            return d.Dest;
+        });
+        console.log('.');
+
+        var numberOfFlights = cf.size();
+        var total = document.getElementById('total');
+        total.innerHTML = numberOfFlights;
+        var title = document.getElementById('title');
+        title.style.display = 'block';
+        var loading = document.getElementById('loading');
+        loading.style.display = 'none';
+        var selectOrigin = dc.selectMenu('#select-origin');
+        selectOrigin
+                .multiple(true)
+                .size(15)
+                .dimension(origin)
+                .group(origin.group().reduceCount());
+        var selectDestination = dc.selectMenu('#select-dest');
+        selectDestination
+                .multiple(true)
+                .size(15)
+                .dimension(dest)
+                .group(dest.group().reduceCount());
+
+        var pieChartCarriers = dc.pieChart("#pie");
+        pieChartCarriers
+                .width(200)
+                .height(200)
+                .slicesCap(5)
+                .innerRadius(50)
+                .dimension(carrier)
+                .group(carrier.group().reduceCount());
+
+        var flightsPerDay = date.group();
+
+        var chart = dc.lineChart("#series");
+        chart
+                .width(1000)
+                .height(200)
+                .margins({top: 10, right: 50, bottom: 30, left: 60})
+                .dimension(date)
+                .group(flightsPerDay)
+                .valueAccessor(function (d) {
+                    return d.value;
+                })
+                .x(d3.scale.linear().domain([new Date(2001, 08, 00), new Date(2001, 08, 30)]))
+                .renderHorizontalGridLines(true)
+                .elasticY(true)
+                .brushOn(true)
+                .title(function (d) {
+                    return d.key
+                            + "\nFlights: " + Math.round(d.value.flights);
+                })
+                .xAxis().ticks(30).tickFormat(
+                function (e) {
+                    return new Date(e).getDate() + 1;
+                });
+
+        dc.renderAll();
+    }
+</script>
+<script>
+    load(render);
+</script>
+</body>
+</html>
