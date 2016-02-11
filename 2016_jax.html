@@ -62,12 +62,14 @@
         <section data-background="airline-pictures/delta-container.jpg">
         <!--<section>-->
             <h1>Big Data in the Browser?</h1>
-            <h3>How to create interactive graphics with D3, Crossfilter, and DC.js</h3>
+            <h4>Interactive graphics with D3, Crossfilter, and DC</h4>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p>Online-Version: <a href="http://bit.ly/1DXcRtP">http://bit.ly/1DXcRtP</a></p>
+            <!--http://www.qr-code-generator.com-->
+            <img src="2016_jax_qr.jpg" height="200px">
+            <p><small><a href="http://bit.ly/1QWHtyn">http://bit.ly/1QWHtyn</a></small></p>
         </section>
 
         <section>
@@ -128,6 +130,25 @@
                 <li class="fragment">Main field of use are diagrams using SVG (but D3 is not limited to that)
                 <li class="fragment">Data is bound to SVG elements which change once the data changes
             </ul>
+        </section>
+        <section>
+            <h4>D3 Example Code</h4>
+<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
+    .selectAll("p")  // select all p tags which are children
+    .data([4, 8, 15, 16, 23, 42]) // bind elements with data
+    .text(function (d) { // data gets passed in
+        return "I’m number " + d + "!"; // result gets displayed
+    })
+    .style("font-size", function (d) {
+        return 2 * d + "px";
+    });
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+&lt;p>First p&lt;/p>
+&lt;p>Second p&lt;/p>
+&lt;p>Third p&lt;/p>
+</code></pre>
+            <div><a target="_blank" href="code/d3-data-bind.html"><img class="fragment" src="basic-d3.png" height="150px"></a></div>
         </section>
 
         <section>

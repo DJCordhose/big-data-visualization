@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 Basics</title>
+</head>
+<body>
+<p>First p</p>
+<p>Second p</p>
+<p>Third p</p>
+</body>
+<script src="lib/d3.js"></script>
+<script>
+    var data = [4, 8, 15, 16, 23, 42];
+    var updateSelection = d3.select("body") // select the body tag
+            .selectAll("p")  // select all p tags which are children
+            .data(data) // bind with data, one value each element
+            .text(function (d) {
+                return "I’m number " + d + "!";
+            })
+            .style("font-size", function (d) {
+                return 2 * d + "px";
+            });
+</script>
+</html>
