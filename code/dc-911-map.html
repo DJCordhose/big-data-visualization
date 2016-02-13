@@ -14,11 +14,11 @@
     </style>
 </head>
 <body>
-<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+<h2 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h2>
 
-<h1 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of
+<h2 id="title" style="display: none">Domectic US flights September 2001 (total number of
     flights <span
-            id="total">???</span>)</h1>
+            id="total">???</span>)</h2>
 
 <div>
     <div style="float: left">
@@ -99,8 +99,8 @@
             var map = dc.geoChoroplethChart("#map");
             map.width(1000)
                     .height(500)
-                    .dimension(origin)
-                    .group(origin.group().reduceCount())
+                    .dimension(stateOrigin)
+                    .group(stateOrigin.group().reduceCount())
                     .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
                     .colorDomain([0, 20000])
                     .colorCalculator(function (d) {
