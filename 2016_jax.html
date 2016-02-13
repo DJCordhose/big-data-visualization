@@ -502,20 +502,44 @@ chart
         </section>
 
         <section>
-            <h1>Different data sources</h1>
+            <h3>Map (Part #4): All flights from Hawaii</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-map.html">Run (have a little patience)</a></div>
+            </div>
+        </section>
+        <section>
+            <h3>Mixing Different data sources</h3>
             <ul>
-                <li class="fragment">TODO
-                    <!-- - Merging data sets can be tricks-->
-                    <!-- - sources can be in many formats-->
-                    <!-- - even data scraping might be necessary-->
-
-                    <!--Code TODO-->
-                    <!-- - Scrape data from big-data-visualization/code/helper_data/airports_by_state.html-->
-                    <!-- - Use airport code to map to state code-->
-                    <!-- - Add state code to raw data (flights)-->
-                    <!-- - add state code dimension-->
-                    <!-- - join the map to state code in overlayGeoJson-->
+                <li class="fragment">sometimes you need to mix data from different sources
+                <li class="fragment">in our case the states airports are in and airport codes
+                <li class="fragment">states are not in our original data
+                <li class="fragment">so we load both data and merge
+                <li class="fragment">we also create additional dimensions for the state
+                <li class="fragment">sources can be in many formats
+                <li class="fragment">even data scraping might be necessary (which I did in
+                <a target="_blank" href="code/helper_data/airports_by_state.html">code/helper_data/airports_by_state.html)
+                    </a>
             </ul>
+        </section>
+
+        <section>
+            <h3>Code for creating the map</h3>
+<pre><code data-trim contenteditable>
+var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
+stateOriginMap.width(500)
+    .height(250)
+    .dimension(stateOrigin)
+    .group(stateOrigin.group().reduceCount())
+    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+    .colorDomain([0, 20000])
+    .colorCalculator(function (d) {
+        return d ? stateOriginMap.colors()(d) : '#ccc';
+    })
+    .overlayGeoJson(statesJson.features, "state", function (d) {
+        return d.properties.name;
+    });
+</code></pre>
         </section>
 
         <section data-background-image="backgrounds/dark-cabin.jpg">
@@ -540,13 +564,15 @@ chart
             <ul>
                 <li><a href="https://www.google.com/publicdata/directory?hl=en_US&dl=en_US" target="_blank">Google Public Data Explorer</a>
                 <li><a href="http://ourworldindata.org/" target="_blank">Our World in Data: Loads of visualizations about how living standards changed</a>
-                <li><a href="http://thegamma.net" target="_blank">TheGamma: Simple code behind interactive articles</a>
+                <!--<li><a href="http://thegamma.net" target="_blank">TheGamma: Simple code behind interactive articles</a>-->
                 <li><a href="http://data.worldbank.org/developers" target="_blank">
                 World Bank Data</a>
+                <li><a href="https://medium.com/accurat-studio/sketching-with-data-opens-the-mind-s-eye-92d78554565#.pv7dcyb43" target="_blank">
+                    From Data to Story</a>
                 <!--<li><a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">-->
                     <!--Alternative / Possible Addition: PCA</a>-->
-                <li><a href="http://r2d3.us" target="_blank">
-                    Mind blowing visual introduction to machine learning with D3</a>
+                <!--<li><a href="http://r2d3.us" target="_blank">-->
+                    <!--Mind blowing visual introduction to machine learning with D3</a>-->
                 <li><a href="http://setosa.io" target="_blank">
                     Great D3 visualizations</a>
             </ul>
