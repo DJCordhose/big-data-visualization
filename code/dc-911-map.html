@@ -24,15 +24,18 @@
     <div style="float: left">
         <div>Origin:</div>
         <div id="select-origin"></div>
+        <div id="state-origin-map"></div>
     </div>
     <div>
         <div>Destination:</div>
         <div id="select-dest"></div>
+        <div id="state-dest-map"></div>
     </div>
-    <div id="pie"></div>
-    <div id="map"></div>
 </div>
-<div style="margin-top: 20px" id="series"></div>
+<div style="margin-top: 20px; reset: both" >
+    <div style="float: left" id="pie"></div>
+    <div style="float: right" id="series"></div>
+</div>
 
 <script src="lib/d3.js"></script>
 <script src="lib/crossfilter.v1.js"></script>
@@ -96,20 +99,39 @@
                 });
 
         d3.json("helper_data/us-states.json", function (statesJson) {
-            var map = dc.geoChoroplethChart("#map");
-            map.width(1000)
-                    .height(500)
+            var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
+            stateOriginMap.width(500)
+                    .height(250)
                     .dimension(stateOrigin)
                     .group(stateOrigin.group().reduceCount())
                     .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
                     .colorDomain([0, 20000])
                     .colorCalculator(function (d) {
-                        return d ? map.colors()(d) : '#ccc';
+                        return d ? stateOriginMap.colors()(d) : '#ccc';
+                    })
+                    .overlayGeoJson(statesJson.features, "state", function (d) {
+                        return d.properties.name;
+                    });
+            var stateDestMap = dc.geoChoroplethChart("#state-dest-map");
+            stateDestMap.width(500)
+                    .height(250)
+                    .dimension(stateDest)
+                    .group(stateDest.group().reduceCount())
+                    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+                    .colorDomain([0, 20000])
+                    .colorCalculator(function (d) {
+                        return d ? stateDestMap.colors()(d) : '#ccc';
                     })
                     .overlayGeoJson(statesJson.features, "state", function (d) {
                         return d.properties.name;
                     });
             dc.renderAll();
+
+            // HACK to make map smaller, no idea how to set the viewport using dc
+            var stateOriginmapSvg = document.querySelector('#state-origin-map svg');
+            stateOriginmapSvg.setAttribute('viewBox', '0 0 1000 500');
+            var stateDestMapSvg = document.querySelector('#state-dest-map svg');
+            stateDestMapSvg.setAttribute('viewBox', '0 0 1000 500');
         });
 
     }
