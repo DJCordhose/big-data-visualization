@@ -35,10 +35,24 @@ function load(callback, complete) {
     // just september
         '../data/09.csv';
 
-    d3.csv(file, function (error, flights) {
+    d3.json("helper_data/airports_by_state.json", function (airportsArray) {
+        var airports = {};
+        airportsArray.forEach(function (airport) {
+            airports[airport.airport] = airport;
+        });
+
+
+        d3.csv(file, function (error, flights) {
             console.log('Loaded');
             console.log(new Date());
             console.log('Number of flights: ' + flights.length);
+            console.log('Adding state information');
+            flights.forEach(function (flight) {
+                flight.stateOrigin = airports[flight.Origin] ? airports[flight.Origin].state : 'N/A'
+                flight.stateDest = airports[flight.Dest] ? airports[flight.Dest].state : 'N/A';
+            });
+            console.log('Done');
+
             console.log(JSON.stringify(flights[0], null, 2));
             console.log(flights[flights.length - 1]);
 
@@ -81,7 +95,7 @@ function load(callback, complete) {
             console.log('Crossfiltering done');
             console.log(new Date());
             callback && callback();
-        }
-    );
+        });
+    });
 }
 
