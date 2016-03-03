@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Big Data in the Browser?</title>
+    <title>Big Data Visualisation in the Browser</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -61,7 +61,7 @@
 
         <section data-background="airline-pictures/delta-container.jpg">
         <!--<section>-->
-             <h2>Big Data Visualisierung in the Browser</h2>
+             <h2>Big Data Visualisation in the Browser</h2>
             <h4>Interactive graphics with D3, Crossfilter, and DC</h4>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -171,14 +171,15 @@
             <h2>Problem #2: Data might be really big and multivariate</h2>
         </section>
 
-        <section>
-            <h3>The Big Data Fallacy: data ≠ information ≠ insights</h3>
-            <img src="data-info.png" height="400">
-            <p><small><a target="_blank" href="http://techcrunch.com/2012/11/25/the-big-data-fallacy-data-%E2%89%A0-information-%E2%89%A0-insights/">
-                http://techcrunch.com/2012/11/25/the-big-data-fallacy-data-%E2%89%A0-information-%E2%89%A0-insights/
-            </a></small></p>
+        <!-- NOT GOOD: I THINK IT CONFUSES SOME PARTS, AT LEAST INFORMATION WITH SIGNAL -->
+        <!--<section>-->
+            <!--<h3>The Big Data Fallacy: data ≠ information ≠ insights</h3>-->
+            <!--<img src="data-info.png" height="400">-->
+            <!--<p><small><a target="_blank" href="http://techcrunch.com/2012/11/25/the-big-data-fallacy-data-%E2%89%A0-information-%E2%89%A0-insights/">-->
+                <!--http://techcrunch.com/2012/11/25/the-big-data-fallacy-data-%E2%89%A0-information-%E2%89%A0-insights/-->
+            <!--</a></small></p>-->
 
-        </section>
+        <!--</section>-->
 
 
         <section>
@@ -326,41 +327,41 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
 // 203
 </code></pre>
         </section>
-        <section>
-            <h3>Sample Code: Accessing filtered data</h3>
-<pre><code data-trim contenteditable class="javascript">
-// intersection of all filters,
-// but descending order by this dimension
-// parameter could be any number of results, even Infinity
-var filteredFlights = dest.top(1);
-[
-  {
-    "Month": "9",
-    "DayofMonth": "28",
-    "UniqueCarrier": "TW",
-    "AirTime": "119",
-    "ArrDelay": "-40",
-    "DepDelay": "-9",
-    "Origin": "EWR",
-    "Dest": "STL",
-    "Distance": "872"
-  }
-]
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-// also possible
-dimension.bottom(k)
-</code></pre>
-        </section>
-        <section>
-            <h2>Run sample code</h2>
-            <p>Open in Chrome for performance</p>
-            <p>Might take a while</p>
-            <p>Open developer console in browser to see any result</p>
-            <p>You might have to wait until run through for the first time, then open console and reload</p>
-            <p>Experiment with the dimensions</p>
-            <div><a target="_blank" href="code/crossfilter-911.html">Run</a></div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Sample Code: Accessing filtered data</h3>-->
+<!--<pre><code data-trim contenteditable class="javascript">-->
+<!--// intersection of all filters,-->
+<!--// but descending order by this dimension-->
+<!--// parameter could be any number of results, even Infinity-->
+<!--var filteredFlights = dest.top(1);-->
+<!--[-->
+  <!--{-->
+    <!--"Month": "9",-->
+    <!--"DayofMonth": "28",-->
+    <!--"UniqueCarrier": "TW",-->
+    <!--"AirTime": "119",-->
+    <!--"ArrDelay": "-40",-->
+    <!--"DepDelay": "-9",-->
+    <!--"Origin": "EWR",-->
+    <!--"Dest": "STL",-->
+    <!--"Distance": "872"-->
+  <!--}-->
+<!--]-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--// also possible-->
+<!--dimension.bottom(k)-->
+<!--</code></pre>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>Run sample code</h2>-->
+            <!--<p>Open in Chrome for performance</p>-->
+            <!--<p>Might take a while</p>-->
+            <!--<p>Open developer console in browser to see any result</p>-->
+            <!--<p>You might have to wait until run through for the first time, then open console and reload</p>-->
+            <!--<p>Experiment with the dimensions</p>-->
+            <!--<div><a target="_blank" href="code/crossfilter-911.html">Run</a></div>-->
+        <!--</section>-->
 
         <section>
             <h2>Problem #3: How to display dimensions in a connected way?</h2>
@@ -599,6 +600,22 @@ stateOriginMap.width(500)
                     <!--Mind blowing visual introduction to machine learning with D3</a>-->
                 <li><a href="http://setosa.io" target="_blank">
                     Great D3 visualizations</a>
+                <li><a href="https://www.kaggle.com/benhamner/d/uciml/iris/python-data-visualizations/notebook" target="_blank">
+                Python notebook style data visualizations tutorial
+                </a>
+                <li><a href="https://www.kaggle.com/msjgriffiths/d/kaggle/sf-salaries/explore-sf-salary-data" target="_blank">
+                Explore SF Salary Data
+                </a>
+
+                <li><a href="https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed/data-visualization-for-human-perception" target="_blank">
+                    Data Visualization for Human Perception
+                </a>
+                <li><a href="http://www.sitepoint.com/interactive-javascript-charts-using-data-from-google-sheets/" target="_blank">
+                    Interactive Chars using Google Sheets
+                </a>
+
+
+
             </ul>
         </section>
 
