@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Big Data Visualisation in the Browser</title>
+    <title>Big Data Visualization in the Browser</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -61,7 +61,7 @@
 
         <section data-background="airline-pictures/delta-container.jpg">
         <!--<section>-->
-             <h2>Big Data Visualisation in the Browser</h2>
+             <h2>Big Data Visualization in the Browser</h2>
             <h4>Interactive graphics with D3, Crossfilter, and DC</h4>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -567,6 +567,22 @@ stateOriginMap.width(500)
 </code></pre>
         </section>
 
+        <section>
+            <h3>Summarizing our steps</h3>
+            <ol>
+                <li class="fragment">specify the domain: US domestic flights 2001
+                <li class="fragment">get the data: CSV (flight data) and HTML (airport by state)
+                <li class="fragment">clean and prepare the data (data munging): awk, cut, etc., jQuery for scraping
+                <li class="fragment">load and index data in the browser: D3 and crossfilter
+                <li class="fragment">create visualizations: D3 and DC.js
+                <li class="fragment">explore using visualizations (this can be done by a non-technical person): browser
+            </ol>
+            <p class="fragment">A <a href="http://kyrandale.com/static/talks/reveal.js/index_pydata2015.html#/13">more Python centric approach</a>
+                would leave the exploration part to non-interactive Python
+            </p>
+
+        </section>
+
         <section data-background-image="backgrounds/dark-cabin.jpg">
             <h3>Wrapup</h3>
             <ul>
@@ -593,12 +609,16 @@ stateOriginMap.width(500)
                 <!--<li><a href="http://thegamma.net" target="_blank">TheGamma: Simple code behind interactive articles</a>-->
                 <li><a href="http://data.worldbank.org/developers" target="_blank">
                 World Bank Data</a>
-                <li><a href="https://medium.com/accurat-studio/sketching-with-data-opens-the-mind-s-eye-92d78554565#.pv7dcyb43" target="_blank">
-                    From Data to Story</a>
+                <!--<li><a href="https://medium.com/accurat-studio/sketching-with-data-opens-the-mind-s-eye-92d78554565#.pv7dcyb43" target="_blank">-->
+                    <!--From Data to Story</a>-->
                 <!--<li><a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">-->
                     <!--Alternative / Possible Addition: PCA</a>-->
                 <!--<li><a href="http://r2d3.us" target="_blank">-->
                     <!--Mind blowing visual introduction to machine learning with D3</a>-->
+                <!--<li><a href="https://medium.com/@mbostock/what-makes-software-good-943557f8a488" target="_blank">-->
+                    <!--Improvements in D3 4.0</a>-->
+                <li><a href="http://kyrandale.com/" target="_blank">Kyran Dale</a>: <a href="https://www.youtube.com/watch?v=h6BtbVioBz8" target="_blank">
+                    Data-visualization with Python and Javascript; Crafting a data-viz toolchain for the web</a>
                 <li><a href="http://setosa.io" target="_blank">
                     Great D3 visualizations</a>
                 <li><a href="https://www.kaggle.com/benhamner/d/uciml/iris/python-data-visualizations/notebook" target="_blank">
@@ -610,9 +630,17 @@ stateOriginMap.width(500)
                 <li><a href="https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed/data-visualization-for-human-perception" target="_blank">
                     Data Visualization for Human Perception
                 </a>
-                <li><a href="http://www.infoworld.com/article/3040708/analytics/data-visualization-showing-isnt-always-telling.html" target="_blank">
-                    Data Visualization useful for gaining novel insights?
+                <li><a href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A404107" target="_blank">
+                When Data Viz Trumps Statistics
                 </a>
+                <li><a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
+                    Worlds, not Stories: data visualization as a macroscope
+                </a>
+
+
+                <!--<li><a href="http://www.infoworld.com/article/3040708/analytics/data-visualization-showing-isnt-always-telling.html" target="_blank">-->
+                    <!--Data Visualization useful for gaining novel insights?-->
+                <!--</a>-->
             </ul>
         </section>
 
