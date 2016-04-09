@@ -18,7 +18,7 @@
 
 <h2 id="title" style="display: none">Domectic US flights September 2001 (total number of
     flights <span
-            id="total">???</span>)</h2>
+            id="total">???</span>, filtered: <span id="filtered">???</span>)</h2>
 
 <div>
     <div style="float: left">
@@ -43,7 +43,14 @@
 <script src="processing.js"></script>
 <script src="flights.js"></script>
 <script>
+    function updateFilteredSize() {
+        var filteredFlights = flight.groupAll().value();
+        var filteredEl = document.querySelector("#filtered");
+        filteredEl.textContent = filteredFlights;
+    }
+
     function render() {
+        updateFilteredSize();
         var numberOfFlights = flight.size();
         var total = document.getElementById('total');
         total.innerHTML = numberOfFlights;
@@ -53,12 +60,18 @@
         loading.style.display = 'none';
         var selectOrigin = dc.selectMenu('#select-origin');
         selectOrigin
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(origin)
                 .group(origin.group().reduceCount());
         var selectDestination = dc.selectMenu('#select-dest');
         selectDestination
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(dest)
@@ -66,6 +79,9 @@
 
         var pieChartCarriers = dc.pieChart("#pie");
         pieChartCarriers
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .width(200)
                 .height(200)
                 .slicesCap(10)
@@ -77,6 +93,9 @@
 
         var chart = dc.lineChart("#series");
         chart
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .width(1000)
                 .height(200)
                 .margins({top: 10, right: 50, bottom: 30, left: 60})
@@ -101,6 +120,9 @@
         d3.json("helper_data/us-states.json", function (statesJson) {
             var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
             stateOriginMap.width(500)
+                    .on("filtered", function(chart, filter){
+                        updateFilteredSize();
+                    })
                     .height(250)
                     .dimension(stateOrigin)
                     .group(stateOrigin.group().reduceCount())
@@ -114,6 +136,9 @@
                     });
             var stateDestMap = dc.geoChoroplethChart("#state-dest-map");
             stateDestMap.width(500)
+                    .on("filtered", function(chart, filter){
+                        updateFilteredSize();
+                    })
                     .height(250)
                     .dimension(stateDest)
                     .group(stateDest.group().reduceCount())

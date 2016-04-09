@@ -77,7 +77,7 @@
         </section>
 
         <section data-background="airline-pictures/landing-far.jpg">
-            <h2>However: That question is really vague</h2>
+            <h2>That question is really vague</h2>
             <h3>
             <ul>
                 <li class="fragment">In which respect?
@@ -99,7 +99,7 @@
         </section>
 
         <section>
-            <h2>Solution #1: You play around</h2>
+            <h2>Solution #1: You play around to learn</h2>
         </section>
 
         <section>
@@ -116,56 +116,57 @@
         </section>
 
         <section>
-            <h3>D3.js: More Details</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
-                <li class="fragment">Transform your data into visualizations in the browser
-                <li class="fragment">Style of programming declarative
-                <li class="fragment">Main field of use are diagrams using SVG (but D3 is not limited to that)
-                <li class="fragment">Data is bound to SVG elements which change once the data changes
+            <h3>D3.js</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
+                <li>Transform your data into visualizations in the browser
+                <li>Style of programming declarative
+                <li>Main field of use are diagrams using SVG (but D3 is not limited to that)
+                <li>Data is bound to SVG elements which change once the data changes
             </ul>
         </section>
-        <section>
-            <h4>D3 Example Code</h4>
-<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
-    .selectAll("p")  // select all p tags which are children
-    .data([4, 8, 15, 16, 23, 42]) // bind elements with data
-    .text(function (d) { // data gets passed in
-        return "I’m number " + d + "!"; // result gets displayed
-    })
-    .style("font-size", function (d) {
-        return 2 * d + "px";
-    });
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-&lt;p>First p&lt;/p>
-&lt;p>Second p&lt;/p>
-&lt;p>Third p&lt;/p>
-</code></pre>
-            <div><a target="_blank" href="code/d3-data-bind.html"><img class="fragment" src="basic-d3.png" height="150px"></a></div>
-        </section>
+        <!--For JSUNConf only-->
+        <!--<section>-->
+            <!--<h4>D3 Example Code</h4>-->
+<!--<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag-->
+    <!--.selectAll("p")  // select all p tags which are children-->
+    <!--.data([4, 8, 15, 16, 23, 42]) // bind elements with data-->
+    <!--.text(function (d) { // data gets passed in-->
+        <!--return "I’m number " + d + "!"; // result gets displayed-->
+    <!--})-->
+    <!--.style("font-size", function (d) {-->
+        <!--return 2 * d + "px";-->
+    <!--});-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--&lt;p>First p&lt;/p>-->
+<!--&lt;p>Second p&lt;/p>-->
+<!--&lt;p>Third p&lt;/p>-->
+<!--</code></pre>-->
+            <!--<div><a target="_blank" href="code/d3-data-bind.html"><img class="fragment" src="basic-d3.png" height="150px"></a></div>-->
+        <!--</section>-->
 
-        <section>
-            <h3>More playful stuff using D3</h3>
-            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
-                <img src="d3-collision-screenshot.png" height="400px">
-            </a>
-            <!--
-                        Local version (needs WebStorm and an open visualization project)
-                        http://localhost:63342/visualization/d3/talk/20111018/index.html#33
-            -->
-        </section>
+        <!--<section>-->
+            <!--<h3>More playful stuff using D3</h3>-->
+            <!--<a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">-->
+                <!--<img src="d3-collision-screenshot.png" height="400px">-->
+            <!--</a>-->
+            <!--&lt;!&ndash;-->
+                        <!--Local version (needs WebStorm and an open visualization project)-->
+                        <!--http://localhost:63342/visualization/d3/talk/20111018/index.html#33-->
+            <!--&ndash;&gt;-->
+        <!--</section>-->
 
-        <section>
-            <h3>Flexible transistions between display types</h3>
-            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">
-                <img src="d3-transitions.png" height="400px">
-            </a>
-            <!--
-                        Local version (needs WebStorm and an open visualization project)
-                        http://localhost:63342/visualization/d3/talk/20111116/index.html#11
-            -->
-        </section>
+        <!--<section>-->
+            <!--<h3>Flexible transistions between display types</h3>-->
+            <!--<a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">-->
+                <!--<img src="d3-transitions.png" height="400px">-->
+            <!--</a>-->
+            <!--&lt;!&ndash;-->
+                        <!--Local version (needs WebStorm and an open visualization project)-->
+                        <!--http://localhost:63342/visualization/d3/talk/20111116/index.html#11-->
+            <!--&ndash;&gt;-->
+        <!--</section>-->
 
         <section>
             <h2>Problem #2: Data might be really big and multivariate</h2>
@@ -189,27 +190,26 @@
 
         <section>
             <h3>Crossfilter: Filtering millions of data sets in real time</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
-                <li class="fragment">Can filter up to millions of data sets in real time in the browser
-                <li class="fragment">Data sets are indexed when loaded
-                <li class="fragment">You specify what you want to filter using dimensions
-                <li class="fragment">Can be used to feed data to D3
+            <ul class="fragment">
+                <li><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
+                <li>Can filter up to millions of data sets in real time in the browser
+                <li>Data sets are indexed when loaded
+                <li>You specify what you want to filter using dimensions
             </ul>
         </section>
-        <section>
-            <h3>Typical Types of Data</h3>
-            <ul>
-                <li class="fragment"><em>numerical:</em> numbers
-                <li class="fragment"><em>categorical:</em> limited number of discrete values
-                <li class="fragment"><em>time series:</em> temporal value, timestamp
-                <li class="fragment"><em>text:</em> words
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>Typical Types of Data</h3>-->
+            <!--<ul>-->
+                <!--<li class="fragment"><em>numerical:</em> numbers-->
+                <!--<li class="fragment"><em>categorical:</em> limited number of discrete values-->
+                <!--<li class="fragment"><em>time series:</em> temporal value, timestamp-->
+                <!--<li class="fragment"><em>text:</em> words-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h3>The data</h3>
-<pre><code data-trim contenteditable class="javascript">
+<pre class="fragment"><code data-trim contenteditable class="javascript">
 // this is how the data for our flights looks like
 console.log(flights[0]);
 {
@@ -229,26 +229,26 @@ console.log(flights[0]);
 
         <section data-background="airline-pictures/sw.jpg">
             <h3>Where does the data come from?</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a>
-                <li class="fragment">All domestic US flights from 1987 to 2008, grouped per year
-                <li class="fragment">Format CSV
-                <li class="fragment">2001 data reduced using <em>awk</em>
-                <li class="fragment">Small set: Just September 2001
-                <li class="fragment">Larger set: Just September to November 2001
-                <li class="fragment">Some columns cut off using <em>cut</em>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a>
+                <li>All domestic US flights from 1987 to 2008, grouped per year
+                <li>Format CSV
+                <li>2001 data reduced using <em>awk</em>
+                <li>Small set: Just September 2001
+                <li>Larger set: Just September to November 2001
+                <li>Some columns cut off using <em>cut</em>
             </ul>
         </section>
         <section>
             <h2 style="color: red">Caution</h2>
             <h4 class="fragment">Interpretation already starts with selection of input data sets</h4>
-            <ul>
-                <li class="fragment">Different time ranges can give very different results
-                <li class="fragment">What columns are relevant is not easy to say
-                <li class="fragment">Even the 'raw' data contains a lot of assumptions and interpretations from the initial creator
-                <li class="fragment">Can you ever have truly objective data?
-                <li class="fragment">In the first version of the talk I ignored 'cancelled' leading to bad results
-                <li class="fragment">Bad mistakes in this phase of the processing can not be healed in later steps
+            <ul class="fragment">
+                <li>Different time ranges can give very different results
+                <li>What columns are relevant is not easy to say
+                <li>Even the 'raw' data contains a lot of assumptions and interpretations from the initial creator
+                <li>Can you ever have truly objective data?
+                <li>In the first version of the talk I ignored 'cancelled' leading to bad results
+                <li>Bad mistakes in this phase of the processing can not be healed in later steps
             </ul>
         </section>
         <section>
@@ -274,12 +274,12 @@ date = flight.dimension(function (d) {
     return new Date(2001, d.Month - 1, d.DayofMonth);
 });
 </code></pre>
-<pre class="fragment"><code data-trim contenteditable>
-// early coercion is a good idea for better performance
-airTime = flight.dimension(function (d) {
-    return parseInt(d.AirTime);
-});
-</code></pre>
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--// early coercion is a good idea for better performance-->
+<!--airTime = flight.dimension(function (d) {-->
+    <!--return parseInt(d.AirTime);-->
+<!--});-->
+<!--</code></pre>-->
         </section>
         <section>
             <h3>Reducing Dimensions</h3>
@@ -300,7 +300,7 @@ var carrierNames = distinctCarriers.map(function (carrier) {
 });
 console.log(carrierNames);
 // ["AA", "AQ", "AS", "CO", "DL", "HP",
-    "MQ", "NW", "TW", "UA", "US", "WN"]
+//  "MQ", "NW", "TW", "UA", "US", "WN"]
 </code></pre>
         </section>
         <section>
@@ -376,10 +376,10 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
 
         <section>
             <h3>dc.js: Charting with D3 and Crossfilter</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
-                <li class="fragment">Prebuilt integration of D3 and Crossfilter
-                <li class="fragment"><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for interactive big data</a>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+                <li>Prebuilt integration of D3 and Crossfilter
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for interactive big data</a>
                     <ul>
                         <li>bar
                         <li>pie
@@ -412,15 +412,24 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
             <h3 class="fragment">Rather an art than a craft</h3>
         </section>
 
-        <section>
-            <h3>How to create a data story?</h3>
-            <img src="data-story.jpg" height="500px">
-            <p><small>https://advocacyassembly.org</small></p>
-        </section>
+        <!--We do not have a story at all, we rather try to explore something-->
+        <!--<section>-->
+            <!--<h3>How to create a data story?</h3>-->
+            <!--<img src="data-story.jpg" height="500px">-->
+            <!--<p><small>https://advocacyassembly.org</small></p>-->
+        <!--</section>-->
 
         <section>
             <h3>Choose the graphical encodings...</h3>
             <h3 class="fragment">... that are best visually decoded.</h3>
+        </section>
+
+        <section>
+            <h3>How can I make this valuable?</h3>
+            <img src="twitter-pay-for-viz.png">
+            <p><a href="https://twitter.com/harrisj/status/718484498091020288" target="_blank">
+                @harrisj
+            </a></p>
         </section>
 
         <section>
@@ -443,7 +452,7 @@ console.log("all flights from EWR to STL", flight.groupAll().value());
         </section>
 
         <section>
-            <h2>How do you really make a design?</h2>
+            <h2>How I really designed it</h2>
             <img class="fragment" src="design.jpg" height="400px">
         </section>
 
@@ -486,22 +495,24 @@ pieChartCarriers
             </div>
         </section>
 
+        <!--<section>-->
+            <!--<h3>Use case: Destinations reached by Delta flights from Austin</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>-->
+            <!--</div>-->
+        <!--</section>-->
+
         <section>
-            <h3>Use case: Destinations reached by Delta flights from Austin</h3>
+            <h2>Time Series: London Underground ad from 1928</h2>
             <div class="fragment">
-                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little patience)</a></div>
+                <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
+                <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
             </div>
         </section>
 
         <section>
-            <h2>Time Series: London Underground ad from 1928</h2>
-            <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
-            <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
-        </section>
-
-        <section>
-            <h3>Time Series (Part #3): Flights to NVC by carriers AA and UA</h3>
+            <h3>Time Series (Part #3): Filtering using Brushes</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little patience)</a></div>
@@ -515,14 +526,7 @@ var chart = dc.lineChart("#series");
 chart
     .dimension(date)
     .group(date.group())
-    .x(d3.scale.linear().domain([new Date(2001, 08, 01),
-                                 new Date(2001, 08, 30)]))
-    .brushOn(true)
-    .xAxis().ticks(30).tickFormat(
-        function (e) {
-            return new Date(e).getDate() + 1;
-        }
-    );
+    .brushOn(true));
 </code></pre>
         </section>
 
@@ -533,14 +537,23 @@ chart
                 <div><a target="_blank" href="code/dc-911-map.html">Run (have a little patience)</a></div>
             </div>
         </section>
+
+        <section>
+            <h2>Audience Participation Required</h2>
+            <p class="fragment">Can you think of a question this interactive visualization could answer?</p>
+        </section>
+
         <section>
             <h3>Mixing Different data sources</h3>
             <ul>
                 <li class="fragment">sometimes you need to mix data from different sources
-                <li class="fragment">in our case the states airports are in and airport codes
-                <li class="fragment">states are not in our original data
-                <li class="fragment">so we load both data and merge
-                <li class="fragment">we also create additional dimensions for the state
+                <li class="fragment">in our case: states airports are in, and airport codes
+                    <ul class="fragment">
+                        <li>states are not in our original data
+                        <li>so I load both data and merge
+                        <li>I also create additional dimensions for the state
+                    </ul>
+                </li>
                 <li class="fragment">sources can be in many formats
                 <li class="fragment">even data scraping might be necessary (which I did in
                 <a target="_blank" href="code/helper_data/airports_by_state.html">code/helper_data/airports_by_state.html
@@ -557,18 +570,12 @@ stateOriginMap.width(500)
     .dimension(stateOrigin)
     .group(stateOrigin.group().reduceCount())
     .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-    .colorDomain([0, 20000])
-    .colorCalculator(function (d) {
-        return d ? stateOriginMap.colors()(d) : '#ccc';
-    })
-    .overlayGeoJson(statesJson.features, "state", function (d) {
-        return d.properties.name;
-    });
+    .colorDomain([0, 20000]));
 </code></pre>
         </section>
 
         <section>
-            <h3>Summarizing our steps</h3>
+            <h4>Summarizing our steps</h4>
             <ol>
                 <li class="fragment">specify the domain: US domestic flights 2001
                 <li class="fragment">get the data: CSV (flight data) and HTML (airport by state)
@@ -581,6 +588,10 @@ stateOriginMap.width(500)
                 would leave the exploration part to non-interactive Python
             </p>
 
+            <!--<div>-->
+                <!--<small></small>-->
+                <!--<a target="_blank" href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A155730"><img src="vanderLans_10_24_2013_Figure 1.jpg"></a>-->
+            <!--</div>-->
         </section>
 
         <section data-background-image="backgrounds/dark-cabin.jpg">
@@ -589,10 +600,10 @@ stateOriginMap.width(500)
                 <li class="fragment">D3 helps you to interactively explore your data visually
                 <li class="fragment">For large amounts of multivariate datasets
                     <ul>
-                        <li class="fragment">Crossfilter allows for fast multidimensional filtering
-                        <li class="fragment">there are limitations to data size, number of data sets, and dimensions
-                        <li class="fragment">you might have to make a pre-selection
-                        <li class="fragment">still millions of data sets are possible
+                        <li>Crossfilter allows for fast multidimensional filtering
+                        <li>there are limitations to data size, number of data sets, and dimensions
+                        <li>you might have to make a pre-selection
+                        <li>still more than a million of data sets are possible
                     </ul>
                 </li>
                 <li class="fragment">Use DC for coordinated visualizations with powerful widgets
@@ -636,6 +647,10 @@ stateOriginMap.width(500)
                 <li><a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
                     Worlds, not Stories: data visualization as a macroscope
                 </a>
+                <!--<li><a href="https://vis4.net/blog/posts/mastering-multi-hued-color-scales/" target="_blank">-->
+                    <!--Mastering Multi-hued Color Scales with Chroma.js-->
+                <!--</a>-->
+
 
 
                 <!--<li><a href="http://www.infoworld.com/article/3040708/analytics/data-visualization-showing-isnt-always-telling.html" target="_blank">-->

@@ -14,11 +14,10 @@
     </style>
 </head>
 <body>
-<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+<h2 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h2>
 
-<h1 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of
-    flights <span
-            id="total">???</span>)</h1>
+<h2 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of
+    flights <span id="total">???</span>, filtered: <span id="filtered">???</span>)</h2>
 
 <div>
     <div style="float: left">
@@ -39,7 +38,14 @@
 <script src="processing.js"></script>
 <script src="flights.js"></script>
 <script>
+    function updateFilteredSize() {
+        var filteredFlights = flight.groupAll().value();
+        var filteredEl = document.querySelector("#filtered");
+        filteredEl.textContent = filteredFlights;
+    }
+
     function render() {
+        updateFilteredSize();
         var numberOfFlights = flight.size();
         var total = document.getElementById('total');
         total.innerHTML = numberOfFlights;
@@ -49,12 +55,18 @@
         loading.style.display = 'none';
         var selectOrigin = dc.selectMenu('#select-origin');
         selectOrigin
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(origin)
                 .group(origin.group().reduceCount());
         var selectDestination = dc.selectMenu('#select-dest');
         selectDestination
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(dest)
@@ -62,6 +74,9 @@
 
         var pieChartCarriers = dc.pieChart("#pie");
         pieChartCarriers
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .width(200)
                 .height(200)
                 .slicesCap(10)
@@ -89,9 +104,12 @@
                     return d.key
                             + "\nFlights: " + Math.round(d.value.flights);
                 })
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .xAxis().ticks(30).tickFormat(
                 function (e) {
-                    return new Date(e).getDate() + 1;
+                    return new Date(e).getDate();
                 });
 
         dc.renderAll();
