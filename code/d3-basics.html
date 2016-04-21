@@ -6,17 +6,19 @@
 </head>
 <body>
 <button class="enter">Enter</button>
-<button class="update">Update</button>
+<button class="updateData">Update Data</button>
+<button class="updateStyle">Update Style</button>
 <button class="exit">Exit</button>
-<p>First p</p>
-<p>Second p</p>
-<p>Third p</p>
-</body>
+<div class="ps">
+    <p>First p</p>
+    <p>Second p</p>
+    <p>Third p</p>
+</div>
 <script src="lib/d3.js"></script>
 <script>
     var data = [4, 8, 15, 16, 23, 42];
-    var updateSelection = d3.select("body") // select the body tag
-            .selectAll("p")  // select all p tags which are children
+    var updateSelection = d3.select('div.ps')
+            .selectAll("p")  // select all p tags
             .data(data) // bind with data, one value each element
             .text(function (d) {
                 return "I’m number " + d + "!";
@@ -24,30 +26,34 @@
             .style("font-size", function (d) {
                 return 2 * d + "px";
             });
-    d3.select('button.update').on('click', function (event) {
-        data[1] = 40;
-        var newSelection = updateSelection.data(data);
-        newSelection.text(function (d) {
+    d3.select('button.updateData').on('click', function (event) {
+        data[1] = Math.round(Math.random() * 1000);
+        updateSelection.data(data).text(function (d) {
             return "I’m number " + d + "!";
         });
     });
+    d3.select('button.updateStyle').on('click', function (event) {
+        updateSelection.style("color", function () {
+            return "hsl(" + Math.random() * 360 + ",100%,50%)";
+        });
+    });
     d3.select('button.exit').on('click', function (event) {
-        var newSelection = updateSelection
-                .data([1, 2]);
-        newSelection.exit().remove();
+        updateSelection.data([1, 2]).exit().remove();
     });
     d3.select('button.enter').on('click', function (event) {
-        var enterSelection = updateSelection.enter();
-        enterSelection
-                .append("p")
+        updateSelection.enter &&  updateSelection.enter().append("p")
                 .text(function (d) {
                     return "I’m number " + d + "!";
                 })
                 .style("color", function () {
                     return "hsl(" + Math.random() * 360 + ",100%,50%)";
                 });
+        updateSelection = d3.select('div.ps')
+                .selectAll("p");
+
     });
 
-
 </script>
+</body>
+
 </html>

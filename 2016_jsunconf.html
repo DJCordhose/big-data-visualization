@@ -65,8 +65,8 @@
 
         <!--<section data-background="backgrounds/light-sky.jpg">-->
         <section data-background="backgrounds/light-flight.jpg">
-             <h1>Big Data Visualization in the Browser</h1>
-            <h3>Interactive graphics with D3, Crossfilter, and DC</h3>
+            <h1>Interactive graphics with D3, Crossfilter, and DC</h1>
+            <h4>JSUnconf 2016</h4>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
@@ -94,6 +94,25 @@
 
         <section data-background="backgrounds/light-runway.jpg">
             <h2>My Question for today: What can we learn from domestic US air-traffic data?</h2>
+        </section>
+        <section>
+            <h3>The data</h3>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// this is how the data for our flights looks like
+console.log(flights[0]);
+{
+  "Month": "9", // part of timestamp (year implied)
+  "DayofMonth": "5", // part of timestamp (year implied)
+  "UniqueCarrier": "US", // categorical
+  "AirTime": "67", // numerical
+  "ArrDelay": "22", // numerical
+  "DepDelay": "31", // numerical
+  "Origin": "MCO", // categorical
+  "Dest": "CLT", // categorical
+  "Distance": "468", // numerical
+  "Cancelled": 0 // categorical
+}
+</code></pre>
         </section>
 
         <section>
@@ -144,6 +163,7 @@
             <!--<h4>Enter, Update, Exit</h4>-->
 <!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
 <!--// add a paragraph for each data not bound to an element-->
+<!--// modifies original updateSelection-->
 <!--updateSelection.enter()-->
     <!--.append("p")-->
     <!--.text(function (d) {return "I’m number " + d + "!";});-->
@@ -161,26 +181,6 @@
 <!--</code></pre>-->
             <!--<div><a target="_blank" href="code/d3-basics.html">Run</a></div>-->
         <!--</section>-->
-
-        <section>
-            <h3>The data</h3>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
-// this is how the data for our flights looks like
-console.log(flights[0]);
-{
-  "Month": "9", // part of timestamp (year implied)
-  "DayofMonth": "5", // part of timestamp (year implied)
-  "UniqueCarrier": "US", // categorical
-  "AirTime": "67", // numerical
-  "ArrDelay": "22", // numerical
-  "DepDelay": "31", // numerical
-  "Origin": "MCO", // categorical
-  "Dest": "CLT", // categorical
-  "Distance": "468", // numerical
-  "Cancelled": 0 // categorical
-}
-</code></pre>
-        </section>
 
         <section>
             <h3>Crossfilter: Filtering millions of data sets in real time</h3>
