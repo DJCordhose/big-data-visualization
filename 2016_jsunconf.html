@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Big Data Visualization in the Browser</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <!--<section data-background="backgrounds/light-sky.jpg">-->
+        <section data-background="backgrounds/light-flight.jpg">
+             <h1>Big Data Visualization in the Browser</h1>
+            <h3>Interactive graphics with D3, Crossfilter, and DC</h3>
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+        </section>
+
+        <section data-background="backgrounds/light-table.jpg">
+            <h1><em style="color: red;">Worlds</em><span class="fragment">, not Stories</span></h1>
+            <p class="fragment">Credit for coining the term goes to
+                <a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:
+            <a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
+                Worlds, not Stories: data visualization as a macroscope
+            </a>
+                </p>
+        </section>
+
+        <section data-background="backgrounds/light-table.jpg">
+            <h2>Interactive Visualization is <em style="color: red;">not</em> about<br> <em class="fragment" style="color: red;">consuming stories</em></h2>
+        </section>
+
+        <section data-background="backgrounds/light-table.jpg">
+            <h2>Interactive Visualization is about<br> <em  class="fragment" style="color: red;">exploring the world</em></h2>
+        </section>
+
+
+        <section data-background="backgrounds/light-runway.jpg">
+            <h2>My Question for today: What can we learn from domestic US air-traffic data?</h2>
+        </section>
+
+        <section>
+            <h3>D3.js</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
+                <li>Transform your data into visualizations in the browser
+                <li>Style of programming declarative
+                <li>Main field of use are diagrams using SVG (but D3 is not limited to that)
+                <li>Data is bound to SVG elements which change once the data changes
+            </ul>
+        </section>
+        <section>
+            <h4>D3 Example Code</h4>
+<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
+    .selectAll("p")  // select all p tags which are children
+    .data([4, 8, 15, 16, 23, 42]) // bind elements with data
+    .text(function (d) { // data gets passed in
+        return "I’m number " + d + "!"; // result gets displayed
+    })
+    .style("font-size", function (d) {
+        return 2 * d + "px";
+    });
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+&lt;p>First p&lt;/p>
+&lt;p>Second p&lt;/p>
+&lt;p>Third p&lt;/p>
+</code></pre>
+            <div><a target="_blank" href="code/d3-data-bind.html"><img class="fragment" src="basic-d3.png" height="150px"></a></div>
+        </section>
+        <section>
+            <h3>D3.js: Dynamic graphics in the browser</h3>
+            <a target="_blank" href="d3-talks/20111116/#14">
+                <img src="d3-airport-connections.png" height="400px">
+            </a>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Data-Joins</h3>-->
+            <!--<p>Data is being linked to elements using <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a></p>-->
+            <!--<p><a href="https://gist.github.com/mbostock/3808218" target="_blank">Example</a></p>-->
+            <!--<img src="data-join.png" height="400px">-->
+            <!--<p><small>Copyright 2012, Mike Bostock http://bost.ocks.org/mike/join/</small></p>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h4>Enter, Update, Exit</h4>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// add a paragraph for each data not bound to an element-->
+<!--updateSelection.enter()-->
+    <!--.append("p")-->
+    <!--.text(function (d) {return "I’m number " + d + "!";});-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// update data and update elements-->
+<!--data[1] = 40;-->
+<!--var newSelection = updateSelection.data(data);-->
+<!--newSelection.text(function (d) {return "I’m number " + d + "!";});-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript">-->
+<!--// remove all elements that are not bound to data-->
+<!--var newSelection = updateSelection.data([1, 2]);-->
+<!--newSelection.exit().remove();-->
+<!--</code></pre>-->
+            <!--<div><a target="_blank" href="code/d3-basics.html">Run</a></div>-->
+        <!--</section>-->
+
+        <section>
+            <h3>The data</h3>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// this is how the data for our flights looks like
+console.log(flights[0]);
+{
+  "Month": "9", // part of timestamp (year implied)
+  "DayofMonth": "5", // part of timestamp (year implied)
+  "UniqueCarrier": "US", // categorical
+  "AirTime": "67", // numerical
+  "ArrDelay": "22", // numerical
+  "DepDelay": "31", // numerical
+  "Origin": "MCO", // categorical
+  "Dest": "CLT", // categorical
+  "Distance": "468", // numerical
+  "Cancelled": 0 // categorical
+}
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Crossfilter: Filtering millions of data sets in real time</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
+                <li>Can filter up to millions of data sets in real time in the browser
+                <li>Data sets are indexed when loaded
+                <li>You specify what you want to filter using dimensions
+            </ul>
+        </section>
+
+        <section>
+            <h3>Creating a Crossfilter</h3>
+<pre><code data-trim contenteditable>
+// creating a new crossfilter (multi-dimensional dataset)
+flight = crossfilter(flights);
+console.log(flight.size()); // 490698
+</code></pre>
+        </section>
+        <section>
+            <h3>Creating Dimensions</h3>
+<pre><code data-trim contenteditable class="javascript">
+// creating a dimension for all carriers of all flights
+// data of dimension needs to be comparable
+carrier = flight.dimension(function (d) {
+    return d.UniqueCarrier;
+});
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+// dates properly constructed
+date = flight.dimension(function (d) {
+    return new Date(2001, d.Month - 1, d.DayofMonth);
+});
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+// early coercion is a good idea for better performance
+airTime = flight.dimension(function (d) {
+    return parseInt(d.AirTime);
+});
+</code></pre>
+        </section>
+        <section>
+            <h3>Reducing Dimensions</h3>
+<pre><code data-trim contenteditable>
+// group() reduces this dimension to a group
+// you can also supply a mapping function
+// identity is used as default
+var distrinctCarriersGroup = carrier.group();
+console.log("Distinct carriers: " + distrinctCarriersGroup.size());
+// 12
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// all() returns all grouped results as an array
+var distinctCarriers = distrinctCarriersGroup.all();
+var carrierNames = distinctCarriers.map(function (carrier) {
+    // contain key and value
+    return carrier.key;
+});
+console.log(carrierNames);
+// ["AA", "AQ", "AS", "CO", "DL", "HP",
+//  "MQ", "NW", "TW", "UA", "US", "WN"]
+</code></pre>
+        </section>
+        <section>
+            <h3>Filtering</h3>
+<pre><code data-trim contenteditable>
+// filter just for TW
+carrier.filter("TW");
+// groupAll() creates a group intersecting all current filters
+console.log("TW flights", flight.groupAll().value()); // 19427
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// dimensions are stateful: result is a combination of all filters
+origin.filter("EWR");
+console.log("coming from EWR", flight.groupAll().value()); // 179
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+dest.filter("STL");
+console.log("going to STL", flight.groupAll().value()); // 179
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+// this resets the filter on carrier
+carrier.filterAll();
+console.log("all flights from EWR to STL", flight.groupAll().value());
+// 203
+</code></pre>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Sample Code: Accessing filtered data</h3>-->
+<!--<pre><code data-trim contenteditable class="javascript">-->
+<!--// intersection of all filters,-->
+<!--// but descending order by this dimension-->
+<!--// parameter could be any number of results, even Infinity-->
+<!--var filteredFlights = dest.top(1);-->
+<!--[-->
+  <!--{-->
+    <!--"Month": "9",-->
+    <!--"DayofMonth": "28",-->
+    <!--"UniqueCarrier": "TW",-->
+    <!--"AirTime": "119",-->
+    <!--"ArrDelay": "-40",-->
+    <!--"DepDelay": "-9",-->
+    <!--"Origin": "EWR",-->
+    <!--"Dest": "STL",-->
+    <!--"Distance": "872",-->
+    <!--"Cancelled": 0-->
+  <!--}-->
+<!--]-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--// also possible-->
+<!--dimension.bottom(k)-->
+<!--</code></pre>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>Run sample code</h2>-->
+            <!--<p>Open in Chrome for performance</p>-->
+            <!--<p>Might take a while</p>-->
+            <!--<p>Open developer console in browser to see any result</p>-->
+            <!--<p>You might have to wait until run through for the first time, then open console and reload</p>-->
+            <!--<p>Experiment with the dimensions</p>-->
+            <!--<div><a target="_blank" href="code/crossfilter-911.html">Run</a></div>-->
+        <!--</section>-->
+
+        <section>
+            <h3>dc.js: Charting with D3 and Crossfilter</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+                <li>Prebuilt integration of D3 and Crossfilter
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for interactive big data</a>
+                    <ul>
+                        <li>bar
+                        <li>pie
+                        <li>many more
+                    </ul>
+                    </li>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>Graphical Encodings</h4>
+            <div class="fragment">
+                <img src="visualizations.png" height="250px">
+                <p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Clear Vision, avoid chartjunk</h3>-->
+            <!--<h4><a target="_blank" href="http://www.edwardtufte.com/">E.R. Tufte</a></h4>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Initial Design</h2>
+            <img class="fragment" src="design.jpg" height="500px">
+        </section>
+
+        <section>
+            <h1>Order</h1>
+        </section>
+
+        <section>
+            <h3>Ordering Values: Possisbly first pie chart ever</h3>
+            <div  class="fragment">
+                <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="400px">
+                <p><small>http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
+
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Pie Charts have drawbacks</h3>-->
+            <!--<p class="fragment">Hard to compare their segments...</p>-->
+            <!--<p class="fragment">... except for the classic case of a missing segment</p>-->
+            <!--<img  class="fragment" src="pie-chart.jpg" height="450px">-->
+        <!--</section>-->
+
+        <section>
+            <h3>Order (Part #1): Display Carriers as a Pie Chart</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Code for creating the pie chart</h3>
+<pre><code data-trim contenteditable>
+var pieChartCarriers = dc.pieChart("#pie");
+pieChartCarriers
+        .slicesCap(5)
+        .dimension(carrier)
+        .group(carrier.group().reduceCount());
+</code></pre>
+        </section>
+
+        <section>
+            <h1>Connect</h1>
+        </section>
+
+        <section>
+            <h3>Connect (Part #2): Origin, Destination, Carriers combined</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Use case: Destinations reached by Delta flights from Austin</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-use-case.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <section>
+            <h1>Time</h1>
+        </section>
+
+        <section>
+            <h2>Time Series: London Underground ad from 1928</h2>
+            <div class="fragment">
+                <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
+                <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Time Series (Part #3): Filtering using Brushes</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Code for creating the line chart</h3>
+<pre><code data-trim contenteditable>
+var chart = dc.lineChart("#series");
+chart
+    .dimension(date)
+    .group(date.group())
+    .brushOn(true));
+</code></pre>
+        </section>
+
+        <section>
+            <h1>Map</h1>
+        </section>
+
+        <section>
+            <h3>Map (Part #4): All flights from Hawaii</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Code for creating the map</h3>
+<pre><code data-trim contenteditable>
+var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
+stateOriginMap.width(500)
+    .height(250)
+    .dimension(stateOrigin)
+    .group(stateOrigin.group().reduceCount())
+    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+    .colorDomain([0, 20000]));
+</code></pre>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>Wrapup</h2>-->
+            <!--<h4>-->
+            <!--<ul>-->
+                <!--<li class="fragment">D3 helps you to interactively explore your data visually-->
+                <!--<li class="fragment">For large amounts of multivariate datasets-->
+                    <!--<ul>-->
+                        <!--<li>Crossfilter allows for fast multidimensional filtering-->
+                        <!--<li>there are limitations to data size, number of data sets, and dimensions-->
+                        <!--<li>you might have to make a pre-selection-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Use DC for coordinated visualizations with powerful widgets-->
+            <!--</ul>-->
+            <!--</h4>-->
+        <!--</section>-->
+
+        <section data-background="backgrounds/light-sky.jpg">
+            <h2>Future ideas</h2>
+            <h3 class="fragment">Put data in ElasticSearch</h3>
+            <h3 class="fragment">Unsupervised Machine Learning to pre-process data</h3>
+            <h3 class="fragment">WebGL and/or WebVR</h3>
+            <h2 class="fragment" style="color: red">Participation Welcome</h2>
+            <div class="fragment" >
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
