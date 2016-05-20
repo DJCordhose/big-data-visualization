@@ -71,20 +71,20 @@
             </p>
         </section>
 
-        <section data-background="backgrounds/light-world.jpg">
-            <h2 style="font-weight: bolder" class="fragment">Using Interactive Data Visualization to
-                <br><em>explore the world</em></h2>
-            <br>
-            <h2 class="fragment" style="font-weight: bolder">not to tell a story</h2>
-            <br>
-            <br>
-            <p class="fragment" style="font-weight: bolder">Credit for coining the term goes to
-                <a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:
-            <a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
-                Worlds, not Stories: data visualization as a macroscope
-            </a>
-                </p>
-        </section>
+        <!--<section data-background="backgrounds/light-world.jpg">-->
+            <!--<h2 style="font-weight: bolder" class="fragment">Using Interactive Data Visualization to-->
+                <!--<br><em>explore the world</em></h2>-->
+            <!--<br>-->
+            <!--<h2 class="fragment" style="font-weight: bolder">not to tell a story</h2>-->
+            <!--<br>-->
+            <!--<br>-->
+            <!--<p class="fragment" style="font-weight: bolder">Credit for coining the term goes to-->
+                <!--<a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:-->
+            <!--<a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">-->
+                <!--Worlds, not Stories: data visualization as a macroscope-->
+            <!--</a>-->
+                <!--</p>-->
+        <!--</section>-->
 
         <section data-background="backgrounds/light-runway.jpg">
             <h2>Example: Exploring large sets of domestic US air-traffic data directly in the browser</h2>
@@ -93,7 +93,7 @@
         <section data-background="backgrounds/light-metal.jpg">
             <h3>Option #1: Interactive queries using Elasticsearch/Kibana</h3>
             <p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>
-            <a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest%3DLAX,EWR%20AND%20Origin%3DDEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
+            <a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest:LAX,EWR%20AND%20Origin:DEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
                 <img src="screenshot_kibana_discover2.png" height="300">
             </a>
         </section>
