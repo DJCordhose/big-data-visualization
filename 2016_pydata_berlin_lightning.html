@@ -65,13 +65,9 @@
 
         <!--<section data-background="backgrounds/light-sky.jpg">-->
         <section data-background="backgrounds/light-flight.jpg">
-            <h1>The Macroscope</h1>
-            <h2>Interactive Visualization in the Browser</h2>
-            <p>Code: <a href="https://github.com/DJCordhose/big-data-visualization">https://github.com/DJCordhose/big-data-visualization</a></p>
-            <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html">https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html</a></p>
+            <h1>Interactive Data Exploration in the Browser</h1>
             <p>
-                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-                </small>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
         </section>
 
@@ -91,43 +87,86 @@
         </section>
 
         <section data-background="backgrounds/light-runway.jpg">
-            <!--<h2>Filtering large sets of domestic US air-traffic data directly in the browser</h2>-->
-        <!--</section>-->
+            <h2>Example: Exploring large sets of domestic US air-traffic data directly in the browser</h2>
+        </section>
 
-        <!--<section data-background="backgrounds/light-chalk.jpg">-->
-            <h3>Filtering large sets of domestic US air-traffic data directly in the browser</h3>
-            <h4 class="fragment">Example: All flights from Hawaii</h4>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
-                <div><small><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></small></div>
-            </div>
+        <section data-background="backgrounds/light-metal.jpg">
+            <h3>Option #1: Interactive queries using Elasticsearch/Kibana</h3>
+            <p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>
+            <a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest%3DLAX,EWR%20AND%20Origin%3DDEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
+                <img src="screenshot_kibana_discover2.png" height="300">
+            </a>
         </section>
 
         <section data-background="backgrounds/light-table.jpg">
-            <h3>Sample Code using crossfilter, D3, and DC</h3>
-            <p class="fragment"><code>crossfilter</code> allows to filter many data sets in the browser using dimensions</p>
-<pre class="fragment"><code data-trim contenteditable>
-var cf = crossfilter(flights); // flights is just an array
-var stateOrigin = cf.dimension(function (d) {
-    return d.stateOrigin;
-});
-</code></pre>
-            <p class="fragment"><code>DC</code> displays <code>crossfilter</code> dimensions as charts</p>
-<pre class="fragment"><code data-trim contenteditable>
-var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
-stateOriginMap.width(500)
-    .height(250)
-    .dimension(stateOrigin)
-    .group(stateOrigin.group().reduceCount())
-    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-    .colorDomain([0, 20000]));
-</code></pre>
-            <p class="fragment"><code>D3</code> used as underlying technology to map data to SVG</p>
+            <h3>Option #2: Kibana interactive Dashboard</h3>
+            <div class="fragment">
+                <a href="http://localhost:5601/app/kibana#/dashboard/Flights-Arrival-Barchart?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,formattedValue:'-20',index:expo2009_airline,key:ArrDelay,negate:!f,value:'-100%20to%20100'),range:(ArrDelay:(gte:-100,lt:100)))),options:(darkTheme:!f),panels:!((col:4,id:Carier-Pie-Chart,panelIndex:1,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Total-Count,panelIndex:2,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Area,panelIndex:3,row:3,size_x:6,size_y:3,type:visualization),(col:7,id:Origin,panelIndex:4,row:1,size_x:3,size_y:2,type:visualization),(col:10,id:Destination,panelIndex:5,row:1,size_x:3,size_y:2,type:visualization),(col:7,id:ArrDelay,panelIndex:6,row:3,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:Flights-Arrival-Barchart,uiState:(P-3:(spy:(mode:(fill:!f,name:!n)))))" target="_blank">
+                    <img src="screenshot_kibana_dashboard.png" height="400">
+                </a>
+                <p>Clicks re-run augmented Elasticsearch query</p>
+            </div>
         </section>
+
+        <!--<section>-->
+            <!--<h3>Benefits</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>works on any size of data-->
+                <!--<li>with a little practice very easy to do-->
+                <!--<li>provides widgets out of the box-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Drawbacks</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>limited in layout and widgets-->
+                <!--<li>each update takes time-->
+                <!--<li>smooth and continuous interaction limited-->
+            <!--</ul>-->
+        <!--</section>-->
+
+
+        <section data-background="backgrounds/light-chalk.jpg">
+            <h3>Option #3: Filtering directly in the browser using D3 with crossfilter and DC</h3>
+            <h4 class="fragment">Example: All flights from Hawaii</h4>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="300px"></a>
+                <div><small><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></small></div>
+                <p>Data served from static JSON file</p>
+            </div>
+        </section>
+
+        <!--<section data-background="backgrounds/light-table.jpg">-->
+            <!--<h3>Sample Code using crossfilter, D3, and DC</h3>-->
+            <!--<p class="fragment"><code>crossfilter</code> allows to filter many data sets in the browser using dimensions</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var cf = crossfilter(flights); // flights is just an array-->
+<!--var stateOrigin = cf.dimension(function (d) {-->
+    <!--return d.stateOrigin;-->
+<!--});-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>DC</code> displays <code>crossfilter</code> dimensions as charts</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");-->
+<!--stateOriginMap.width(500)-->
+    <!--.height(250)-->
+    <!--.dimension(stateOrigin)-->
+    <!--.group(stateOrigin.group().reduceCount())-->
+    <!--.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))-->
+    <!--.colorDomain([0, 20000]));-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>D3</code> used as underlying technology to map data to SVG</p>-->
+        <!--</section>-->
 
         <section data-background="backgrounds/light-sky.jpg">
             <h2>Thank you</h2>
-            <p>Code / Slides: <a href="https://github.com/DJCordhose/big-data-visualization">https://github.com/DJCordhose/big-data-visualization</a></p>
+            <p>Code:
+                <a href="https://github.com/DJCordhose/big-data-visualization">https://github.com/DJCordhose/big-data-visualization</a>
+                /
+                <a href="https://github.com/DJCordhose/introduction-to-elasticsearch">https://github.com/DJCordhose/introduction-to-elasticsearch</a>
+            </p>
+            <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html">https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html</a></p>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
         </section>
     </div>
