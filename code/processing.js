@@ -52,6 +52,9 @@ function process(callback) {
     var filteredFlights = arrDelay.bottom(1);
     console.log(JSON.stringify(filteredFlights, null, '  '));
     console.log(filteredFlights);
+    origin.filterAll();
+    dest.filterAll();
+    console.log("#flights after resetting all filters", flight.groupAll().value());
     callback && callback();
 }
 
