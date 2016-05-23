@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>The Macroscope</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!--Proposal for data2day:-->
+
+<!--Interaktive Daten-Analyse im Browser-->
+
+<!--Daten zu sammeln und zu speichern ist technisch weitesgehend gelöst. -->
+<!--Was macht man nun aber mit diesen Daten? Wie kann man diese für Informationsgewinn oder Entscheidungsfindungen einsetzen?-->
+
+<!--Eine Lösung besteht darin, das Domänenwissen von Experten und die Daten so nah und einfach wie möglich zusammen zu bringen.-->
+<!--Dabei ist ein Browser basierter Ansatz vorteilhaft, -->
+<!--da er für den Experten keinerlei Installationsaufwand erfordert und überall verfügbar ist.-->
+
+<!--In diesem Talk vergleiche ich anhand eines durchgängigen Beispiel mit echten Daten aus der Praxis -->
+<!--die interaktive Analyse und Visualisierung von großen Datenmengen im Browser mit -->
+<!--Google Spreadsheet, Elasticsearch/Kibana und D3 in Kombination mit crossfilter und DC.-->
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section style="color: red;">
+            <h3 style="color: red;">TODO</h3>
+            <ol class="fragment">
+                <li>Google Spreadsheet: Quellen für Info herraussuchen
+                <li>Erwähnen als weitere Option für JS mit Python: http://bokeh.pydata.org/en/latest/
+                <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
+                <ul>
+                    <li>Z.B.: was ist die Samstags-Beule?
+                    <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
+                </ul>
+                </li>
+            </ol>
+        </section>
+
+        <!--<section data-background="backgrounds/light-sky.jpg">-->
+        <section data-background="backgrounds/light-flight.jpg">
+            <h1>Interactive Data Exploration in the Browser</h1>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+        </section>
+
+        <section data-background="backgrounds/light-world.jpg">
+            <h2 style="font-weight: bolder">Using Interactive Data Visualization to
+                <br><em>explore the world</em></h2>
+            <br>
+            <h2 style="font-weight: bolder">not to tell a story</h2>
+            <br>
+            <br>
+            <p style="font-weight: bolder">Credit for coining the term goes to
+                <a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:
+            <a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
+                Worlds, not Stories: data visualization as a macroscope
+            </a>
+                </p>
+        </section>
+
+        <section data-background="backgrounds/light-sky.jpg">
+            <h2>But why in the Browser</h2>
+            <h3 class="fragment">1: Zero-Installation for the user</h3>
+            <h3 class="fragment">2: Interactivity coming naturally</h3>
+        </section>
+
+        <section data-background="backgrounds/light-runway.jpg">
+            <h2>Example: Exploring all data sets of domestic US air-traffic</h2>
+            <h2>for September 2001</h2>
+            <h2>(400,000)</h2>
+        </section>
+
+        <section>
+            <h3>Options</h3>
+            <ol class="fragment">
+                <li>Google Spreadsheet
+                <li>Elasticsearch / Kibana
+                <li>D3 with crossfilter and DC
+            </ol>
+        </section>
+
+
+        <!--<section data-background="backgrounds/light-metal.jpg">-->
+            <!--<h3>Option #1: Interactive queries using Elasticsearch/Kibana</h3>-->
+            <!--<p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>-->
+            <!--<a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest:LAX,EWR%20AND%20Origin:DEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">-->
+                <!--<img src="screenshot_kibana_discover2.png" height="300">-->
+            <!--</a>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-table.jpg">-->
+            <!--<h3>Option #2: Kibana interactive Dashboard</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a href="http://localhost:5601/app/kibana#/dashboard/Flights-Arrival-Barchart?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,formattedValue:'-20',index:expo2009_airline,key:ArrDelay,negate:!f,value:'-100%20to%20100'),range:(ArrDelay:(gte:-100,lt:100)))),options:(darkTheme:!f),panels:!((col:4,id:Carier-Pie-Chart,panelIndex:1,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Total-Count,panelIndex:2,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Area,panelIndex:3,row:3,size_x:6,size_y:3,type:visualization),(col:7,id:Origin,panelIndex:4,row:1,size_x:3,size_y:2,type:visualization),(col:10,id:Destination,panelIndex:5,row:1,size_x:3,size_y:2,type:visualization),(col:7,id:ArrDelay,panelIndex:6,row:3,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:Flights-Arrival-Barchart,uiState:(P-3:(spy:(mode:(fill:!f,name:!n)))))" target="_blank">-->
+                    <!--<img src="screenshot_kibana_dashboard.png" height="400">-->
+                <!--</a>-->
+                <!--<p>Clicks re-run augmented Elasticsearch query</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Benefits</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>works on any size of data-->
+                <!--<li>with a little practice very easy to do-->
+                <!--<li>provides widgets out of the box-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Drawbacks</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>limited in layout and widgets-->
+                <!--<li>each update takes time-->
+                <!--<li>smooth and continuous interaction limited-->
+            <!--</ul>-->
+        <!--</section>-->
+
+
+        <!--<section data-background="backgrounds/light-chalk.jpg">-->
+            <!--<h3>Option #3: Filtering directly in the browser using D3 with crossfilter and DC</h3>-->
+            <!--<h4 class="fragment">Example: All flights from Hawaii</h4>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="300px"></a>-->
+                <!--<div><small><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></small></div>-->
+                <!--<p>Data served from static JSON file</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-table.jpg">-->
+            <!--<h3>Sample Code using crossfilter, D3, and DC</h3>-->
+            <!--<p class="fragment"><code>crossfilter</code> allows to filter many data sets in the browser using dimensions</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var cf = crossfilter(flights); // flights is just an array-->
+<!--var stateOrigin = cf.dimension(function (d) {-->
+    <!--return d.stateOrigin;-->
+<!--});-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>DC</code> displays <code>crossfilter</code> dimensions as charts</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");-->
+<!--stateOriginMap.width(500)-->
+    <!--.height(250)-->
+    <!--.dimension(stateOrigin)-->
+    <!--.group(stateOrigin.group().reduceCount())-->
+    <!--.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))-->
+    <!--.colorDomain([0, 20000]));-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>D3</code> used as underlying technology to map data to SVG</p>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-sky.jpg">-->
+            <!--<h2>Thank you</h2>-->
+            <!--<p>Code:-->
+                <!--<a href="https://github.com/DJCordhose/big-data-visualization">https://github.com/DJCordhose/big-data-visualization</a>-->
+                <!--/-->
+                <!--<a href="https://github.com/DJCordhose/introduction-to-elasticsearch">https://github.com/DJCordhose/introduction-to-elasticsearch</a>-->
+            <!--</p>-->
+            <!--<p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html">https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html</a></p>-->
+            <!--<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>-->
+        <!--</section>-->
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
