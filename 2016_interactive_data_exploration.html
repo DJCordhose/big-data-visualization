@@ -40,6 +40,15 @@
             float: right;
             height: 500px;
         }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
     </style>
 
     <!-- Printing and PDF exports -->
@@ -78,9 +87,9 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section style="color: red;">
-            <h3 style="color: red;">TODO</h3>
-            <ol class="fragment">
+        <section class="todo">
+            <h3>TODO</h3>
+            <ol>
                 <li>Google Spreadsheet: Quellen für Info herraussuchen
                 <li>Erwähnen als weitere Option für JS mit Python: http://bokeh.pydata.org/en/latest/
                 <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
@@ -89,6 +98,7 @@
                     <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
                 </ul>
                 </li>
+                <li>Auf Englisch machen
             </ol>
         </section>
 
@@ -134,6 +144,34 @@
                 <li>Elasticsearch / Kibana
                 <li>D3 with crossfilter and DC
             </ol>
+        </section>
+
+        <section>
+            <h1>D3 with crossfilter and DC</h1>
+        </section>
+
+        <section>
+            <h3>Adding a map to DC</h3>
+            <p>Leaflet / OpenStreetMap</p>
+            <div class="fragment">
+                <img src="leaflet-dc-sample.png" height="300">
+                <p><small><a target="_blank" href="http://intellipharm.github.io/dc-addons/#leafletjs">
+                    http://intellipharm.github.io/dc-addons/#leafletjs
+                </a></small></p>
+                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-section-today.php">
+                    Example from: http://cockpit.status-kanal.com/board-section-today.php
+                </a></small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Use Case: Pipe Maintenance</h3>
+            <div class="fragment">
+                <img src="dc-use-case-pipe-maintenance.png" height="450">
+                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-damage.php">
+                    Example from: http://cockpit.status-kanal.com/board-damage.php
+                </a></small></p>
+            </div>
         </section>
 
 

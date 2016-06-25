@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
-    <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">-->
-    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
 
 
     <!-- Code syntax highlighting -->
@@ -83,7 +83,8 @@
                 <li>DDD Basics
                     <ul>
                         <li>http://www.infoq.com/minibooks/domain-driven-design-quickly
-                        <li>https://domainlanguage.com/ddd/patterns/DDD_Reference_2011-01-31.pdf
+                        <li>http://domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf
+                        <li>https://en.wikipedia.org/wiki/Domain-driven_design
                     </ul>
                 </li>
                 <li>MySQL
@@ -116,6 +117,69 @@
         <section>
             <h3>Why is good DB design important?</h3>
             <img src="ApplicationStabilitySmall.png">
+        </section>
+
+        <section>
+            <h3>What is Architecture?</h3>
+            <p>Somewhat hard to define</p>
+            <p>Can only be defined in an implicit way</p>
+            <p><em>Software architecture is the set of design decisions which, if made incorrectly, may cause your project to be canceled.</em> (Eoin Woods)</p>
+            <p><em>Architecture is about the important stuff. Whatever that is.</em> (Martin Fowler)</p>
+        </section>
+
+        <section>
+            <h3>Problem of Architecture:</h3>
+            <h4>Many times it is not obvious what are architectural decisions</h4>
+            <h4>(because it is only defined implicitly in the context of a project)</h4>
+            <h4>Sometimes it only becomes clear in hindsight</h4>
+        </section>
+
+        <section>
+            <h3>Domain-Driven Design</h3>
+            <p class="fragment">Domain-Driven Design is an approach to the development of complex software in which we:</p>
+            <div class="fragment">
+                <ol>
+                    <li>Focus on the core domain.
+                    <li>Explore models in a creative collaboration of domain practitioners and
+                    software practitioners.
+                    <li>Speak a ubiquitous language within an explicitly bounded context.
+                </ol>
+                <p><small>From: <a href="https://domainlanguage.com/ddd/patterns/DDD_Reference_2011-01-31.pdf" target="_blank">https://domainlanguage.com/ddd/patterns/DDD_Reference_2011-01-31.pdf</a></small></p>
+            </div>
+        </section>
+
+        <section>
+            <h4>Domain-Driven Design</h4>
+            <small>Shortened from: <a href="https://domainlanguage.com/ddd/patterns/DDD_Reference_2011-01-31.pdf" target="_blank">https://domainlanguage.com/ddd/patterns/DDD_Reference_2011-01-31.pdf</a></small>
+            <ul>
+                <li class="fragment">domain: A sphere of knowledge, influence, or activity. Application of a program is the domain of the software.
+
+                <li class="fragment">model: A system of abstractions that describes selected aspects of a domain.
+
+                <li class="fragment">ubiquitous language: A language structured around the domain model and used by all team members within a bounded context.
+                <li class="fragment">context:  The setting in which a word or statement appears that determines its meaning.
+                Statements about a model can only be understood in a context.
+
+                <li class="fragment">bounded context: A description of a subsystem, or the work of a particular
+                team within which a particular model is defined and applicable.
+            </ul>
+        </section>
+
+        <section>
+            <h3>Bounded Context</h3>
+            <ul class="fragment">
+                <li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Ubiquitous Language</h3>
+            <ul class="fragment">
+                <li>common language for all share-holders
+                <li>not only a class- or ER-diagram (because this only speaks to technical people)
+                <li>clearly defines the language and you should stick to
+                <li>a change in language warrants a change in the model
+            </ul>
         </section>
 
 
