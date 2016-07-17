@@ -49,6 +49,42 @@
         code span.line-number {
             color: lightcoral;
         }
+        th {
+            text-align: center !important;
+        }
+        td {
+            width: 130px;
+        }
+        td.pos, td.neutral, td.neg {
+            color: white;
+            vertical-align: middle;
+            font-size: xx-large;
+            border: 1px solid white;
+            border-bottom: 1px solid black !important;
+        }
+        td.pos:before, td.neutral:before, td.neg:before {
+            text-align: center;
+            display: block;
+        }
+        td.pos {
+            background-color: green;
+        }
+        td.pos:before {
+            content: '+';
+        }
+        td.neutral {
+            background-color: yellow;
+            color: black;
+        }
+        td.neutral:before {
+            content: '0';
+        }
+        td.neg {
+            background-color: red;
+        }
+        td.neg:before {
+            content: '-';
+        }
     </style>
 
     <!-- Printing and PDF exports -->
@@ -107,6 +143,14 @@
   - https://analytics.google.com/analytics/web/#report/defaultid/a36034286w64004450p65689861/
     - Als google sheet exportieren
             </pre>
+            <pre>
+- Grundproblem: Access vs Excel, oder: große Datenmengen vs Interaktivität
+- Data needs to be (physically) close to the interaction to make it fast and thus most useful
+- Beliebige Datenmengen mit Interaktionen: ELK
+- D3/Crossfilter: Auf Segmenten/Partitionen
+  - Partitionierung? Manuell automatisch?
+</pre>
+
         </section>
 
         <!--<section data-background="backgrounds/light-sky.jpg">-->
@@ -179,6 +223,90 @@
                     Example from: http://cockpit.status-kanal.com/board-damage.php
                 </a></small></p>
             </div>
+        </section>
+<!--
+- Spreadsheet
+    - One tool for designer / user +
+    - Easy to create new dashboard +
+    - Interactivity +
+    - Unlimited data size -
+    - Offline +
+    - Unlimited  widgets -
+- D3
+    - One tool for designer / user -
+    - Easy to create new dashboard -
+    - Interactivity +
+    - Unlimited data size -
+    - Offline +
+    - Unlimited  widgets +
+- ELK
+    - One tool for designer / user +
+    - Easy to create new dashboard ++
+    - Interactivity 0
+    - Unlimited data size +
+    - Offline -
+    - Unlimited  widgets -
+- Segmented D3 (loading partitions of data)
+    - One tool for designer / user -
+    - Easy to create new dashboard &#45;&#45;
+    - Interactivity +
+    - Unlimited data size +
+    - Offline -
+    - Unlimited widgets +
+-->
+
+        <section>
+            <h3>Final Matrix</h3>
+            <small>
+            <table>
+                <tr>
+                    <th></th><th>Spreadsheet</th><th>D3</th><th>ELK</th><th>Segmented D3</th>
+                </tr>
+                <tr>
+                    <th>One tool for designer / user</th>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                </tr>
+                <tr>
+                    <th>Easy to create new dashboard</th>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                </tr>
+                <tr>
+                    <th>Interactivity</th>
+                    <td class="pos"></td>
+                    <td class="pos"></td>
+                    <td class="neutral"></td>
+                    <td class="pos"></td>
+                </tr>
+                <tr>
+                    <th>Unlimited data size</th>
+                    <td class="neg"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neutral"></td>
+                </tr>
+                <tr>
+                    <th>Offline</th>
+                    <td class="pos"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                    <td class="neg"></td>
+                </tr>
+                <tr>
+                    <th>Unrestricted widgets</th>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                </tr>
+                <tr></tr>
+            </table>
+            </small>
         </section>
 
 
