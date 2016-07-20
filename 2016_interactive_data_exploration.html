@@ -65,25 +65,26 @@
         td.pos:before, td.neutral:before, td.neg:before {
             text-align: center;
             display: block;
+            transform: scale(0.9);
         }
         td.pos {
             background-color: green;
         }
         td.pos:before {
-            content: '+';
+            content: url('pos.png');
         }
         td.neutral {
             background-color: yellow;
             color: black;
         }
         td.neutral:before {
-            content: '0';
+            content: url('neutral.png');
         }
         td.neg {
             background-color: red;
         }
         td.neg:before {
-            content: '-';
+            content: url('neg.png');
         }
     </style>
 
@@ -150,6 +151,11 @@
 - D3/Crossfilter: Auf Segmenten/Partitionen
   - Partitionierung? Manuell automatisch?
 </pre>
+<pre>
+Spreadsheets
+- http://www.felienne.com/slides
+- http://www.slideshare.net/Felienne/spreadsheets-for-developers
+</pre>
 
         </section>
 
@@ -192,9 +198,15 @@
             <h3>Options</h3>
             <ol class="fragment">
                 <li>Google Spreadsheet
-                <li>Elasticsearch / Kibana
+                <li>Elasticsearch / Kibana (ELK)
                 <li>D3 with crossfilter and DC
+                <li>D3 loading Segments from ELK
             </ol>
+        </section>
+
+        <section>
+            <h1>Google Spreadsheet</h1>
+            <!--To begin with something familiar to the audience -->
         </section>
 
         <section>
@@ -257,8 +269,12 @@
 
         <section>
             <h3>Final Matrix</h3>
+
+            <div style="transform: scale(0.8);
+            position: relative;
+            top: -50px">
             <small>
-            <table>
+            <table cellpadding="0" cellspacing="0">
                 <tr>
                     <th></th><th>Spreadsheet</th><th>D3</th><th>ELK</th><th>Segmented D3</th>
                 </tr>
@@ -304,9 +320,38 @@
                     <td class="neg"></td>
                     <td class="pos"></td>
                 </tr>
+                <tr>
+                    <th>Auto Refresh / Update</th>
+                    <td class="neg"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                </tr>
+                <tr>
+                    <th>Repl</th>
+                    <td class="neg"></td>
+                    <td class="pos"><center><small>Console</small></center></td>
+                    <td class="pos"><center><small>Query</small></center></td>
+                    <td class="neutral"><center><small>(Console)</small></center></td>
+                </tr>
+                <tr>
+                    <th>Turn Query into Dashboard</th>
+                    <td class="neg"></td>
+                    <td class="neg"></td>
+                    <td class="pos"></td>
+                    <td class="neg"></td>
+                </tr>
+                <tr>
+                    <th><em style="color: red">Add your category here</em></th>
+                    <td class="neutral"></td>
+                    <td class="neutral"></td>
+                    <td class="neutral"></td>
+                    <td class="neutral"></td>
+                </tr>
                 <tr></tr>
             </table>
             </small>
+            </div>
         </section>
 
 
