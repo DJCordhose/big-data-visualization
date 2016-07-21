@@ -35,6 +35,7 @@ function load(callback, complete) {
         //'../data/09to11.csv' :
         '../data/09to11_not_cancelled.csv' :
     // just september
+        // 11M, 400k Datasets
         '../data/09.csv';
 
     d3.json("helper_data/airports_by_state.json", function (airportsArray) {

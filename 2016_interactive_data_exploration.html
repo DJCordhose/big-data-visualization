@@ -191,13 +191,35 @@ Spreadsheets
         <section data-background="backgrounds/light-runway.jpg">
             <h2>Example: Exploring all data sets of domestic US air-traffic</h2>
             <h2>for September 2001</h2>
-            <h2>(400,000)</h2>
+        </section>
+
+        <section>
+            <h2>The raw data</h2>
+            <h3>approx. 400,000 data sets</h3>
+            <h3>approx. 11MB of data</h3>
+            <h3>9 colums</h3>
+            <pre><code data-trim>
+> head 09.csv
+Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
+9,5,US,67,22,31,MCO,CLT,468
+9,6,US,73,14,19,MCO,CLT,468
+9,7,US,70,43,54,MCO,CLT,468
+</code></pre>
+            <pre><code data-trim>
+> ls -hl 09.csv
+-rw-r--r--  1 olli  staff    11M Oct 27  2015 09.csv
+            </code></pre>
+            <pre><code data-trim>
+> wc -l 09.csv
+391375 09.csv
+            </code></pre>
+
         </section>
 
         <section>
             <h3>Options</h3>
             <ol class="fragment">
-                <li>Google Spreadsheet
+                <li>Google Sheets
                 <li>Elasticsearch / Kibana (ELK)
                 <li>D3 with crossfilter and DC
                 <li>D3 loading Segments from ELK
@@ -205,8 +227,80 @@ Spreadsheets
         </section>
 
         <section>
-            <h1>Google Spreadsheet</h1>
+            <h1>Google Sheets</h1>
             <!--To begin with something familiar to the audience -->
+        </section>
+
+        <section>
+            <h2>Import</h2>
+            <p>Up to 2 million cells</p>
+            <p>We have 9 * 400,000: too many for Google Sheets</p>
+            <pre><code data-trim class="nohighlight">
+> cut -f2,3,4,5,6,7,8,9 -d, 09.csv >09_no_month.csv
+> awk -F, '$1 >= 10 && $1 <= 15' 09_no_month.csv > 09_very_small.csv
+            </code></pre>
+            <pre><code data-trim class="nohighlight">
+> ls -lh 09_very_small.csv
+-rw-r--r--  1 olli  staff   1.0M Jul 21 21:46 09_very_small.csv
+            </code></pre>
+            <pre><code data-trim class="nohighlight">
+> wc -l 09_very_small.csv
+38272 09_very_small.csv
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Import</h2>
+            <img src="google_sheets/screenshot_import.png">
+        </section>
+
+
+        <section>
+            <h2>Data</h2>
+            <img src="google_sheets/screenshot_data.png">
+        </section>
+
+        <section>
+            <h2>Filters</h2>
+            <img src="google_sheets/screenshot_filters.png">
+        </section>
+
+        <section>
+            <h2>Filters: All flights between JFK and STL</h2>
+            <p>Physically change the data</p>
+            <img src="google_sheets/screenshot_jfk_stl.png">
+        </section>
+
+        <section>
+            <h2>Filters Views</h2>
+            <p>Just a view on the data, more than one possible</p>
+            <p>Departure Delay > 200 minutes</p>
+            <img src="google_sheets/screenshot_filter_view.png">
+        </section>
+
+        <section>
+            <h2>Diagram</h2>
+            <p>How many flights per day?</p>
+            <img src="google_sheets/screenshot_chart_per_day.png">
+        </section>
+
+        <section>
+            <h2>Mini Dashboard</h2>
+            <p>flights per day / carriers / delay</p>
+            <img src="google_sheets/screenshot_mini_dashboard.png">
+        </section>
+
+        <section>
+            <h2>Pivot Tables</h2>
+            <p>flights per day / carriers / delay</p>
+            <img src="google_sheets/screenshot_pivot.png">
+        </section>
+
+        <section>
+            <h2>Live Sample</h2>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+                https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing
+            </a>
         </section>
 
         <section>
@@ -276,7 +370,7 @@ Spreadsheets
             <small>
             <table cellpadding="0" cellspacing="0">
                 <tr>
-                    <th></th><th>Spreadsheet</th><th>D3</th><th>ELK</th><th>Segmented D3</th>
+                    <th></th><th>Google Sheets</th><th>D3</th><th>ELK</th><th>Segmented D3</th>
                 </tr>
                 <tr>
                     <th>One tool for designer / user</th>
