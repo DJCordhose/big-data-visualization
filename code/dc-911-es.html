@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DC Timeline</title>
+    <title>Large Queries</title>
     <link rel="stylesheet" type="text/css" href="css/dc.css"/>
     <style type="text/css">
         select {
@@ -14,31 +14,45 @@
     </style>
 </head>
 <body>
-<h1 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h1>
+<h2 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h2>
 
-<h1 id="title" style="display: none">All US flights September 2001 grouped by Origin and Destination (total number of
+<h2 id="title" style="display: none">Domectic US flights September 2001 (total number of
     flights <span
-            id="total">???</span>)</h1>
+            id="total">???</span>, filtered: <span id="filtered">???</span>)</h2>
 
 <div>
     <div style="float: left">
         <div>Origin:</div>
         <div id="select-origin"></div>
+        <div id="state-origin-map"></div>
     </div>
     <div>
         <div>Destination:</div>
         <div id="select-dest"></div>
+        <div id="state-dest-map"></div>
     </div>
-    <div id="pie"></div>
 </div>
-<div style="margin-top: 20px" id="series"></div>
+<div style="margin-top: 20px; reset: both" >
+    <div style="float: left" id="pie"></div>
+    <div style="float: right" id="series"></div>
+</div>
 
 <script src="lib/d3.js"></script>
 <script src="lib/crossfilter.v1.js"></script>
 <script src="lib/dc.js"></script>
 <script src="flights-from-es.js"></script>
 <script>
+    var flight;
+
+    function updateFilteredSize() {
+        var filteredFlights = flight.groupAll().value();
+        var filteredEl = document.querySelector("#filtered");
+        filteredEl.textContent = filteredFlights;
+    }
+
     function render(cf) {
+        flight = cf;
+        updateFilteredSize();
 
         const all = cf.groupAll();
         const carrier = cf.dimension(function (d) {
@@ -58,6 +72,15 @@
         });
         console.log('.');
 
+        const stateOrigin = cf.dimension(function (d) {
+            return d.stateOrigin;
+        });
+        console.log('.');
+        const stateDest = cf.dimension(function (d) {
+            return d.stateDest;
+        });
+        console.log('.');
+
         var numberOfFlights = cf.size();
         var total = document.getElementById('total');
         total.innerHTML = numberOfFlights;
@@ -67,12 +90,18 @@
         loading.style.display = 'none';
         var selectOrigin = dc.selectMenu('#select-origin');
         selectOrigin
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(origin)
                 .group(origin.group().reduceCount());
         var selectDestination = dc.selectMenu('#select-dest');
         selectDestination
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .multiple(true)
                 .size(15)
                 .dimension(dest)
@@ -80,9 +109,12 @@
 
         var pieChartCarriers = dc.pieChart("#pie");
         pieChartCarriers
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .width(200)
                 .height(200)
-                .slicesCap(5)
+                .slicesCap(10)
                 .innerRadius(50)
                 .dimension(carrier)
                 .group(carrier.group().reduceCount());
@@ -91,6 +123,9 @@
 
         var chart = dc.lineChart("#series");
         chart
+                .on("filtered", function(chart, filter){
+                    updateFilteredSize();
+                })
                 .width(1000)
                 .height(200)
                 .margins({top: 10, right: 50, bottom: 30, left: 60})
@@ -99,7 +134,7 @@
                 .valueAccessor(function (d) {
                     return d.value;
                 })
-                .x(d3.scale.linear().domain([new Date(2001, 08, 00), new Date(2001, 08, 30)]))
+                .x(d3.scale.linear().domain([new Date(2001, 08, 01), new Date(2001, 08, 30)]))
                 .renderHorizontalGridLines(true)
                 .elasticY(true)
                 .brushOn(true)
@@ -112,7 +147,47 @@
                     return new Date(e).getDate() + 1;
                 });
 
-        dc.renderAll();
+        d3.json("helper_data/us-states.json", function (statesJson) {
+            var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
+            stateOriginMap.width(500)
+                    .on("filtered", function(chart, filter){
+                        updateFilteredSize();
+                    })
+                    .height(250)
+                    .dimension(stateOrigin)
+                    .group(stateOrigin.group().reduceCount())
+                    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+                    .colorDomain([0, 20000])
+                    .colorCalculator(function (d) {
+                        return d ? stateOriginMap.colors()(d) : '#ccc';
+                    })
+                    .overlayGeoJson(statesJson.features, "state", function (d) {
+                        return d.properties.name;
+                    });
+            var stateDestMap = dc.geoChoroplethChart("#state-dest-map");
+            stateDestMap.width(500)
+                    .on("filtered", function(chart, filter){
+                        updateFilteredSize();
+                    })
+                    .height(250)
+                    .dimension(stateDest)
+                    .group(stateDest.group().reduceCount())
+                    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+                    .colorDomain([0, 20000])
+                    .colorCalculator(function (d) {
+                        return d ? stateDestMap.colors()(d) : '#ccc';
+                    })
+                    .overlayGeoJson(statesJson.features, "state", function (d) {
+                        return d.properties.name;
+                    });
+            dc.renderAll();
+
+            // HACK to make map smaller, no idea how to set the viewport using dc
+            var stateOriginmapSvg = document.querySelector('#state-origin-map svg');
+            stateOriginmapSvg.setAttribute('viewBox', '0 0 1000 500');
+            var stateDestMapSvg = document.querySelector('#state-dest-map svg');
+            stateDestMapSvg.setAttribute('viewBox', '0 0 1000 500');
+        });
     }
 </script>
 <script>

@@ -1,5 +1,7 @@
 'use strict';
 
+var flight;
+
 function coerceToInt(number) {
     if (number === 'NA') {
         return null;
@@ -93,12 +95,58 @@ function load(callback) {
         //console.log(flights);
         console.log(flights[0]);
 
-        const cf = crossfilter(flights);
+        d3.json("helper_data/airports_by_state.json", function (airportsArray) {
+            // make airports a map using airport code as key
+            var airports = {};
+            airportsArray.forEach(function (airport) {
+                airports[airport.airport] = airport;
+            });
 
-        console.log('Conversion done');
-        console.log(new Date());
-        callback && callback(cf);
+            // FCA missing in data set
+            // https://en.wikipedia.org/wiki/Glacier_Park_International_Airport
+            // https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations
+            var fca = {
+                airport: 'FCA',
+                name: 'Glacier Park International Airport',
+                state: 'MT'
+            };
+            airports[fca.airport] = fca;
 
+            // MQT missing in data set
+            // https://en.wikipedia.org/wiki/Sawyer_International_Airport
+            var mqt = {
+                airport: 'MQT',
+                name: 'Sawyer International Airport',
+                state: 'MI'
+            };
+            airports[mqt.airport] = mqt;
+
+            console.log('Adding state information');
+            // add state of origin and departure using airport code
+            flights.forEach(function (flight) {
+                if (airports[flight.Origin]) {
+                    flight.stateOrigin = airports[flight.Origin].state;
+                } else {
+                    flight.stateOrigin = 'N/A';
+                    console.warn('Missing airport code', flight.Origin);
+                }
+                if (airports[flight.Dest]) {
+                    flight.stateDest = airports[flight.Dest].state;
+                } else {
+                    flight.stateDest = 'N/A';
+                    console.warn('Missing airport code', flight.Dest);
+                }
+            });
+            console.log('Done');
+            console.log('Processed flight:');
+            console.log(flights[0]);
+
+            flight = crossfilter(flights);
+
+            console.log('Conversion done');
+            console.log(new Date());
+            callback && callback(flight);
+        });
     }
 
 }
