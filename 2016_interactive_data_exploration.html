@@ -119,6 +119,9 @@
 <!--die interaktive Analyse und Visualisierung von großen Datenmengen im Browser mit -->
 <!--Google Spreadsheet, Elasticsearch/Kibana und D3 in Kombination mit crossfilter und DC.-->
 
+<!--Englisch!-->
+<!--40 Minuten-->
+
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
@@ -127,68 +130,35 @@
         <section class="todo">
             <h3>TODO</h3>
             <ol>
-                <li>Google Spreadsheet: Quellen für Info herraussuchen
-                <li>Erwähnen als weitere Option für JS mit Python: http://bokeh.pydata.org/en/latest/
                 <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
                 <ul>
                     <li>Z.B.: was ist die Samstags-Beule?
                     <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
                 </ul>
                 </li>
-                <li>Auf Englisch machen
             </ol>
-            <pre>
-- Pivot-Tabelle in Google Spreadsheet für Talk
-- Auch Google Analytics für zeigermann.eu angucken
-  - Zeigermann.eu mit Unterseiten für bessere Analytics?
-  - https://analytics.google.com/analytics/web/#report/defaultid/a36034286w64004450p65689861/
-    - Als google sheet exportieren
-            </pre>
-            <pre>
-- Grundproblem: Access vs Excel, oder: große Datenmengen vs Interaktivität
-- Data needs to be (physically) close to the interaction to make it fast and thus most useful
-- Beliebige Datenmengen mit Interaktionen: ELK
-- D3/Crossfilter: Auf Segmenten/Partitionen
-  - Partitionierung? Manuell automatisch?
-</pre>
-<pre>
-Spreadsheets
-- http://www.felienne.com/slides
-- http://www.slideshare.net/Felienne/spreadsheets-for-developers
-</pre>
-
         </section>
 
-        <!--<section data-background="backgrounds/light-sky.jpg">-->
-        <section data-background="backgrounds/light-flight.jpg">
+        <section>
             <h1>Interactive Data Exploration in the Browser</h1>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
         </section>
 
-        <section data-background="backgrounds/light-world.jpg">
-            <h2 style="font-weight: bolder">Using Interactive Data Visualization to
-                <br><em>explore the world</em></h2>
-            <br>
-            <h2 style="font-weight: bolder">not to tell a story</h2>
-            <br>
-            <br>
-            <p style="font-weight: bolder">Credit for coining the term goes to
-                <a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:
-            <a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
-                Worlds, not Stories: data visualization as a macroscope
-            </a>
-                </p>
+        <section>
+            <h1>Using Interactive Data Visualization to
+                <br><em>explore the world</em></h1>
         </section>
 
-        <section data-background="backgrounds/light-sky.jpg">
+
+        <section>
             <h2>But why in the Browser</h2>
             <h3 class="fragment">1: Zero-Installation for the user</h3>
             <h3 class="fragment">2: Interactivity coming naturally</h3>
         </section>
 
-        <section data-background="backgrounds/light-runway.jpg">
+        <section>
             <h2>Example: Exploring all data sets of domestic US air-traffic</h2>
             <h2>for September 2001</h2>
         </section>
@@ -198,27 +168,31 @@ Spreadsheets
             <h3>approx. 400,000 data sets</h3>
             <h3>approx. 11MB of data</h3>
             <h3>9 colums</h3>
-            <pre><code data-trim>
+            <pre><code data-trim class="nohighlight">
 > head 09.csv
 Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
 9,5,US,67,22,31,MCO,CLT,468
 9,6,US,73,14,19,MCO,CLT,468
 9,7,US,70,43,54,MCO,CLT,468
 </code></pre>
-            <pre><code data-trim>
+            <pre><code data-trim class="nohighlight">
 > ls -hl 09.csv
 -rw-r--r--  1 olli  staff    11M Oct 27  2015 09.csv
             </code></pre>
-            <pre><code data-trim>
+            <pre><code data-trim class="nohighlight">
 > wc -l 09.csv
 391375 09.csv
             </code></pre>
+        </section>
 
+        <section>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
         </section>
 
         <section>
             <h3>Options</h3>
-            <ol class="fragment">
+            <ol>
                 <li>Google Sheets
                 <li>Elasticsearch / Kibana (ELK)
                 <li>D3 with crossfilter and DC
@@ -292,8 +266,54 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
 
         <section>
             <h2>Pivot Tables</h2>
-            <p>flights per day / carriers / delay</p>
+            <p>Flights from NYC to SFO or LAX</p>
             <img src="google_sheets/screenshot_pivot.png">
+        </section>
+
+        <section>
+            <h2>Explore</h2>
+            <p>The best is yet to come</p>
+            <img src="google_sheets/screenshot_explore.png">
+            <br>
+            <img height="300px" src="google_sheets/screenshot_explore2.png">
+        </section>
+
+        <section>
+            <h2>Correlations, Outliers, etc.</h2>
+            <p>Sheets can automatically find this</p>
+            <div style="transform: scale(1.3);">
+                <div style="height: 250px; float: left;">
+                    <img src="google_sheets/screenshot_depArrDelay.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="google_sheets/screenshot_distance_airtime.png">
+                </div>
+                <div style="height: 250px; float: left">
+                    <img src="google_sheets/screenshot_depDelay_outliers.png">
+                </div>
+                <div style="height: 250px; float: left;">
+                    <img src="google_sheets/screenshot_histogram_distance.png">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>What I have learned</h2>
+            <p>Without asking</p>
+            <ul>
+                <li>long arrival delays are caused be departure delays
+                <li>per 100 minutes you can fly around 857 miles
+                <li>some flights where delayed more than 1000 minutes (more than 16 hours)
+                <li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)
+            </ul>
+        </section>
+
+        <section>
+            <h2>There are no limits</h2>
+            <p>You can express any programm in a Spreadsheet</p>
+            <a target="_blank" href="http://www.slideshare.net/Felienne/spreadsheets-for-developers">
+                http://www.slideshare.net/Felienne/spreadsheets-for-developers
+            </a>
         </section>
 
         <section>
@@ -303,63 +323,53 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             </a>
         </section>
 
-        <section>
+        <section class="todo">
             <h1>D3 with crossfilter and DC</h1>
+            <p>Things get more interactive and connected</p>
+            <p>Using full data set of September (10x the data)</p>
         </section>
 
         <section>
-            <h3>Adding a map to DC</h3>
-            <p>Leaflet / OpenStreetMap</p>
-            <div class="fragment">
-                <img src="leaflet-dc-sample.png" height="300">
-                <p><small><a target="_blank" href="http://intellipharm.github.io/dc-addons/#leafletjs">
-                    http://intellipharm.github.io/dc-addons/#leafletjs
-                </a></small></p>
-                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-section-today.php">
-                    Example from: http://cockpit.status-kanal.com/board-section-today.php
-                </a></small></p>
-            </div>
+            <h2>Initial Design</h2>
+            <img class="fragment" src="design.jpg" height="500px">
+        </section>
+
+        <section class="todo">
+            <h1>ELK</h1>
+            <p>Things scale</p>
+            <p>Using all of 2001 (once more 10x the data)</p>
+
+            <pre>
+- Grundproblem: Access vs Excel, oder: große Datenmengen vs Interaktivität
+- Data needs to be (physically) close to the interaction to make it fast and thus most useful
+- Beliebige Datenmengen mit Interaktionen: ELK
+</pre>
+
         </section>
 
         <section>
-            <h3>Use Case: Pipe Maintenance</h3>
-            <div class="fragment">
-                <img src="dc-use-case-pipe-maintenance.png" height="450">
-                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-damage.php">
-                    Example from: http://cockpit.status-kanal.com/board-damage.php
-                </a></small></p>
-            </div>
+            <h2></h2>
+            <img src="twitter_big_data_ram.png">
+            <p><small><a target="_blank" href="https://twitter.com/garybernhardt/status/600783000331112449">
+                https://twitter.com/garybernhardt/status/600783000331112449
+            </a></small></p>
         </section>
-<!--
-- Spreadsheet
-    - One tool for designer / user +
-    - Easy to create new dashboard +
-    - Interactivity +
-    - Unlimited data size -
-    - Offline +
-    - Unlimited  widgets -
-- D3
-    - One tool for designer / user -
-    - Easy to create new dashboard -
-    - Interactivity +
-    - Unlimited data size -
-    - Offline +
-    - Unlimited  widgets +
-- ELK
-    - One tool for designer / user +
-    - Easy to create new dashboard ++
-    - Interactivity 0
-    - Unlimited data size +
-    - Offline -
-    - Unlimited  widgets -
-- Segmented D3 (loading partitions of data)
-    - One tool for designer / user -
-    - Easy to create new dashboard &#45;&#45;
-    - Interactivity +
-    - Unlimited data size +
-    - Offline -
-    - Unlimited widgets +
--->
+
+        <section class="todo">
+            <h1>D3 loading Segments from ELK</h1>
+            <ul>
+                <li>Elasticsearch delivers data over HTTP/JSON using query
+                <li>D3/Crossfiler/DC display partion of data
+                <li>Partition could be month
+                <li>Manually selected by user
+            </ul>
+            <pre>
+nur ganz kurz in einer Folie, damit klar für Matrix, habe ja nur 40 Minuten
+- D3/Crossfilter: Auf Segmenten/Partitionen
+  - Partitionierung? Manuell automatisch?
+- Screenshot rein und Beispiel auf Selektion der Partition über Montag umbauen
+</pre>
+        </section>
 
         <section>
             <h3>Final Matrix</h3>
