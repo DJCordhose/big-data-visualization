@@ -14,13 +14,34 @@
     </style>
 </head>
 <body>
+<div id="loading2" style="color: red; display: block; position: fixed; left: 350px; top: 200px; font-size: 3.5em">
+    <h1>LOADING</h1>
+</div>
+<div>
+    <div style="float: left" >
 <h2 id="loading">WAIT FOR IT TO LOAD (few seconds)...</h2>
 
-<h2 id="title" style="display: none">Domestic US flights September 2001 (total number of
+<h2 id="title" style="display: none">Domestic US flights <span id="time-range-name">September</span> 2001 (total number of
     flights <span
             id="total">???</span>, filtered: <span id="filtered">???</span>)</h2>
 
-<div>
+    </div>
+
+    <div style="float: right;" >
+        <select id="time-range-week" style="width: 100px">
+            <option selected value="-1">
+                Select Week
+            </option>
+        </select>
+        <select id="time-range-month" style="width: 100px">
+            <option selected value="-1">
+                Select Month
+            </option>
+        </select>
+
+    </div>
+</div>
+<div style="clear: both">
     <div style="float: left">
         <div>Origin:</div>
         <div id="select-origin"></div>
@@ -40,9 +61,31 @@
 <script src="lib/d3.js"></script>
 <script src="lib/crossfilter.v1.js"></script>
 <script src="lib/dc.js"></script>
+<script src="lib/moment.js"></script>
 <script src="flights-from-es.js"></script>
 <script>
     var flight;
+    var chart;
+
+    function signalLoadingStart() {
+        console.log('Loading Start');
+        console.log(new Date());
+//        var loading = document.getElementById('loading');
+//        loading.style.display = 'inline';
+        var loading2 = document.getElementById('loading2');
+        loading2.style.display = 'block';
+
+    }
+
+    function signalLoadingEnd() {
+        console.log('Loading End');
+        console.log(new Date());
+        var loading = document.getElementById('loading');
+        loading.style.display = 'none';
+        var loading2 = document.getElementById('loading2');
+        loading2.style.display = 'none';
+
+    }
 
     function updateFilteredSize() {
         var filteredFlights = flight.groupAll().value();
@@ -50,7 +93,12 @@
         filteredEl.textContent = filteredFlights;
     }
 
-    function render(cf) {
+    function render(cf, from, to, ticks) {
+
+        from = (from && new Date(from)) || new Date(2001, 08, 01);
+        to = (to && new Date(to)) || new Date(2001, 08, 30);
+        ticks = ticks || 30;
+
         flight = cf;
         updateFilteredSize();
 
@@ -121,7 +169,7 @@
 
         var flightsPerDay = date.group();
 
-        var chart = dc.lineChart("#series");
+        chart = dc.lineChart("#series");
         chart
                 .on("filtered", function(chart, filter){
                     updateFilteredSize();
@@ -134,7 +182,6 @@
                 .valueAccessor(function (d) {
                     return d.value;
                 })
-                .x(d3.scale.linear().domain([new Date(2001, 08, 01), new Date(2001, 08, 30)]))
                 .renderHorizontalGridLines(true)
                 .elasticY(true)
                 .brushOn(true)
@@ -142,9 +189,10 @@
                     return d.key
                             + "\nFlights: " + Math.round(d.value.flights);
                 })
-                .xAxis().ticks(30).tickFormat(
+                .x(d3.scale.linear().domain([from, to]))
+                .xAxis().ticks(ticks).tickFormat(
                 function (e) {
-                    return new Date(e).getDate() + 1;
+                    return new Date(e).getDate();
                 });
 
         d3.json("helper_data/us-states.json", function (statesJson) {
@@ -187,6 +235,8 @@
             stateOriginmapSvg.setAttribute('viewBox', '0 0 1000 500');
             var stateDestMapSvg = document.querySelector('#state-dest-map svg');
             stateDestMapSvg.setAttribute('viewBox', '0 0 1000 500');
+
+            signalLoadingEnd();
         });
     }
 </script>

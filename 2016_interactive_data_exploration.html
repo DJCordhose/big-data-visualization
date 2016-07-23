@@ -138,9 +138,8 @@
                 </li>
             </ol>
             <pre>
-- Drop-down für Monat/Woche bauen in ES
-  - http://www.epochconverter.com/
 - Fragments aus Folien heraus nehmen
+- Screenshots in Größe einpassen
 - Ausdünnen
 - Benefits und Drawbacks aktualisieren
             </pre>
@@ -606,46 +605,38 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
                 <li>Partition could be month
                 <li>Manually selected by user
             </ul>
-            <pre>
-nur ganz kurz in einer Folie, damit klar für Matrix, habe ja nur 40 Minuten
-- D3/Crossfilter: Auf Segmenten/Partitionen
-  - Partitionierung? Manuell automatisch?
-- Screenshot rein und Beispiel auf Selektion der Partition über Montag umbauen
-</pre>
         </section>
         <section>
-            <h3>Flights Dashboard #2</h3>
-            <div class="fragment">
-                <h4>Dumping 400,000 data sets</h4>
-                <a href="code/dc-911-es.html" target="_blank">
-                    <img src="screenshot_dc.png" height="400">
-                </a>
-                <p>All data offline, filtered in browser</p>
-            </div>
-        </section>
-
-        <section>
-            <h3>Accessing Elasticsearch via REST</h3>
-            <p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>
-            <p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>
-            <p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">
-                enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>
-            <pre class="fragment"><code data-trim class="javascript">
-http.cors.enabled: true
-http.cors.allow-origin: '*'
-            </code></pre>
-        </section>
-
-        <section>
-            <h3>Network, Timing, Data Sizes</h3>
+            <h3>Literally no one flying to Wyoming first half of December???</h3>
             <div>
                 <a href="code/dc-911-es.html" target="_blank">
-                    <img src="screenshot_network_cors.png">
+                    <img src="screenshot_wy_dec.png">
                 </a>
             </div>
-            <p>same amount of data sets, but almost 8x the size</p>
-            <p>can be optimized by just tranferring fields you really need</p>
         </section>
+
+        <!--<section>-->
+            <!--<h3>Accessing Elasticsearch via REST</h3>-->
+            <!--<p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>-->
+            <!--<p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>-->
+            <!--<p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">-->
+                <!--enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>-->
+            <!--<pre class="fragment"><code data-trim class="javascript">-->
+<!--http.cors.enabled: true-->
+<!--http.cors.allow-origin: '*'-->
+            <!--</code></pre>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Network, Timing, Data Sizes</h3>-->
+            <!--<div>-->
+                <!--<a href="code/dc-911-es.html" target="_blank">-->
+                    <!--<img src="screenshot_network_cors.png">-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<p>same amount of data sets, but almost 8x the size</p>-->
+            <!--<p>can be optimized by just tranferring fields you really need</p>-->
+        <!--</section>-->
 
         <section>
             <h3>Final Matrix</h3>
