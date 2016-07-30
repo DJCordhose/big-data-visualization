@@ -88,19 +88,18 @@
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-
         <section class="todo">
             <h3>TODO</h3>
             <ol>
                 <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
-                <ul>
-                    <li>Z.B.: was ist die Samstags-Beule?
-                    <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
+                    <ul>
+                        <li>Z.B.: was ist die Samstags-Beule?
+                        <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
 
-                </ul>
+                    </ul>
                 </li>
             </ol>
-                <pre>
+            <pre>
 - https://www.elastic.co/blog/elastic-stack-primer
 - React mit D3: https://gist.github.com/benschwarz/b24c8522057fac5c4d8dddb7c1a4d59d
 - D3-Intro von Elisabeth klauen: http://slides.com/elisabethengel/d3js#/
@@ -109,92 +108,199 @@
 - Add cat: https://twitter.com/Creatuluw/status/749151998415634432
 - Add universal_cat_picture.gif everywhere in all talks
                 </pre>
-<pre>
-- Grundproblem: Access vs Excel, oder: große Datenmengen vs Interaktivität
-- Data needs to be (physically) close to the interaction to make it fast and thus most useful
+            <pre>
 - Beliebige Datenmengen mit Interaktionen: ELK
 - D3/Crossfilter: Auf Segmenten/Partitionen
   - Partitionierung? Manuell automatisch?
 </pre>
         </section>
 
-        <!--<section data-background="backgrounds/light-sky.jpg">-->
-        <section data-background="backgrounds/light-flight.jpg">
-            <h1>Interactive Data Exploration in the Browser</h1>
+
+        <section>
+            <h2>Interactive data exploration using Pandas, Elasticsearch, and D3</h2>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
-        </section>
-
-        <section data-background="backgrounds/light-world.jpg">
-            <h2 style="font-weight: bolder">Using Interactive Data Visualization to
-                <br><em>explore the world</em></h2>
-            <br>
-            <h2 style="font-weight: bolder">not to tell a story</h2>
-            <br>
-            <br>
-            <p style="font-weight: bolder">Credit for coining the term goes to
-                <a href="https://twitter.com/moritz_stefaner" target="_blank">@moritz_stefaner</a>:
-            <a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
-                Worlds, not Stories: data visualization as a macroscope
-            </a>
-                </p>
-        </section>
-
-        <section data-background="backgrounds/light-sky.jpg">
-            <h2>But why in the Browser</h2>
-            <h3 class="fragment">1: Zero-Installation for the user</h3>
-            <h3 class="fragment">2: Interactivity coming naturally</h3>
-        </section>
-
-        <section data-background="backgrounds/light-runway.jpg">
-            <h2>Example: Exploring all data sets of domestic US air-traffic</h2>
-            <h2>for September 2001</h2>
-            <h2>(400,000)</h2>
+            <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.html">
+                Slides: http://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></small></p>
+            <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf">
+                PDF: http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf</a></small></p>
         </section>
 
         <section>
-            <h2>Initial Design</h2>
-            <img class="fragment" src="design.jpg" height="500px">
+            <h2>Example:</h2>
+            <h2>Exploring <em>all</em> domestic US flights</h2>
+            <h2>for 2001</h2>
         </section>
 
-
         <section>
-            <h3>Options</h3>
-            <ol class="fragment">
-                <li>Google Spreadsheet
-                <li>Elasticsearch / Kibana
-                <li>D3 with crossfilter and DC
+            <h2>Content</h2>
+            <ol>
+                <li>Pandas: Preparing the data
+                <li>Elasticsearch: Deliver digestible data chunks
+                <li>D3 with crossfilter and DC: Display data interactively
             </ol>
         </section>
 
         <section>
-            <h1>D3 with crossfilter and DC</h1>
+            <h2>I: Data Wrangling with Pandas</h2>
+            <p>Preparing the data</p>
+            <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
+            <ul>
+                <li>Add missing data
+                <li>Recombine data to match Elasticsearch
+                <li>Add type information / conversion
+                <li>Recombine data to match Elasticsearch
+                <li>Do static pre-analysis to learn about data
+                    <ul>
+                        <li>What is the nature of the data (e.g. time series data)?</li>
+                        <li>Does the data look plaubisble?</li>
+                        <li>What visualizations seem most promising?</li>
+                    </ul>
+                </li>
+            </ul>
         </section>
 
         <section>
-            <h3>Adding a map to DC</h3>
-            <p>Leaflet / OpenStreetMap</p>
-            <div class="fragment">
-                <img src="leaflet-dc-sample.png" height="300">
-                <p><small><a target="_blank" href="http://intellipharm.github.io/dc-addons/#leafletjs">
-                    http://intellipharm.github.io/dc-addons/#leafletjs
-                </a></small></p>
-                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-section-today.php">
-                    Example from: http://cockpit.status-kanal.com/board-section-today.php
-                </a></small></p>
-            </div>
+            <h2>The raw data</h2>
+            <h3>approx. 6 million data sets</h3>
+            <h3>approx. 600 MB of data</h3>
+            <h3>29 colums</h3>
+            <pre><code data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
+            <pre><code data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <pre><code data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
         </section>
 
         <section>
-            <h3>Use Case: Pipe Maintenance</h3>
-            <div class="fragment">
-                <img src="dc-use-case-pipe-maintenance.png" height="450">
-                <p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-damage.php">
-                    Example from: http://cockpit.status-kanal.com/board-damage.php
-                </a></small></p>
-            </div>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
         </section>
+
+        <section>
+            <h2>Why not just load it into Excel?</h2>
+            <p>You simple can not</p>
+            <p>too large</p>
+            <p>and even if you could: way too slow</p>
+        </section>
+
+        <section>
+            <h2>Challenge</h2>
+            <h3>Handling large amounts of data</h3>
+            <h3>while maintaining the interactivity and the intuitive UI</h3>
+            <h3>Like: benefits of Excel and Access at the same time</h3>
+            <h3>But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</h3>
+        </section>
+
+        <section>
+            <h2>Analysing Samples</h2>
+            <ul>
+                <li>Working on a reduced number of random samples
+                <li class="todo">Show output from seaborn plots
+            </ul>
+        </section>
+
+        <section class="todo">
+            <pre>
+Show sample code
+            </pre>
+        </section>
+
+        <section>
+            <h2>Complete import</h2>
+            <ul>
+                <li>Bulk import
+                <li>Corrections
+                <li>Conversions
+                <li>Synthetic fields combining data (timestamp)
+            </ul>
+        </section>
+
+        <section class="todo">
+            <h2>Performance</h2>
+            <p>More than 7GB of RAM</p>
+            <p>100% single core CPU on a 2,9 GHz Intel Core i5</p>
+<pre>
+Time loading 5967780 rows, total: 6M rows, 573M total size: 26.768 s
+NaN filled: 28.263 s
+</pre>
+        </section>
+
+        <section class="todo">
+            <pre>
+Show sample code
+            </pre>
+        </section>
+
+        <section>
+            <h2>II: Elasticsearch and Kibana</h2>
+            <h3>Storing, Querying the data</h3>
+        </section>
+
+        <section class="todo">
+            <h2>Imported Results</h2>
+            <p class="todo">http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2000-12-31T23:00:00.000Z',mode:absolute,to:'2001-12-31T23:00:00.000Z'))&_a=(columns:!(_source),index:expo2009_pandas,interval:h,query:(query_string:(analyze_wildcard:!t,query:'Cancelled:true')),sort:!('@timestamp',desc))
+            </p>
+            <p class="todo">Add Screenshot
+            </p>
+        </section>
+
+        <section>
+            <h2>III: D3, DC, and Crossfilter</h2>
+            <h3>Interactive Exploration</h3>
+        </section>
+
+        <section class="todo">
+            <h2>Wrap-Up</h2>
+        </section>
+
+        <section>
+            <h1>Thank you</h1>
+            <h2>Questions / Discussion</h2>
+
+            <p>Complete Code:
+                <a href="https://github.com/DJCordhose/big-data-visualization/code">https://github.com/DJCordhose/big-data-visualization/code</a>
+            </p>
+            <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_javazone.html">https://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></p>
+            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </section>
+
+
+
+        <!--<section>-->
+            <!--<h3>Adding a map to DC</h3>-->
+            <!--<p>Leaflet / OpenStreetMap</p>-->
+            <!--<div class="fragment">-->
+                <!--<img src="leaflet-dc-sample.png" height="300">-->
+                <!--<p><small><a target="_blank" href="http://intellipharm.github.io/dc-addons/#leafletjs">-->
+                    <!--http://intellipharm.github.io/dc-addons/#leafletjs-->
+                <!--</a></small></p>-->
+                <!--<p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-section-today.php">-->
+                    <!--Example from: http://cockpit.status-kanal.com/board-section-today.php-->
+                <!--</a></small></p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Use Case: Pipe Maintenance</h3>-->
+            <!--<div class="fragment">-->
+                <!--<img src="dc-use-case-pipe-maintenance.png" height="450">-->
+                <!--<p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-damage.php">-->
+                    <!--Example from: http://cockpit.status-kanal.com/board-damage.php-->
+                <!--</a></small></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
 
         <!--<section data-background="backgrounds/light-metal.jpg">-->

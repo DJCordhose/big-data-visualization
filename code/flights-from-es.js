@@ -37,7 +37,7 @@ monthNames.forEach((name, index) => {
 });
 timeRangeMonthDisplay.addEventListener('change', event => {
     const selectedMonth = event.target.value;
-    if (selectedMonth !== -1) {
+    if (selectedMonth != -1) {
         handleRangeChangeMonth(selectedMonth);
     }
 });
@@ -59,7 +59,7 @@ weekNames.forEach((name, index) => {
 });
 timeRangeWeekDisplay.addEventListener('change', event => {
     const selectedWeek = event.target.value;
-    if (selectedWeek !== -1) {
+    if (selectedWeek != -1) {
         handleRangeChangeWeek(selectedWeek);
     }
 });
@@ -153,7 +153,8 @@ function load(callback, from, to) {
     // be sure to enable CORS in elasticsearch
     // https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html
 
-    fetch('http://localhost:9200/expo2009_airline/_search', {
+    // fetch('http://localhost:9200/expo2009_airline/_search', {
+    fetch('http://localhost:9200/expo2009_pandas/_search', {
         method: 'POST',
         //mode: 'no-cors', // we need cors, otherwise we get no response back
         body: JSON.stringify(query),
