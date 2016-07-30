@@ -129,17 +129,18 @@ es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
 t0 = time()
 print('Loading data')
 # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
-# df = pd.read_csv('/Users/olli/Development/ml/raw_data/expo2009_airline/2001.csv',
+# df = pd.read_csv('../../data/2001/2001.csv',
 #                  encoding='iso-8859-1', engine='c')
 offset = 0
 number_rows = 1000
-df = pd.read_csv('/Users/olli/Development/ml/raw_data/expo2009_airline/2001.csv',
+df = pd.read_csv('../../data/2001/2001.csv',
                  encoding='iso-8859-1', engine='c',
                  skiprows=offset, nrows=number_rows)
 
 # wc -l /Users/olli/Development/ml/raw_data/expo2009_airline/2001.csv
 # > 5967781
 print("Time loading", len(df), "rows, total: 6M rows, 573M total size:", round(time() - t0, 3), "s")
+# should be 5967780 data sets, as the first one contains the name of the columns
 
 # Transformation steps
 # 1. np.nan becomes -1

@@ -142,6 +142,10 @@
             </ol>
         </section>
 
+        <section class="todo">
+            <h2>What is Pandas?</h2>
+        </section>
+
         <section>
             <h2>I: Data Wrangling with Pandas</h2>
             <p>Preparing the data</p>
@@ -205,10 +209,27 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
         <section>
             <h2>Analysing Samples</h2>
-            <ul>
-                <li>Working on a reduced number of random samples
-                <li class="todo">Show output from seaborn plots
-            </ul>
+            <p>Working on a reduced number of random samples</p>
+        </section>
+
+        <section>
+            <h3>Correlations</h3>
+            <img src="analysis_talk/corr.png" height="500px">
+            <p><small>Data looks plausible</small></p>
+        </section>
+
+        <section>
+            <h3>Origin to Unique Carrier</h3>
+            <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
+            <p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>
+            <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+        </section>
+
+        <section>
+            <h3>Distance to Unique Carrier</h3>
+            <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
+            <p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>
+            <!--Answer AQ in D3 part: mainly between Hawaii and California -->
         </section>
 
         <section class="todo">
@@ -225,16 +246,6 @@ Show sample code
                 <li>Conversions
                 <li>Synthetic fields combining data (timestamp)
             </ul>
-        </section>
-
-        <section class="todo">
-            <h2>Performance</h2>
-            <p>More than 7GB of RAM</p>
-            <p>100% single core CPU on a 2,9 GHz Intel Core i5</p>
-<pre>
-Time loading 5967780 rows, total: 6M rows, 573M total size: 26.768 s
-NaN filled: 28.263 s
-</pre>
         </section>
 
         <section class="todo">
