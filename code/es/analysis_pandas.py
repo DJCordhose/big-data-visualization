@@ -53,7 +53,8 @@ cols_for_correlation = [
     u'ArrDelay',
     u'Distance',
     u'UniqueCarrier_',
-    u'Origin_', u'Dest_'
+    u'Origin_',
+    u'Dest_'
 ]
 plt.clf()
 sns.corrplot(df[cols_for_correlation])
@@ -64,6 +65,7 @@ plt.savefig(IMG_DIR+'/corr.png', dpi = DPI)
 
 def plot(col1, col2):
     plt.clf()
+    # https://stanford.edu/~mwaskom/software/seaborn/generated/seaborn.jointplot.html#seaborn.jointplot
     sns.jointplot(df[col1],df[col2],dropna=True, kind="hex")
     figure = plt.gcf()
     figure.set_size_inches(8, 6)

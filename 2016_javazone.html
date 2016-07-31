@@ -84,21 +84,30 @@
 <!--JavaZone: 60 Minutes-->
 <!--ODSC: 30 Minutes-->
 
+<!--JavaZone:-->
+<!--Audience Level: This is an introductory talk. I require no previous experience with any of the above techniques.-->
+<!--I will show some Java, Python, and JavaScript code in the slides. However, Java developers will be able to make sense of this code.-->
+
+<!--Plan:-->
+
+<!-- - Introduce project (5 min)-->
+    <!-- - Why this project in the first place?-->
+<!-- - Explain challenges (5 min)-->
+    <!-- - What do you do if you do not even know the questions?-->
+<!-- - Stages-->
+    <!-- - Preparation of data (pandas and pyelasticsearch) (10 min)-->
+    <!-- - Extracting timestamps (5 min)-->
+    <!-- - Storing and providing data (Elasticsearch)  (10 min)-->
+    <!-- - Rules for visualizing data (5 min)-->
+    <!-- - Exploring data using Interactive visualisation (10 min)-->
+<!-- - Summary / Lessons learned (5 min)-->
+<!-- - Questions (5 min)-->
+
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section class="todo">
-            <h3>TODO</h3>
-            <ol>
-                <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
-                    <ul>
-                        <li>Z.B.: was ist die Samstags-Beule?
-                        <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
-
-                    </ul>
-                </li>
-            </ol>
             <pre>
 - https://www.elastic.co/blog/elastic-stack-primer
 - React mit D3: https://gist.github.com/benschwarz/b24c8522057fac5c4d8dddb7c1a4d59d
@@ -108,11 +117,6 @@
 - Add cat: https://twitter.com/Creatuluw/status/749151998415634432
 - Add universal_cat_picture.gif everywhere in all talks
                 </pre>
-            <pre>
-- Beliebige Datenmengen mit Interaktionen: ELK
-- D3/Crossfilter: Auf Segmenten/Partitionen
-  - Partitionierung? Manuell automatisch?
-</pre>
         </section>
 
 
@@ -128,9 +132,22 @@
         </section>
 
         <section>
-            <h2>Example:</h2>
+            <h2>Example Porject:</h2>
             <h2>Exploring <em>all</em> domestic US flights</h2>
             <h2>for 2001</h2>
+        </section>
+
+        <section>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
+        </section>
+
+        <section>
+            <h2>Challenge</h2>
+            <h3>Handling large amounts of data</h3>
+            <h3>while maintaining the interactivity and the intuitive UI</h3>
+            <h3>Like: benefits of Excel and Access at the same time</h3>
+            <h3>But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</h3>
         </section>
 
         <section>
@@ -140,10 +157,6 @@
                 <li>Elasticsearch: Deliver digestible data chunks
                 <li>D3 with crossfilter and DC: Display data interactively
             </ol>
-        </section>
-
-        <section class="todo">
-            <h2>What is Pandas?</h2>
         </section>
 
         <section>
@@ -158,7 +171,7 @@
                 <li>Do static pre-analysis to learn about data
                     <ul>
                         <li>What is the nature of the data (e.g. time series data)?</li>
-                        <li>Does the data look plaubisble?</li>
+                        <li>Does the data look plausible?</li>
                         <li>What visualizations seem most promising?</li>
                     </ul>
                 </li>
@@ -166,10 +179,29 @@
         </section>
 
         <section>
+            <h2>Analysing Samples</h2>
+            <p>Working on a reduced number of random samples</p>
+            <ul>
+                <li>How is the data quality?
+                <li>What does it contain?
+                <li>How big is it?
+            </ul>
+            <p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support</small></p>
+        </section>
+
+        <section>
             <h2>The raw data</h2>
-            <h3>approx. 6 million data sets</h3>
-            <h3>approx. 600 MB of data</h3>
-            <h3>29 colums</h3>
+            <p>approx. 6 million data sets</p>
+            <pre><code data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
+            <p>approx. 600 MB of data</p>
+            <pre><code data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <p>29 colums, data has gaps, but looks consistent</p>
             <pre><code data-trim class="nohighlight">
 > head 2001.csv
 Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
@@ -177,19 +209,6 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
 2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
 2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
-            <pre><code data-trim class="nohighlight">
-> ls -hl 2001.csv
-573M Jan 10  2016 2001.csv
-            </code></pre>
-            <pre><code data-trim class="nohighlight">
-> wc -l 2001.csv
-5967781 2001.csv
-            </code></pre>
-        </section>
-
-        <section>
-            <h2>No specific task or question</h2>
-            <h3>Exploring what just might be interesting</h3>
         </section>
 
         <section>
@@ -197,19 +216,48 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <p>You simple can not</p>
             <p>too large</p>
             <p>and even if you could: way too slow</p>
+            <p>even if it was fast enough: does not run in the Browser</p>
+            <p>even if it does (360 or Google Sheets): is it most interactive?</p>
+            <h3 style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
         </section>
 
         <section>
-            <h2>Challenge</h2>
-            <h3>Handling large amounts of data</h3>
-            <h3>while maintaining the interactivity and the intuitive UI</h3>
-            <h3>Like: benefits of Excel and Access at the same time</h3>
-            <h3>But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</h3>
+            <h2>Other Standard tools</h2>
+            <ul>
+                <li>Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li>Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li>Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li>Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>loads data very fast with almost no memory overhead
+                        <li>all operations work smoothly, even editing and saving
+                    </ul>
+                </li>
+            </ul>
         </section>
 
-        <section>
-            <h2>Analysing Samples</h2>
-            <p>Working on a reduced number of random samples</p>
+        <section class="todo">
+            <h2>Introducing Pandas and friends</h2>
+            <ul>
+                <li>http://pandas.pydata.org/
+                <li>http://www.numpy.org/
+                <li>https://stanford.edu/~mwaskom/software/seaborn/
+            </ul>
         </section>
 
         <section>
@@ -217,6 +265,30 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <img src="analysis_talk/corr.png" height="500px">
             <p><small>Data looks plausible</small></p>
         </section>
+
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
+            <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+        </section>
+
+        <section>
+            <h3>Pearson's r</h3>
+            <p><em>Pearson's r</em> is a measure of the degree of linear dependence between two variables</p>
+            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
+                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+            </a></small></p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+            <img src="Correlation_coefficient.png">
+            </a>
+            <!--<ul>-->
+                <!--<li><em>0</em> is no correlation: data is just randomly distributed</li>-->
+                <!--<li><em>1</em> or <em>-1</em> is total pos./neg. correlation: data forms a line</li>-->
+            <!--</ul>-->
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
+
+        </section>
+
 
         <section>
             <h3>Origin to Unique Carrier</h3>
@@ -232,10 +304,42 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--Answer AQ in D3 part: mainly between Hawaii and California -->
         </section>
 
-        <section class="todo">
-            <pre>
-Show sample code
-            </pre>
+        <section>
+            <h3>Sample Code</h3>
+            <p>Reading sample data</p>
+            <pre><code data-trim class="line-numbers">
+s = 10000 # desired sample size
+n = 5967780 # complete data size
+skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
+
+# pandas dataframe (2-dim table structure)
+df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
+            </code></pre>
+
+            <p>Creating Correlation Chart</p>
+            <pre><code data-trim class="line-numbers">
+cols_for_correlation = [
+    'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
+    'UniqueCarrier_', 'Origin_', 'Dest_'
+]
+seaborn.corrplot(df[cols_for_correlation])
+            </code></pre>
+
+            <p>2D Jointploit</p>
+            <pre><code data-trim class="line-numbers">
+seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Results of Analysis</h3>
+            <ul>
+                <li>Data looks plausible
+                <li>Contains obvious correlations
+                <li>But also contains non-trivial correlations
+                <li>Has timestamps
+                <li>Storing and analysing as time series data sounds promising
+            </ul>
         </section>
 
         <section>
@@ -399,6 +503,7 @@ Show sample code
 
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
 
 <script>
 
@@ -437,7 +542,8 @@ Show sample code
             }
             },
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
-            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 
