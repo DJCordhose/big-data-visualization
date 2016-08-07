@@ -84,7 +84,7 @@
 <!--JavaZone: 60 Minutes-->
 <!--ODSC: 30 Minutes-->
 <!--ODSC:-->
-<!-- - Remove all code samples-->
+<!-- - Remove all code samples to save time -->
 
 
 <!--JavaZone:-->
@@ -110,21 +110,13 @@
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-        <section class="todo">
-            <pre>
-- Finish Wrapup
-- Shorten
-- Finish Pandas Intro
-- Remove all Code samples for ODSC
-                </pre>
-        </section>
-
 
         <section>
             <h2>Interactive data exploration using Pandas, Elasticsearch, and D3</h2>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
+            <p>JavaZone 2016</p>
             <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.html">
                 Slides: http://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></small></p>
             <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf">
@@ -141,7 +133,7 @@
         </section>
 
         <section>
-            <h2>Example Porject:</h2>
+            <h2>Example Project:</h2>
             <h2>Exploring <em>all</em> domestic US flights</h2>
             <h2>for 2001</h2>
         </section>
@@ -153,10 +145,10 @@
 
         <section>
             <h2>Challenge</h2>
-            <h3>Handling large amounts of data</h3>
-            <h3>while maintaining the interactivity and the intuitive UI</h3>
-            <h3>Like: benefits of Excel and Access at the same time</h3>
-            <h3>But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</h3>
+            <p class="fragment">Handling large amounts of data</p>
+            <p class="fragment">while maintaining the interactivity and the intuitive UI</p>
+            <p class="fragment">Like: benefits of Excel and Access at the same time</p>
+            <p class="fragment">But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</p>
         </section>
 
 
@@ -262,12 +254,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
         </section>
 
-        <section class="todo">
+        <section>
             <h2>Introducing Pandas and friends</h2>
+            <p>All live in the <em>Python</em> world</p>
             <ul>
-                <li>http://pandas.pydata.org/
-                <li>http://www.numpy.org/
-                <li>https://stanford.edu/~mwaskom/software/seaborn/
+                <li class="fragment"><a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a>: data structures and data analysis tools
+                <li class="fragment"><a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a>: fundamental package for scientific computing
+                <li class="fragment"><a href="http://matplotlib.org/" target="_blank">http://matplotlib.org/</a>: 2D plotting library
+                <li class="fragment"><a href="https://stanford.edu/~mwaskom/software/seaborn/" target="_blank">https://stanford.edu/~mwaskom/software/seaborn/</a>: statistical data visualization
             </ul>
         </section>
 
@@ -332,7 +326,7 @@ cols_for_correlation = [
 seaborn.corrplot(df[cols_for_correlation])
             </code></pre>
 
-            <p>2D Jointploit</p>
+            <p>2D Jointplot</p>
             <pre><code data-trim class="line-numbers">
 seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             </code></pre>
@@ -729,20 +723,17 @@ stateOriginMap.width(500)
             </div>
         </section>
 
-        <section class="todo">
+        <section>
             <h2>Wrapup</h2>
             <ul>
-                <li class="fragment">D3 helps you to interactively explore your data visually
-                <li class="fragment">For large amounts of multivariate datasets
-                    <ul>
-                        <li>crossfilter allows for fast multidimensional filtering
-                        <li>there are limitations to data size, number of data sets, and dimensions
-                        <li>you might have to make a pre-selection
-                    </ul>
-                </li>
-                <li class="fragment">Use DC for coordinated visualizations with powerful widgets
+                <li class="fragment">Python based tools are most advanced in low level data analysis
+                <li class="fragment">They can be used to prepare data and an analytical overview
+                <li class="fragment">Pyelasticsearch allows to push that data in Elasticsearch
+                <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
+                <li class="fragment">The Browser is the ideal platform to explore data
+                <li class="fragment">D3, crossfilter, and DC help you to interactively explore your data visually
+                <li class="fragment">Elasticsearch can deliver data in chunks the Browser can digest
             </ul>
-
         </section>
 
         <section>
