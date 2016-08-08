@@ -111,7 +111,8 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section>
+        <!--<section data-background-image="backgrounds/light-handle.jpg">-->
+        <section data-background-image="backgrounds/light-sky3.jpg">
             <h2>Interactive data exploration using Pandas, Elasticsearch, and D3</h2>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -123,7 +124,8 @@
                 PDF: http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf</a></small></p>
         </section>
 
-        <section>
+        <section data-background-image="backgrounds/light-sky3.jpg">
+        <!--<section>-->
             <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
             <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
                 <img src="dataviz-cat.jpg" height="500px">
@@ -147,11 +149,9 @@
             <h2>Challenge</h2>
             <p class="fragment">Handling large amounts of data</p>
             <p class="fragment">while maintaining the interactivity and the intuitive UI</p>
-            <p class="fragment">Like: benefits of Excel and Access at the same time</p>
             <p class="fragment">But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</p>
+            <p class="fragment">Like: benefits of Excel and Access at the same time</p>
         </section>
-
-
 
         <section>
             <h2>Content</h2>
@@ -168,9 +168,8 @@
             <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
             <ul>
                 <li>Add missing data
-                <li>Recombine data to match Elasticsearch
+                <li>Recombine data
                 <li>Add type information / conversion
-                <li>Recombine data to match Elasticsearch
                 <li>Do static pre-analysis to learn about data
                     <ul>
                         <li>What is the nature of the data (e.g. time series data)?</li>
@@ -265,6 +264,40 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
         </section>
 
+    <section>
+            <h3>Sample Code: Analysis</h3>
+        <div class="fragment">
+            <p>Reading sample data</p>
+            <pre><code data-trim class="line-numbers">
+s = 10000 # desired sample size
+n = 5967780 # complete data size
+skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
+
+# pandas dataframe (2-dim table structure)
+df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
+            </code></pre>
+        </div>
+
+        <div class="fragment">
+            <p>Creating Correlation Chart</p>
+            <pre><code data-trim class="line-numbers">
+cols_for_correlation = [
+    'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
+    'UniqueCarrier_', 'Origin_', 'Dest_'
+]
+seaborn.corrplot(df[cols_for_correlation])
+            </code></pre>
+        </div>
+
+        <div class="fragment">
+            <p>2D Jointplot</p>
+            <pre><code data-trim class="line-numbers">
+seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
+            </code></pre>
+        </div>
+    </section>
+
+
         <section>
             <h3>Correlations</h3>
             <img src="analysis_talk/corr.png" height="500px">
@@ -306,33 +339,6 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Sample Code</h3>
-            <p>Reading sample data</p>
-            <pre><code data-trim class="line-numbers">
-s = 10000 # desired sample size
-n = 5967780 # complete data size
-skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
-
-# pandas dataframe (2-dim table structure)
-df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
-            </code></pre>
-
-            <p>Creating Correlation Chart</p>
-            <pre><code data-trim class="line-numbers">
-cols_for_correlation = [
-    'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
-    'UniqueCarrier_', 'Origin_', 'Dest_'
-]
-seaborn.corrplot(df[cols_for_correlation])
-            </code></pre>
-
-            <p>2D Jointplot</p>
-            <pre><code data-trim class="line-numbers">
-seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
-            </code></pre>
-        </section>
-
-        <section>
             <h3>Results of Analysis</h3>
             <ul>
                 <li>Data looks plausible
@@ -354,7 +360,37 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         </section>
 
         <section>
-            <h3>Sample Code</h3>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+                <p>Create an index</p>
+                <pre><code data-trim class="line-numbers python">
+from pyelasticsearch import ElasticSearch, bulk_chunks
+es = ElasticSearch(ES_HOST)
+es.create_index(INDEX_NAME)
+            </code></pre>
+            <p>Create a mapping to make types clear to Elasticsearch</p>
+                <pre><code data-trim class="line-numbers python">
+mapping = {
+    'flight': {
+        'properties': {
+            'SecurityDelay': {
+                'type': 'integer',
+                'null_value': -1
+            },
+            'Origin': {
+                'type': 'string'
+            },
+            'Cancelled': {
+                'type': 'boolean'
+            },
+            ...
+es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
+            </code></pre>
+        </section>
+
+    <section>
+            <h3>Sample Code: Reading and Cleaning</h3>
+
+        <div class="fragment">
             <p>Reading and Cleaning</p>
             <pre><code data-trim class="line-numbers python">
 df = pd.read_csv('../../data/2001/2001.csv')
@@ -366,7 +402,9 @@ df['@timestamp'] = df.apply(lambda row:
 df['Cancelled'] = df.apply(lambda row:
     False if row['Cancelled'] == 0 else True)
             </code></pre>
+        </div>
 
+        <div class="fragment">
             <p>Bulk Import</p>
             <pre><code data-trim class="line-numbers python">
 records = df.to_dict(orient='records')
@@ -380,7 +418,8 @@ for chunk in bulk_chunks(documents(records=records),
                          bytes_per_chunk=10000):
     es.bulk(chunk, doc_type='flight', index='expo2009')
             </code></pre>
-        </section>
+        </div>
+    </section>
 
         <section>
             <h2>II: Elasticsearch and Kibana</h2>
@@ -544,8 +583,13 @@ PUT /megacorp/employee/1
         </section>
 
         <section>
-            <h2>III: D3, DC, and Crossfilter</h2>
-            <h3>Interactive Exploration</h3>
+            <h2>III: Interactive Exploration in  the Browser</h2>
+        </section>
+
+        <section>
+            <h2>But why in the Browser</h2>
+            <h3 class="fragment">1: Zero-Installation for the user</h3>
+            <h3 class="fragment">2: Interactivity coming naturally</h3>
         </section>
 
         <section>
@@ -571,10 +615,42 @@ PUT /megacorp/employee/1
             <ul class="fragment">
                 <li><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
                 <li>Can filter up to millions of data sets in real time in the browser
-                <li>Data sets are indexed when loaded
+                <li>Loads data in memory
+                <li>Data sets are indexed when loaded (also in memory)
                 <li>You specify what you want to filter using dimensions
             </ul>
         </section>
+
+        <section>
+        <h3>Crossfilter Sample Code</h3>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// creating a new crossfilter (multi-dimensional dataset)
+// flights array contains all flights for a single month
+flight = crossfilter(flights);
+console.log(flight.size()); // 490698
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// creating a dimension for all carriers of all flights
+carrier = flight.dimension(function (d) {
+    return d.UniqueCarrier;
+});
+</code></pre>
+<pre class="fragment"><code class="javascript" data-trim contenteditable>
+// group() reduces this dimension to distinct values
+var distrinctCarriersGroup = carrier.group();
+console.log("Distinct carriers: " + distrinctCarriersGroup.size());
+// 12
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+// filter just for TW
+carrier.filter("TW");
+// groupAll() creates a group intersecting all current filters
+// Trans World Airlines, became part of American Airlines in 2001
+console.log("TW flights", flight.groupAll().value()); // 19427
+// display first 10 matches
+console.log(flight.top(10));
+</code></pre>
+</section>
 
         <section>
             <h3>dc.js: Charting with D3 and Crossfilter</h3>
@@ -714,6 +790,7 @@ stateOriginMap.width(500)
                 <li>Manually selected by user
             </ul>
         </section>
+
         <section>
             <h3>Literally no one flying to Wyoming first half of December???</h3>
             <div>
@@ -721,6 +798,66 @@ stateOriginMap.width(500)
                     <img src="screenshot_wy_dec.png">
                 </a>
             </div>
+        </section>
+
+        <section>
+            <h3>Accessing Elasticsearch via REST</h3>
+            <p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>
+            <p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>
+            <p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">
+                enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>
+            <pre class="fragment"><code data-trim class="javascript">
+http.cors.enabled: true
+http.cors.allow-origin: '*'
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Network, Timing, Data Sizes</h3>
+            <div class="fragment">
+                <a href="code/dc-911-es.html" target="_blank">
+                    <img src="screenshot_network_cors.png">
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Coming back to questions from low level analysis in first part</h2>
+        </section>
+
+        <section>
+            <h3>Why only short flight distances for Carrier Aloha Airlines (AQ)?</h3>
+            <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+            <!--<p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>-->
+            <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_aq.png" height="400px"></a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
+                Aloha Airlines (AQ) mainly flies between Hawaii and West Coast (California/Nevada)
+            </a></p>
+        </section>
+
+
+        <section>
+            <h3>What is the prominent Origin for Carrier Delta (DL)?</h3>
+            <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+            <!--<p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>-->
+            <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_ATL.png" height="400px"></a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
+                Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
+            </a></p>
         </section>
 
         <section>
@@ -741,7 +878,7 @@ stateOriginMap.width(500)
             <h2>Questions / Discussion</h2>
 
             <p>Complete Code:
-                <a href="https://github.com/DJCordhose/big-data-visualization/code">https://github.com/DJCordhose/big-data-visualization/code</a>
+                <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
             </p>
             <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_javazone.html">https://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></p>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -860,6 +997,9 @@ stateOriginMap.width(500)
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
+<script>
+    $('section').attr('data-background-image', "backgrounds/light-sky3.jpg")
+</script>
 
 <script>
 
