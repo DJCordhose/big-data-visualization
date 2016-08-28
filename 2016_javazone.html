@@ -120,10 +120,10 @@
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
             <p>JavaZone 2016</p>
-            <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.html">
-                Slides: http://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></small></p>
-            <p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf">
-                PDF: http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf</a></small></p>
+            <p><small>Slides: <a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.html">
+                http://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></small></p>
+            <!--<p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf">-->
+                <!--PDF: http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf</a></small></p>-->
         </section>
 
         <section>
@@ -150,7 +150,7 @@
             <h2>Challenge</h2>
             <p class="fragment">Handling large amounts of data</p>
             <p class="fragment">while maintaining the interactivity and the intuitive UI</p>
-            <p class="fragment">But: data needs to be (physically) close to the processing / interaction to make it fast and thus most useful</p>
+            <p class="fragment">But: data needs to be (physically) close to processing / interaction to make it fast and thus most useful</p>
             <p class="fragment">Like: benefits of Excel and Access at the same time</p>
         </section>
 
@@ -158,7 +158,7 @@
             <h2>Content</h2>
             <ol>
                 <li>Pandas: Preparing the data
-                <li>Elasticsearch: Deliver digestible data chunks
+                <li>Elasticsearch: Store data and Deliver digestible data chunks
                 <li>D3 with crossfilter and DC: Display data interactively
             </ol>
         </section>
@@ -221,31 +221,31 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <p>and even if you could: way too slow</p>
             <p>even if it was fast enough: does not run in the Browser</p>
             <p>even if it does (360 or Google Sheets): is it most interactive?</p>
-            <h3 style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
+            <h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
         </section>
 
         <section>
             <h2>Other Standard tools</h2>
             <ul>
-                <li>Excel (2011 Mac): <em style="color: red">truncates</em>
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
                     <ul>
                         <li>loads data relatively fast
                         <li>truncates after 1M lines
                     </ul>
                 </li>
-                <li>Google Sheets: <em style="color: red">nope</em>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
                     <ul>
                         <li>limited to 2.000.000 cells (not lines)
                         <li>does not load data at all
                     </ul>
                 </li>
-                <li>Numbers (Mac): <em style="color: red">truncates</em>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
                     <ul>
                         <li>loading takes long
                         <li>truncates after 64k lines
                     </ul>
                 </li>
-                <li>Emacs: <em style="color: red">Low-level operations possible</em>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
                     <ul>
                         <li>loads data very fast with almost no memory overhead
                         <li>all operations work smoothly, even editing and saving
@@ -391,11 +391,11 @@ es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
     <section>
             <h3>Sample Code: Reading and Cleaning</h3>
 
-        <div class="fragment">
-            <p>Reading and Cleaning</p>
+        <!--<div class="fragment">-->
+            <!--<p>Reading and Cleaning</p>-->
             <pre><code data-trim class="line-numbers python">
 df = pd.read_csv('../../data/2001/2001.csv')
-df.fillna(-1, inplace=True)
+df.fillna(-1)
 df['@timestamp'] = df.apply(lambda row:
     pd.Timestamp('%s-%s-%s;%04d'
         %(row['Year'], row['Month'],
@@ -403,23 +403,23 @@ df['@timestamp'] = df.apply(lambda row:
 df['Cancelled'] = df.apply(lambda row:
     False if row['Cancelled'] == 0 else True)
             </code></pre>
-        </div>
+        <!--</div>-->
 
-        <div class="fragment">
-            <p>Bulk Import</p>
-            <pre><code data-trim class="line-numbers python">
-records = df.to_dict(orient='records')
+        <!--<div class="fragment">-->
+            <!--<p>Bulk Import</p>-->
+            <!--<pre><code data-trim class="line-numbers python">-->
+<!--records = df.to_dict(orient='records')-->
 
-def documents(records):
-    for flight in records:
-        yield es.index_op(flight)
+<!--def documents(records):-->
+    <!--for flight in records:-->
+        <!--yield es.index_op(flight)-->
 
-for chunk in bulk_chunks(documents(records=records),
-                         docs_per_chunk=500,
-                         bytes_per_chunk=10000):
-    es.bulk(chunk, doc_type='flight', index='expo2009')
-            </code></pre>
-        </div>
+<!--for chunk in bulk_chunks(documents(records=records),-->
+                         <!--docs_per_chunk=500,-->
+                         <!--bytes_per_chunk=10000):-->
+    <!--es.bulk(chunk, doc_type='flight', index='expo2009')-->
+            <!--</code></pre>-->
+        <!--</div>-->
     </section>
 
         <section>
@@ -452,49 +452,49 @@ for chunk in bulk_chunks(documents(records=records),
             </ul>
         </section>
 
-        <section>
-            <h2>Introspecting Elasticsearch</h2>
-            <h3>Looking at physical entities</h3>
-            <p>Using <a href="https://github.com/lmenezes/elasticsearch-kopf" target="_blank">Kopf</a> plugin
-                allowing for easy administration and introspection</p>
-            <p>Open <a href="http://localhost:9200/_plugin/kopf" target="_blank">http://localhost:9200/_plugin/kopf</a></p>
-        </section>
+        <!--<section>-->
+            <!--<h2>Introspecting Elasticsearch</h2>-->
+            <!--<h3>Looking at physical entities</h3>-->
+            <!--<p>Using <a href="https://github.com/lmenezes/elasticsearch-kopf" target="_blank">Kopf</a> plugin-->
+                <!--allowing for easy administration and introspection</p>-->
+            <!--<p>Open <a href="http://localhost:9200/_plugin/kopf" target="_blank">http://localhost:9200/_plugin/kopf</a></p>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Cluster</h3>
-            <div class="fragment">
-                <p>nodes grouped under cluster name</p>
-                <img src="screenshot_cluster.png" height="400">
-                <p>There always is one master node</p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Cluster</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>nodes grouped under cluster name</p>-->
+                <!--<img src="screenshot_cluster.png" height="400">-->
+                <!--<p>There always is one master node</p>-->
+            <!--</div>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Node</h3>
-            <div class="fragment">
-                <p>Simple Elasticsearch instance</p>
-                <img src="screenshot_nodes.png" height="400">
-                <p>Coordinates access to shards</p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Node</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>Simple Elasticsearch instance</p>-->
+                <!--<img src="screenshot_nodes.png" height="400">-->
+                <!--<p>Coordinates access to shards</p>-->
+            <!--</div>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Index</h3>
-            <div class="fragment">
-                <p>logical grouping over shards</p>
-                <img src="screenshot_indices.png" height="400">
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Index</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>logical grouping over shards</p>-->
+                <!--<img src="screenshot_indices.png" height="400">-->
+            <!--</div>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Shard</h3>
-            <div class="fragment">
-                <p>part of an index</p>
-                <p>can be distributed over many nodes for failover or performance</p>
-                <img src="screenshot_shards.png" height="300">
-                <p>technically a Lucene index</p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Shard</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>part of an index</p>-->
+                <!--<p>can be distributed over many nodes for failover or performance</p>-->
+                <!--<img src="screenshot_shards.png" height="300">-->
+                <!--<p>technically a Lucene index</p>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h2>Logical structures</h2>
@@ -801,26 +801,26 @@ stateOriginMap.width(500)
             </div>
         </section>
 
-        <section>
-            <h3>Accessing Elasticsearch via REST</h3>
-            <p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>
-            <p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>
-            <p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">
-                enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>
-            <pre class="fragment"><code data-trim class="javascript">
-http.cors.enabled: true
-http.cors.allow-origin: '*'
-            </code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Accessing Elasticsearch via REST</h3>-->
+            <!--<p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>-->
+            <!--<p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>-->
+            <!--<p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">-->
+                <!--enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>-->
+            <!--<pre class="fragment"><code data-trim class="javascript">-->
+<!--http.cors.enabled: true-->
+<!--http.cors.allow-origin: '*'-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Network, Timing, Data Sizes</h3>
-            <div class="fragment">
-                <a href="code/dc-911-es.html" target="_blank">
-                    <img src="screenshot_network_cors.png">
-                </a>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Network, Timing, Data Sizes</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a href="code/dc-911-es.html" target="_blank">-->
+                    <!--<img src="screenshot_network_cors.png">-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h2>Coming back to questions from low level analysis in first part</h2>
@@ -865,7 +865,7 @@ http.cors.allow-origin: '*'
             <h2>Wrapup</h2>
             <ul>
                 <li class="fragment">Python based tools are most advanced in low level data analysis
-                <li class="fragment">They can be used to prepare data and an analytical overview
+                <li class="fragment">They can be used to prepare data and give an analytical overview
                 <li class="fragment">Pyelasticsearch allows to push that data in Elasticsearch
                 <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
                 <li class="fragment">The Browser is the ideal platform to explore data
@@ -1003,6 +1003,7 @@ http.cors.allow-origin: '*'
 //    $('section').attr('data-background-image', "backgrounds/light-seestar.jpg")
 //    $('section').attr('data-background-image', "backgrounds/light-coral.jpg")
     $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
+//    $('section').attr('data-background-image', "backgrounds/light-silver.jpg");
 </script>
 
 <script>
