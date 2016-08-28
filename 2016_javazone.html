@@ -81,6 +81,10 @@
 <!--JavaZone: 60 Minutes-->
 <!--https://2016.javazone.no/program/worlds-not-stories-data-exploration-in-the-browser-using-elasticsearch-pandas-and-d-3-->
 
+<!--Par I: 20 Minutes-->
+<!--Par II: 10 Minutes-->
+<!--Par III: 20 Minutes (skip code examples when running out of time-->
+
 <!--ODSC: 30 Minutes-->
 <!--ODSC:-->
 <!--Remove all details-->
@@ -267,7 +271,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
     <section>
             <h3>Sample Code: Analysis</h3>
-        <div class="fragment">
+        <div>
             <p>Reading sample data</p>
             <pre><code data-trim class="line-numbers">
 s = 10000 # desired sample size
@@ -278,9 +282,11 @@ skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
 df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
             </code></pre>
         </div>
+    </section>
 
-        <div class="fragment">
-            <p>Creating Correlation Chart</p>
+
+        <section>
+            <h3>Sample Code: Creating Correlation Chart</h3>
             <pre><code data-trim class="line-numbers">
 cols_for_correlation = [
     'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
@@ -288,27 +294,12 @@ cols_for_correlation = [
 ]
 seaborn.corrplot(df[cols_for_correlation])
             </code></pre>
-        </div>
-
-        <div class="fragment">
-            <p>2D Jointplot</p>
-            <pre><code data-trim class="line-numbers">
-seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
-            </code></pre>
-        </div>
-    </section>
-
+        </section>
 
         <section>
             <h3>Correlations</h3>
             <img src="analysis_talk/corr.png" height="500px">
-            <p><small>Data looks plausible</small></p>
-        </section>
-
-        <section>
-            <h3>Arrival Time to Departure Time</h3>
-            <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
-            <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+            <p><small>Interesting: Distance / Origin to Unique Carrier</small></p>
         </section>
 
         <section>
@@ -318,24 +309,43 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
                 https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
             </a></small></p>
             <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-            <img src="Correlation_coefficient.png">
+                <img src="Correlation_coefficient.png">
             </a>
             <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
-
         </section>
 
 
         <section>
+            <h3>Sample Code: 2D Jointplot</h3>
+                <pre><code data-trim class="line-numbers">
+seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
+            <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+        </section>
+
+        <section>
             <h3>Origin to Unique Carrier</h3>
             <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
-            <p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>
+            <p><small>
+                <!--0 = AA(American Airlines),-->
+                <em>4 = (DL) Delta</em>
+                <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
+            </small></p>
             <!--Answer DL in D3 part: that is ATL (Atlanta) -->
         </section>
 
         <section>
             <h3>Distance to Unique Carrier</h3>
             <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
-            <p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>
+            <p><small>
+                <em>1 = AQ (Aloha Airlines)</em>
+                <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+            </small></p>
             <!--Answer AQ in D3 part: mainly between Hawaii and California -->
         </section>
 
@@ -351,80 +361,16 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         </section>
 
         <section>
-            <h2>Complete import</h2>
-            <ul>
-                <li>Bulk import
-                <li>Corrections
-                <li>Conversions
-                <li>Synthetic fields combining data (timestamp)
-            </ul>
+            <h2>So far</h2>
+            <p class="fragment">working on random samples only</p>
+            <p class="fragment">time series data not exploited</p>
+            <p class="fragment">not interactive</p>
+            <h3 class="fragment">Next Step: store data in db to make it flexibly accessible</h3>
+
         </section>
-
-        <section>
-            <h3>Sample Code: Preparing Elasticsearch</h3>
-                <p>Create an index</p>
-                <pre><code data-trim class="line-numbers python">
-from pyelasticsearch import ElasticSearch, bulk_chunks
-es = ElasticSearch(ES_HOST)
-es.create_index(INDEX_NAME)
-            </code></pre>
-            <p>Create a mapping to make types clear to Elasticsearch</p>
-                <pre><code data-trim class="line-numbers python">
-mapping = {
-    'flight': {
-        'properties': {
-            'SecurityDelay': {
-                'type': 'integer',
-                'null_value': -1
-            },
-            'Origin': {
-                'type': 'string'
-            },
-            'Cancelled': {
-                'type': 'boolean'
-            },
-            ...
-es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
-            </code></pre>
-        </section>
-
-    <section>
-            <h3>Sample Code: Reading and Cleaning</h3>
-
-        <!--<div class="fragment">-->
-            <!--<p>Reading and Cleaning</p>-->
-            <pre><code data-trim class="line-numbers python">
-df = pd.read_csv('../../data/2001/2001.csv')
-df.fillna(-1)
-df['@timestamp'] = df.apply(lambda row:
-    pd.Timestamp('%s-%s-%s;%04d'
-        %(row['Year'], row['Month'],
-          row['DayofMonth'], row['CRSDepTime'])))
-df['Cancelled'] = df.apply(lambda row:
-    False if row['Cancelled'] == 0 else True)
-            </code></pre>
-        <!--</div>-->
-
-        <!--<div class="fragment">-->
-            <!--<p>Bulk Import</p>-->
-            <!--<pre><code data-trim class="line-numbers python">-->
-<!--records = df.to_dict(orient='records')-->
-
-<!--def documents(records):-->
-    <!--for flight in records:-->
-        <!--yield es.index_op(flight)-->
-
-<!--for chunk in bulk_chunks(documents(records=records),-->
-                         <!--docs_per_chunk=500,-->
-                         <!--bytes_per_chunk=10000):-->
-    <!--es.bulk(chunk, doc_type='flight', index='expo2009')-->
-            <!--</code></pre>-->
-        <!--</div>-->
-    </section>
-
         <section>
             <h2>II: Elasticsearch and Kibana</h2>
-            <h3>Storing, Querying the data</h3>
+            <h3>Storing and Querying the data</h3>
         </section>
 
         <section>
@@ -508,13 +454,13 @@ df['Cancelled'] = df.apply(lambda row:
                     <td>Columns</td>
                 </tr>
                 <tr class="fragment">
-                    <th>Elasticsearch</th>
+                    <th style="border-bottom: hidden">Elasticsearch</th>
                     <td>Indices</td>
                     <td>Types</td>
                     <td>Documents</td>
                     <td>Fields</td>
                 </tr>
-                <tr></tr>
+                <!--<tr></tr>-->
             </table>
         </section>
 
@@ -535,15 +481,95 @@ PUT /megacorp/employee/1
                 <li class="fragment"><em>field(s)</em>: age
             </ul>
         </section>
+        <section>
+            <h2>Complete import</h2>
+            <ul>
+                <li>Bulk import
+                <li>Corrections
+                <li>Conversions
+                <li>Synthetic fields combining data (timestamp)
+            </ul>
+        </section>
 
         <section>
-            <h3>Sense - Making low level queries</h3>
-            <p>Looking at our example using REST calls returning JSON</p>
-            <a href="http://localhost:5601/app/sense" target="_blank">
-                <img src="screenshot_sense.png" height="400">
-            </a>
-            <p><code>GET expo2009_airline/flight/_search</code></p>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+            <p>Create an index</p>
+            <pre><code data-trim class="line-numbers python">
+from pyelasticsearch import ElasticSearch, bulk_chunks
+es = ElasticSearch(ES_HOST)
+es.create_index(INDEX_NAME)
+            </code></pre>
         </section>
+
+        <section>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+            <p>Create a mapping to make types clear to Elasticsearch</p>
+            <pre><code data-trim class="line-numbers python">
+mapping = {
+    'flight': {
+        'properties': {
+            'SecurityDelay': {
+                'type': 'integer',
+                'null_value': -1
+            },
+            'Origin': {
+                'type': 'string'
+            },
+            'Cancelled': {
+                'type': 'boolean'
+            },
+            ...
+es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Sample Code: Reading and Cleaning</h3>
+
+            <!--<div class="fragment">-->
+            <!--<p>Reading and Cleaning</p>-->
+            <pre><code data-trim class="line-numbers python">
+# reads all data into data frame in memory
+df = pd.read_csv('../../data/2001/2001.csv')
+# missing value will be filled with -1
+df.fillna(-1)
+# add a timestamp to each row
+df['@timestamp'] = df.apply(lambda row:
+    pd.Timestamp('%s-%s-%s;%04d'
+        %(row['Year'], row['Month'],
+          row['DayofMonth'], row['CRSDepTime'])))
+# custom convert cancelled into boolean
+df['Cancelled'] = df.apply(lambda row:
+    False if row['Cancelled'] == 0 else True)
+            </code></pre>
+            <!--</div>-->
+
+            <!--<div class="fragment">-->
+            <!--<p>Bulk Import</p>-->
+            <!--<pre><code data-trim class="line-numbers python">-->
+            <!--records = df.to_dict(orient='records')-->
+
+            <!--def documents(records):-->
+            <!--for flight in records:-->
+            <!--yield es.index_op(flight)-->
+
+            <!--for chunk in bulk_chunks(documents(records=records),-->
+            <!--docs_per_chunk=500,-->
+            <!--bytes_per_chunk=10000):-->
+            <!--es.bulk(chunk, doc_type='flight', index='expo2009')-->
+            <!--</code></pre>-->
+            <!--</div>-->
+        </section>
+
+
+        <!--<section>-->
+            <!--<h3>Sense - Making low level queries</h3>-->
+            <!--<p>Looking at our example using REST calls returning JSON</p>-->
+            <!--<a href="http://localhost:5601/app/sense" target="_blank">-->
+                <!--<img src="screenshot_sense.png" height="400">-->
+            <!--</a>-->
+            <!--<p><code>GET expo2009_airline/flight/_search</code></p>-->
+        <!--</section>-->
 
         <section>
             <h2>Kibana</h2>
@@ -556,7 +582,7 @@ PUT /megacorp/employee/1
         </section>
 
         <section>
-            <h3>Discover Data</h3>
+            <h3>Seeing time series data for the first time</h3>
             <div class="fragment">
                 <p>using adhoc queries</p>
                 <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
@@ -574,7 +600,19 @@ PUT /megacorp/employee/1
         <!--</section>-->
 
         <section>
+            <h2>III: Interactive Exploration in the Browser</h2>
+        </section>
+
+        <section>
+            <h2>But why in the Browser</h2>
+            <h3 class="fragment">1: Zero-Installation for the user</h3>
+            <h3 class="fragment">2: Interactivity coming naturally</h3>
+        </section>
+
+        <section>
             <h3>Interactive Dashboard</h3>
+            <p>Already possible with Kibana</p>
+
             <div class="fragment">
                 <a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">
                     <img src="screenshot_kibana_dashboard.png" height="400">
@@ -584,14 +622,13 @@ PUT /megacorp/employee/1
         </section>
 
         <section>
-            <h2>III: Interactive Exploration in  the Browser</h2>
+            <h3>What is still missing?</h3>
+            <p>Speed of interactivity</p>
+            <p>Limited offline access</p>
+            <p>Charts limited to what Kibana offers</p>
         </section>
 
-        <section>
-            <h2>But why in the Browser</h2>
-            <h3 class="fragment">1: Zero-Installation for the user</h3>
-            <h3 class="fragment">2: Interactivity coming naturally</h3>
-        </section>
+
 
         <section>
             <h3>D3.js: Dynamic graphics in the browser</h3>
@@ -624,25 +661,23 @@ PUT /megacorp/employee/1
 
         <section>
         <h3>Crossfilter Sample Code</h3>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
 // creating a new crossfilter (multi-dimensional dataset)
 // flights array contains all flights for a single month
 flight = crossfilter(flights);
 console.log(flight.size()); // 490698
 </code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript">
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
 // creating a dimension for all carriers of all flights
-carrier = flight.dimension(function (d) {
-    return d.UniqueCarrier;
-});
+carrier = flight.dimension(d => d.UniqueCarrier);
 </code></pre>
-<pre class="fragment"><code class="javascript" data-trim contenteditable>
+<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable>
 // group() reduces this dimension to distinct values
 var distrinctCarriersGroup = carrier.group();
 console.log("Distinct carriers: " + distrinctCarriersGroup.size());
 // 12
 </code></pre>
-<pre class="fragment"><code data-trim contenteditable>
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
 // filter just for TW
 carrier.filter("TW");
 // groupAll() creates a group intersecting all current filters
@@ -651,6 +686,7 @@ console.log("TW flights", flight.groupAll().value()); // 19427
 // display first 10 matches
 console.log(flight.top(10));
 </code></pre>
+            <p class="fragment">Could even be used as an interactive REPL in the browser</p>
 </section>
 
         <section>
@@ -669,13 +705,13 @@ console.log(flight.top(10));
             </ul>
         </section>
 
-        <section>
-            <h3>Graphical Encodings</h3>
-            <div class="fragment">
-                <img src="visualizations.png" height="250px">
-                <p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Graphical Encodings</h3>-->
+            <!--<div class="fragment">-->
+                <!--<img src="visualizations.png" height="250px">-->
+                <!--<p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h2>Initial Design</h2>
@@ -783,10 +819,40 @@ stateOriginMap.width(500)
         </section>
 
         <section>
+            <h3>Code for creating the map</h3>
+            <pre><code data-trim contenteditable class="line-numbers">
+var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
+stateOriginMap.width(500)
+    .height(250)
+    .dimension(stateOrigin)
+    .group(stateOrigin.group().reduceCount())
+    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+    .colorDomain([0, 20000]));
+</code></pre>
+        </section>
+
+        <section>
+            <h3>Mixing Different data sources</h3>
+            <ul>
+                <li class="fragment">sometimes you need to mix data from different sources
+                <li class="fragment">in our case: states airports are in, and airport codes
+                    <ul>
+                        <li>states are not in our original data
+                        <li>so we load both data and merge
+                        <li>additional dimensions for the state
+                    </ul>
+                </li>
+                <li class="fragment">can be done at display time
+                <li class="fragment">Possible by total freedom due to using plain JavaScript here
+                <li class="fragment">Using just Pandas might have required this data at import time
+            </ul>
+        </section>
+
+        <section>
             <h2>D3 loading Segments from ELK</h2>
             <ul class="fragment">
                 <li>Elasticsearch delivers data over HTTP/JSON using query
-                <li>D3/Crossfiler/DC display partion of data
+                <li>D3/Crossfiler/DC displays partition of data
                 <li>Partition could be month
                 <li>Manually selected by user
             </ul>
@@ -866,7 +932,7 @@ stateOriginMap.width(500)
             <ul>
                 <li class="fragment">Python based tools are most advanced in low level data analysis
                 <li class="fragment">They can be used to prepare data and give an analytical overview
-                <li class="fragment">Pyelasticsearch allows to push that data in Elasticsearch
+                <li class="fragment">Pyelasticsearch allows to push that data into Elasticsearch
                 <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
                 <li class="fragment">The Browser is the ideal platform to explore data
                 <li class="fragment">D3, crossfilter, and DC help you to interactively explore your data visually
