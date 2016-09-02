@@ -136,15 +136,6 @@
         </section>
 
         <section>
-            <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
-            <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
-                <img src="dataviz-cat.jpg" height="500px">
-            </a>
-            <p><small><a target="_blank" href="https://twitter.com/Creatuluw">@Creatuluw</a></small></p>
-
-        </section>
-
-        <section>
             <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
                 <img src="twitter-creatuluw.png">
             </a>
@@ -154,6 +145,8 @@
             <h2>Example Project:</h2>
             <h2>Exploring <em>all</em> domestic US flights</h2>
             <h2>for 2001</h2>
+            <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
+
         </section>
 
         <section>
@@ -174,8 +167,9 @@
             <h2>Content</h2>
             <ol>
                 <li>Pandas: Preparing the data
-                <li>Elasticsearch: Store data and Deliver digestible data chunks
+                <li>Elasticsearch: Store data and deliver digestible data chunks
                 <li>D3 with crossfilter and DC: Display data interactively
+                <li>Some data exploration
             </ol>
         </section>
 
@@ -315,29 +309,16 @@ seaborn.corrplot(df[cols_for_correlation])
         </section>
 
         <section>
-            <h3>Pearson's r</h3>
-            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
-                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
-            </a></small></p>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-                <img src="Correlation_coefficient.png">
-            </a>
-            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
-        </section>
-
-
-        <section>
-            <h3>Sample Code: 2D Jointplot</h3>
-                <pre><code data-trim class="line-numbers">
-seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
-            </code></pre>
-        </section>
-
-        <section>
             <h3>Arrival Time to Departure Time</h3>
             <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
             <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+        </section>
+
+        <section>
+            <h3>Sample Code: 2D Jointplot</h3>
+            <pre><code data-trim class="line-numbers">
+seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
+            </code></pre>
         </section>
 
         <section>
@@ -362,6 +343,18 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         </section>
 
         <section>
+            <h3>Pearson's r</h3>
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
+                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+            </a></small></p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+                <img src="Correlation_coefficient.png">
+            </a>
+            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
+        </section>
+
+        <section>
             <h3>Results of Analysis</h3>
             <ul>
                 <li>Data looks plausible
@@ -381,35 +374,48 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
 
         </section>
         <section>
-            <h2>II: Elasticsearch and Kibana</h2>
-            <h3>Storing and Querying the data</h3>
+            <h2>II: Elasticsearch</h2>
+            <h3>Storing and Querying data</h3>
         </section>
 
         <section>
-            <h2>ELK Stack</h2>
+        <h2>Introducing Elasticsearch</h2>
+            <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank">
+                https://www.elastic.co/products/elasticsearch
+            </a></p>
             <ul>
-                <li><a href="https://www.elastic.co/products/elasticsearch" target="_blank">Elasticsearch</a>
-                    <ul>
-                        <li>Search and Analytics Engine
-                        <li>Indexes and stores structured or unstructured data
-                        <li>Offers query language to search or aggregate data
-                    </ul>
-                </li>
-                <li><a href="https://www.elastic.co/products/logstash" target="_blank">Logstash</a>
-                    <ul>
-                        <li>alternative to our Pandas approach
-                        <li>Ruby based import description
-                    </ul>
-                </li>
-                <li><a href="https://www.elastic.co/products/kibana" target="_blank">Kibana</a>
-                    <ul>
-                        <li>interactive querying
-                        <li>visualization (in dashboards)
-                        <li>browser based
-                    </ul>
-                </li>
+                <li>Search and Analytics Engine
+                <li>Indexes and stores structured or unstructured data
+                <li>Offers query language to search or aggregate data
             </ul>
         </section>
+
+
+        <!--<section>-->
+            <!--<h2>ELK Stack</h2>-->
+            <!--<ul>-->
+                <!--<li><a href="https://www.elastic.co/products/elasticsearch" target="_blank">Elasticsearch</a>-->
+                    <!--<ul>-->
+                        <!--<li>Search and Analytics Engine-->
+                        <!--<li>Indexes and stores structured or unstructured data-->
+                        <!--<li>Offers query language to search or aggregate data-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a href="https://www.elastic.co/products/logstash" target="_blank">Logstash</a>-->
+                    <!--<ul>-->
+                        <!--<li>alternative to our Pandas approach-->
+                        <!--<li>Ruby based import description-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a href="https://www.elastic.co/products/kibana" target="_blank">Kibana</a>-->
+                    <!--<ul>-->
+                        <!--<li>interactive querying-->
+                        <!--<li>visualization (in dashboards)-->
+                        <!--<li>browser based-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h2>Introspecting Elasticsearch</h2>-->
@@ -597,6 +603,7 @@ df['Cancelled'] = df.apply(lambda row:
                     <img src="screenshot_kibana_discover.png">
                 </a>
                 <p>Demo: filter for <em>'Cancelled:false'</em></p>
+                <p><small>Interactive Dashboards also possible</small></p>
             </div>
         </section>
 
@@ -618,24 +625,24 @@ df['Cancelled'] = df.apply(lambda row:
             <h3 class="fragment">2: Interactivity coming naturally</h3>
         </section>
 
-        <section>
-            <h3>Interactive Dashboard</h3>
-            <p>Already possible with Kibana</p>
+        <!--<section>-->
+            <!--<h3>Interactive Dashboard</h3>-->
+            <!--<p>Already possible with Kibana</p>-->
 
-            <div class="fragment">
-                <a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">
-                    <img src="screenshot_kibana_dashboard.png" height="400">
-                </a>
-                <p>Demo: Clicks trigger requests, responses update graphics</em></p>
-            </div>
-        </section>
+            <!--<div class="fragment">-->
+                <!--<a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">-->
+                    <!--<img src="screenshot_kibana_dashboard.png" height="400">-->
+                <!--</a>-->
+                <!--<p>Demo: Clicks trigger requests, responses update graphics</em></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
-        <section>
-            <h3>What is still missing?</h3>
-            <p>Low-latency interaction</p>
-            <p>(Limited) offline access</p>
-            <p>Charts limited to what Kibana offers</p>
-        </section>
+        <!--<section>-->
+            <!--<h3>What is still missing?</h3>-->
+            <!--<p>Low-latency interaction</p>-->
+            <!--<p>(Limited) offline access</p>-->
+            <!--<p>Charts limited to what Kibana offers</p>-->
+        <!--</section>-->
 
 
 
@@ -774,6 +781,15 @@ pieChartCarriers
         </section>
 
         <section>
+            <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
+            <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
+                <img src="dataviz-cat.jpg" height="500px">
+            </a>
+            <p><small><a target="_blank" href="https://twitter.com/Creatuluw">@Creatuluw</a></small></p>
+
+        </section>
+
+        <section>
             <h1>Part #3: Time</h1>
         </section>
 
@@ -887,7 +903,8 @@ pieChartCarriers
         <!--</section>-->
 
         <section>
-            <h2>Coming back to questions from low level analysis in first part</h2>
+            <h2>IV: Data Exploration Examples</h2>
+            <h3>Coming back to questions from low level analysis in first part</h3>
         </section>
 
         <section>
