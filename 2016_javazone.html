@@ -113,6 +113,10 @@
 <!-- - Summary / Lessons learned (5 min)-->
 <!-- - Questions (5 min)-->
 
+<!--Preparation: -->
+<!-- - Start ES-->
+<!-- - Start kibana-->
+
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
@@ -123,11 +127,12 @@
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
-            <p>JavaZone 2016</p>
-            <p><small>Slides: <a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.html">
-                http://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></small></p>
-            <!--<p><small><a href="http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf">-->
-                <!--PDF: http://djcordhose.github.io/big-data-visualization/2016_javazone.pdf</a></small></p>-->
+            <p>
+                <a href="https://2016.javazone.no/program/worlds-not-stories-data-exploration-in-the-browser-using-elasticsearch-pandas-and-d-3"
+                   target="_blank">JavaZone 2016</a></p>
+            <!--http://djcordhose.github.io/big-data-visualization/2016_javazone.html-->
+            <p><small>Slides: <a href="http://bit.ly/data-exploration-javazone">
+                http://bit.ly/data-exploration-javazone</a></small></p>
         </section>
 
         <section>
@@ -140,6 +145,12 @@
         </section>
 
         <section>
+            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                <img src="twitter-creatuluw.png">
+            </a>
+        </section>
+
+        <section>
             <h2>Example Project:</h2>
             <h2>Exploring <em>all</em> domestic US flights</h2>
             <h2>for 2001</h2>
@@ -148,15 +159,16 @@
         <section>
             <h2>No specific task or question</h2>
             <h3>Exploring what just might be interesting</h3>
+            <h3>Finding the unknown unknowns</h3>
         </section>
 
-        <section>
-            <h2>Challenge</h2>
-            <p class="fragment">Handling large amounts of data</p>
-            <p class="fragment">while maintaining the interactivity and the intuitive UI</p>
-            <p class="fragment">But: data needs to be (physically) close to processing / interaction to make it fast and thus most useful</p>
-            <p class="fragment">Like: benefits of Excel and Access at the same time</p>
-        </section>
+        <!--<section>-->
+            <!--<h2>Challenge</h2>-->
+            <!--<p class="fragment">Handling large amounts of data</p>-->
+            <!--<p class="fragment">while maintaining the interactivity and the intuitive UI</p>-->
+            <!--<p class="fragment">But: data needs to be (physically) close to processing / interaction to make it fast and thus most useful</p>-->
+            <!--<p class="fragment">Like: benefits of Excel and Access at the same time</p>-->
+        <!--</section>-->
 
         <section>
             <h2>Content</h2>
@@ -171,18 +183,18 @@
             <h2>I: Data Wrangling with Pandas</h2>
             <p>Preparing the data</p>
             <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
-            <ul>
-                <li>Add missing data
-                <li>Recombine data
-                <li>Add type information / conversion
-                <li>Do static pre-analysis to learn about data
-                    <ul>
-                        <li>What is the nature of the data (e.g. time series data)?</li>
-                        <li>Does the data look plausible?</li>
-                        <li>What visualizations seem most promising?</li>
-                    </ul>
-                </li>
-            </ul>
+            <!--<ul>-->
+                <!--<li>Add missing data-->
+                <!--<li>Recombine data-->
+                <!--<li>Add type information / conversion-->
+                <!--<li>Do static pre-analysis to learn about data-->
+                    <!--<ul>-->
+                        <!--<li>What is the nature of the data (e.g. time series data)?</li>-->
+                        <!--<li>Does the data look plausible?</li>-->
+                        <!--<li>What visualizations seem most promising?</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
         </section>
 
         <section>
@@ -218,45 +230,45 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
         </section>
 
-        <section>
-            <h2>Why not just load it into Excel?</h2>
-            <p>You simple can not</p>
-            <p>too large</p>
-            <p>and even if you could: way too slow</p>
-            <p>even if it was fast enough: does not run in the Browser</p>
-            <p>even if it does (360 or Google Sheets): is it most interactive?</p>
-            <h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
-        </section>
+        <!--<section>-->
+            <!--<h2>Why not just load it into Excel?</h2>-->
+            <!--<p>You simple can not</p>-->
+            <!--<p>too large</p>-->
+            <!--<p>and even if you could: way too slow</p>-->
+            <!--<p>even if it was fast enough: does not run in the Browser</p>-->
+            <!--<p>even if it does (360 or Google Sheets): is it most interactive?</p>-->
+            <!--<h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>-->
+        <!--</section>-->
 
-        <section>
-            <h2>Other Standard tools</h2>
-            <ul>
-                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
-                    <ul>
-                        <li>loads data relatively fast
-                        <li>truncates after 1M lines
-                    </ul>
-                </li>
-                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
-                    <ul>
-                        <li>limited to 2.000.000 cells (not lines)
-                        <li>does not load data at all
-                    </ul>
-                </li>
-                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
-                    <ul>
-                        <li>loading takes long
-                        <li>truncates after 64k lines
-                    </ul>
-                </li>
-                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
-                    <ul>
-                        <li>loads data very fast with almost no memory overhead
-                        <li>all operations work smoothly, even editing and saving
-                    </ul>
-                </li>
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h2>Other Standard tools</h2>-->
+            <!--<ul>-->
+                <!--<li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>-->
+                    <!--<ul>-->
+                        <!--<li>loads data relatively fast-->
+                        <!--<li>truncates after 1M lines-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Google Sheets: <em style="color: red">nope</em>-->
+                    <!--<ul>-->
+                        <!--<li>limited to 2.000.000 cells (not lines)-->
+                        <!--<li>does not load data at all-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>-->
+                    <!--<ul>-->
+                        <!--<li>loading takes long-->
+                        <!--<li>truncates after 64k lines-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>-->
+                    <!--<ul>-->
+                        <!--<li>loads data very fast with almost no memory overhead-->
+                        <!--<li>all operations work smoothly, even editing and saving-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h2>Introducing Pandas and friends</h2>
@@ -393,6 +405,7 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
                     <ul>
                         <li>interactive querying
                         <li>visualization (in dashboards)
+                        <li>browser based
                     </ul>
                 </li>
             </ul>
@@ -482,13 +495,8 @@ PUT /megacorp/employee/1
             </ul>
         </section>
         <section>
-            <h2>Complete import</h2>
-            <ul>
-                <li>Bulk import
-                <li>Corrections
-                <li>Conversions
-                <li>Synthetic fields combining data (timestamp)
-            </ul>
+            <h2>Importing our data into Elasticsearch</h2>
+            <h3>using <a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a></h3>
         </section>
 
         <section>
@@ -571,20 +579,20 @@ df['Cancelled'] = df.apply(lambda row:
             <!--<p><code>GET expo2009_airline/flight/_search</code></p>-->
         <!--</section>-->
 
-        <section>
-            <h2>Kibana</h2>
-            <ul>
-                <li>generic frontend for Elasticsearch
-                <li>browser based
-                <li>allows for dashboards
-                <li>also allows to make arbitrary adhoc queries
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h2>Kibana</h2>-->
+            <!--<ul>-->
+                <!--<li>generic frontend for Elasticsearch-->
+                <!--<li>browser based-->
+                <!--<li>allows for dashboards-->
+                <!--<li>also allows to make arbitrary adhoc queries-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
-            <h3>Seeing time series data for the first time</h3>
+            <h3>Checking time series data for the first time</h3>
             <div class="fragment">
-                <p>using adhoc queries</p>
+                <p>using Kibana adhoc queries</p>
                 <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
                     <img src="screenshot_kibana_discover.png">
                 </a>
@@ -623,7 +631,7 @@ df['Cancelled'] = df.apply(lambda row:
 
         <section>
             <h3>What is still missing?</h3>
-            <p>Speed of interactivity</p>
+            <p>Low-latency interaction</p>
             <p>Limited offline access</p>
             <p>Charts limited to what Kibana offers</p>
         </section>
@@ -635,18 +643,20 @@ df['Cancelled'] = df.apply(lambda row:
             <a target="_blank" href="d3-talks/20111116/#14">
                 <img src="d3-airport-connections.png" height="400px">
             </a>
+            <p>Data based vector graphics (SVG)</p>
+            <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
         </section>
 
-        <section>
-            <h3>D3.js</h3>
-            <ul class="fragment">
-                <li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
-                <li>Transform your data into visualizations in the browser
-                <li>Style of programming declarative
-                <li>Main field of use are diagrams using SVG (but D3 is not limited to that)
-                <li>Data is bound to SVG elements which change once the data changes
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>D3.js</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>-->
+                <!--<li>Transforms your data into visualizations in the browser-->
+                <!--<li>Style of programming declarative-->
+                <!--<li>Main field of use are diagrams using SVG (but D3 is not limited to that)-->
+                <!--<li>Data is bound to SVG elements which change once the data changes-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h3>Crossfilter: Filtering millions of data sets in real time</h3>
@@ -694,7 +704,7 @@ console.log(flight.top(10));
             <ul class="fragment">
                 <li><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
                 <li>Prebuilt integration of D3 and Crossfilter
-                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for interactive big data</a>
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for exploring data</a>
                     <ul>
                         <li>bar
                         <li>pie
@@ -714,12 +724,12 @@ console.log(flight.top(10));
         <!--</section>-->
 
         <section>
-            <h2>Initial Design</h2>
+            <h2>Initial Design of our Dashboard</h2>
             <img class="fragment" src="design.jpg" height="500px">
         </section>
 
         <section>
-            <h1>Order</h1>
+            <h1>Part #1: Order</h1>
         </section>
 
         <section>
@@ -732,7 +742,7 @@ console.log(flight.top(10));
         </section>
 
         <section>
-            <h3>Order (Part #1): Display Carriers as a Pie Chart</h3>
+            <h3>Display Carriers as a Pie Chart</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>
@@ -751,11 +761,11 @@ pieChartCarriers
         </section>
 
         <section>
-            <h1>Connect</h1>
+            <h1>Part #2: Connections</h1>
         </section>
 
         <section>
-            <h3>Connect (Part #2): Origin, Destination, Carriers combined</h3>
+            <h3>Origin, Destination, Carriers combined</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>
@@ -763,7 +773,7 @@ pieChartCarriers
         </section>
 
         <section>
-            <h1>Time</h1>
+            <h1>Part #3: Time</h1>
         </section>
 
         <section>
@@ -775,7 +785,7 @@ pieChartCarriers
         </section>
 
         <section>
-            <h3>Time Series (Part #3): Filtering using Brushes</h3>
+            <h3>Filtering using Brushes</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>
@@ -794,28 +804,15 @@ chart
         </section>
 
         <section>
-            <h1>Map</h1>
+            <h1>Part #4: Map</h1>
         </section>
 
         <section>
-            <h3>Map (Part #4): All flights from Hawaii</h3>
+            <h3>All flights from Hawaii</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
             </div>
-        </section>
-
-        <section>
-            <h3>Code for creating the map</h3>
-            <pre><code data-trim contenteditable class="line-numbers">
-var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
-stateOriginMap.width(500)
-    .height(250)
-    .dimension(stateOrigin)
-    .group(stateOrigin.group().reduceCount())
-    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-    .colorDomain([0, 20000]));
-</code></pre>
         </section>
 
         <section>
@@ -947,7 +944,8 @@ stateOriginMap.width(500)
             <p>Complete Code:
                 <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
             </p>
-            <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_javazone.html">https://djcordhose.github.io/big-data-visualization/2016_javazone.html</a></p>
+            <p>Slides: <a href="http://bit.ly/data-exploration-javazone">
+                http://bit.ly/data-exploration-javazone</a></p>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
         </section>
 
@@ -1068,8 +1066,12 @@ stateOriginMap.width(500)
 //    $('section').attr('data-background-image', "backgrounds/light-sky3.jpg")
 //    $('section').attr('data-background-image', "backgrounds/light-seestar.jpg")
 //    $('section').attr('data-background-image', "backgrounds/light-coral.jpg")
-    $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
 //    $('section').attr('data-background-image', "backgrounds/light-silver.jpg");
+//    $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
+$('section').attr('data-background-image', "backgrounds/light-ring.jpg");
+//$('section').attr('data-background-image', "backgrounds/light-fs.jpg");
+
+
 </script>
 
 <script>
