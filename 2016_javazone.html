@@ -88,11 +88,6 @@
 <!--ODSC: 30 Minutes-->
 <!--ODSC:-->
 <!--Remove all details-->
-<!--More Advanced Data Science stuff-->
-<!--After JavaZone Talk-->
-<!--Add skikit learn Code for Turing String into number-->
-<!--r value with Counter Example from Wiki (https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_examples2.svg)-->
-<!--and Example where all have the same R value (http://images.google.de/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fe%2Fec%2FAnscombe%2527s_quartet_3.svg%2F1280px-Anscombe%2527s_quartet_3.svg.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCorrelation_and_dependence&h=931&w=1280&tbnid=kR565LWrj0jQGM%3A&docid=JZ&#45;&#45;jJ3I9U7ylM&ei=lFioV4jBBoGzsAG_sp6wAQ&tbm=isch&iact=rc&uact=3&dur=1036&page=1&start=0&ndsp=19&ved=0ahUKEwiI2-eMyLHOAhWBGSwKHT-ZBxYQMwgeKAAwAA&bih=702&biw=1280)-->
 
 <!--JavaZone:-->
 <!--Audience Level: This is an introductory talk. I require no previous experience with any of the above techniques.-->
@@ -309,6 +304,45 @@ seaborn.corrplot(df[cols_for_correlation])
         </section>
 
         <section>
+            <h3>Pearson's r</h3>
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+                <img src="Correlation_examples2.svg" height="400px">
+            </a>
+            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
+                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+            </a></small></p>
+            <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
+            <!--<img src="Correlation_coefficient.png">-->
+            <!--</a>-->
+            <!--<p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>-->
+        </section>
+
+        <!--<section>-->
+        <!--<h3>This is just linear correlation</h3>-->
+        <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
+        <!--<img src="Correlation_examples2.svg" height="350px">-->
+        <!--</a>-->
+        <!--<p><small>correlation coefficient (r) above each figure</small></p>-->
+        <!--<p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>-->
+        <!--</section>-->
+
+        <section>
+            <h3>Anscombe's quartet</h3>
+            <p>all figures have the same summary statistics properties including Pearson's r</p>
+            <a target="_blank" href="https://commons.wikimedia.org/wiki/User:Schutz#/media/File:Anscombe.svg">
+                <img src="Anscombe's_quartet_3.svg" height="400px">
+            </a>
+            <p><small><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">
+                https://en.wikipedia.org/wiki/Anscombe%27s_quartet
+            </a></small></p>
+        </section>
+
+        <section>
+            <h2>Need to look at the individual figures</h2>
+        </section>
+
+        <section>
             <h3>Arrival Time to Departure Time</h3>
             <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
             <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
@@ -340,18 +374,6 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
                 <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
             </small></p>
             <!--Answer AQ in D3 part: mainly between Hawaii and California -->
-        </section>
-
-        <section>
-            <h3>Pearson's r</h3>
-            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
-                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
-            </a></small></p>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-                <img src="Correlation_coefficient.png">
-            </a>
-            <p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>
         </section>
 
         <section>
@@ -643,8 +665,6 @@ df['Cancelled'] = df.apply(lambda row:
             <!--<p>(Limited) offline access</p>-->
             <!--<p>Charts limited to what Kibana offers</p>-->
         <!--</section>-->
-
-
 
         <section>
             <h3>D3.js: Dynamic graphics in the browser</h3>
