@@ -1074,6 +1074,12 @@ $('section').attr('data-background-image', "backgrounds/light-ring.jpg");
 
 
 </script>
+<script>
+    // only presentation version has fragments
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        $('.fragment').removeClass('fragment');
+    }
+</script>
 
 <script>
 
