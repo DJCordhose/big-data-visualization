@@ -596,6 +596,7 @@ df['Cancelled'] = df.apply(lambda row:
                 <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
                     <img src="screenshot_kibana_discover.png">
                 </a>
+                <p>Demo: filter for <em>'Cancelled:false'</em></p>
             </div>
         </section>
 
@@ -625,14 +626,14 @@ df['Cancelled'] = df.apply(lambda row:
                 <a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">
                     <img src="screenshot_kibana_dashboard.png" height="400">
                 </a>
-                <p>Clicks trigger requests, responses update graphics</p>
+                <p>Demo: Clicks trigger requests, responses update graphics</em></p>
             </div>
         </section>
 
         <section>
             <h3>What is still missing?</h3>
             <p>Low-latency interaction</p>
-            <p>Limited offline access</p>
+            <p>(Limited) offline access</p>
             <p>Charts limited to what Kibana offers</p>
         </section>
 
@@ -792,16 +793,16 @@ pieChartCarriers
             </div>
         </section>
 
-        <section>
-            <h3>Code for creating the line chart</h3>
-            <pre><code data-trim contenteditable class="line-numbers">
-var chart = dc.lineChart("#series");
-chart
-    .dimension(date)
-    .group(date.group())
-    .brushOn(true));
-</code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Code for creating the line chart</h3>-->
+            <!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--var chart = dc.lineChart("#series");-->
+<!--chart-->
+    <!--.dimension(date)-->
+    <!--.group(date.group())-->
+    <!--.brushOn(true));-->
+<!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h1>Part #4: Map</h1>
@@ -815,18 +816,18 @@ chart
             </div>
         </section>
 
-        <section>
-            <h3>Code for creating the map</h3>
-            <pre><code data-trim contenteditable class="line-numbers">
-var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");
-stateOriginMap.width(500)
-    .height(250)
-    .dimension(stateOrigin)
-    .group(stateOrigin.group().reduceCount())
-    .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
-    .colorDomain([0, 20000]));
-</code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Code for creating the map</h3>-->
+            <!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");-->
+<!--stateOriginMap.width(500)-->
+    <!--.height(250)-->
+    <!--.dimension(stateOrigin)-->
+    <!--.group(stateOrigin.group().reduceCount())-->
+    <!--.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))-->
+    <!--.colorDomain([0, 20000]));-->
+<!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h3>Mixing Different data sources</h3>
