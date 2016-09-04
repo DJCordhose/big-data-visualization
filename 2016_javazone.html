@@ -145,9 +145,71 @@
         </section>
 
         <section>
+            <h2>The raw data</h2>
+            <p>approx. 6 million data sets</p>
+            <pre><code data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
+            <p>approx. 600 MB of data</p>
+            <pre><code data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <p>29 colums, data has gaps, but looks consistent</p>
+            <pre><code data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
+        </section>
+
+        <section>
             <h2>No specific task or question</h2>
             <h3>Exploring what just might be interesting</h3>
             <h3>Finding the unknown unknowns</h3>
+        </section>
+
+        <section>
+            <h2>Why not just load it into Excel and fiddle about?</h2>
+            <p class="fragment">You simple can not</p>
+            <p class="fragment">too large</p>
+            <p class="fragment">and even if you could: way too slow</p>
+            <p class="fragment">even if it was fast enough: does not run in the Browser</p>
+            <p class="fragment">even if it does (360 or Google Sheets): is it most interactive?</p>
+            <h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
+        </section>
+
+        <section>
+            <h2>Other Standard tools</h2>
+            <ul>
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>loads data very fast with almost no memory overhead
+                        <li>all operations work smoothly, even editing and saving
+                    </ul>
+                </li>
+            </ul>
         </section>
 
         <!--<section>-->
@@ -184,80 +246,29 @@
                     <!--</ul>-->
                 <!--</li>-->
             <!--</ul>-->
+            <p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support on this section</small></p>
         </section>
 
         <section>
             <h2>Analysing Samples</h2>
             <p>Working on a reduced number of random samples</p>
             <ul>
-                <li>How is the data quality?
-                <li>What does it contain?
-                <li>How big is it?
+                <li>How is the data quality (e.g. missing or wrong data)?
+                <li>Is the data plausible?
+                <li>What might be interesting to explore?
             </ul>
-            <p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support</small></p>
+
+            <p><small>More on sampling and confidence in the sample:<br>
+                <a target="_blank"
+                        href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know.html">
+                    The Theorem Every Data Scientist Should Know</a>
+                and <br>
+                <a target="_blank"
+                   href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know-2.html">
+                    The Theorem Every Data Scientist Should Know (Part 2)</a>
+            </small></p>
+
         </section>
-
-        <section>
-            <h2>The raw data</h2>
-            <p>approx. 6 million data sets</p>
-            <pre><code data-trim class="nohighlight">
-> wc -l 2001.csv
-5967781 2001.csv
-            </code></pre>
-            <p>approx. 600 MB of data</p>
-            <pre><code data-trim class="nohighlight">
-> ls -hl 2001.csv
-573M Jan 10  2016 2001.csv
-            </code></pre>
-            <p>29 colums, data has gaps, but looks consistent</p>
-            <pre><code data-trim class="nohighlight">
-> head 2001.csv
-Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
-2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
-2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
-2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
-2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
-        </section>
-
-        <!--<section>-->
-            <!--<h2>Why not just load it into Excel?</h2>-->
-            <!--<p>You simple can not</p>-->
-            <!--<p>too large</p>-->
-            <!--<p>and even if you could: way too slow</p>-->
-            <!--<p>even if it was fast enough: does not run in the Browser</p>-->
-            <!--<p>even if it does (360 or Google Sheets): is it most interactive?</p>-->
-            <!--<h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>-->
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h2>Other Standard tools</h2>-->
-            <!--<ul>-->
-                <!--<li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>-->
-                    <!--<ul>-->
-                        <!--<li>loads data relatively fast-->
-                        <!--<li>truncates after 1M lines-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="fragment">Google Sheets: <em style="color: red">nope</em>-->
-                    <!--<ul>-->
-                        <!--<li>limited to 2.000.000 cells (not lines)-->
-                        <!--<li>does not load data at all-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>-->
-                    <!--<ul>-->
-                        <!--<li>loading takes long-->
-                        <!--<li>truncates after 64k lines-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>-->
-                    <!--<ul>-->
-                        <!--<li>loads data very fast with almost no memory overhead-->
-                        <!--<li>all operations work smoothly, even editing and saving-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</section>-->
 
         <section>
             <h2>Introducing Pandas and friends</h2>
@@ -327,16 +338,18 @@ seaborn.corrplot(df[cols_for_correlation])
         <!--<p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>-->
         <!--</section>-->
 
-        <section>
-            <h3>Anscombe's quartet</h3>
-            <p>all figures have the same summary statistics properties including Pearson's r</p>
-            <a target="_blank" href="https://commons.wikimedia.org/wiki/User:Schutz#/media/File:Anscombe.svg">
-                <img src="Anscombe's_quartet_3.svg" height="400px">
-            </a>
-            <p><small><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">
-                https://en.wikipedia.org/wiki/Anscombe%27s_quartet
-            </a></small></p>
-        </section>
+        <!--For ODSC-->
+
+        <!--<section>-->
+            <!--<h3>Anscombe's quartet</h3>-->
+            <!--<p>all figures have the same summary statistics properties including Pearson's r</p>-->
+            <!--<a target="_blank" href="https://commons.wikimedia.org/wiki/User:Schutz#/media/File:Anscombe.svg">-->
+                <!--<img src="Anscombe's_quartet_3.svg" height="400px">-->
+            <!--</a>-->
+            <!--<p><small><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">-->
+                <!--https://en.wikipedia.org/wiki/Anscombe%27s_quartet-->
+            <!--</a></small></p>-->
+        <!--</section>-->
 
         <section>
             <h2>Need to look at the individual figures</h2>
@@ -963,7 +976,7 @@ pieChartCarriers
         </section>
 
         <section>
-            <h2>Wrapup</h2>
+            <h3>Wrapup</h3>
             <ul>
                 <li class="fragment">Python based tools are most advanced in low level data analysis
                 <li class="fragment">They can be used to prepare data and give an analytical overview
@@ -976,16 +989,45 @@ pieChartCarriers
         </section>
 
         <section>
-            <h1>Thank you</h1>
-            <h2>Questions / Discussion</h2>
-
-            <p>Complete Code:
+            <h2>Your turn</h2>
+            <p class="fragment">Do you have (possibly large) data set worth exploring?</p>
+            <p class="fragment">Best to have it as a CSV or similar (because that might be the hardest and most boring part)</p>
+            <p class="fragment">Try some of the techniques described here</p>
+            <p class="fragment">Complete Code:
                 <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
             </p>
-            <p>Slides: <a href="http://bit.ly/data-exploration-javazone">
+            <p class="fragment">Slides: <a href="http://bit.ly/data-exploration-javazone">
                 http://bit.ly/data-exploration-javazone</a></p>
-            <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            <p class="fragment">Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
         </section>
+
+        <section>
+            <h3>Bonus Level: How to Start Experimenting?</h3>
+            <p class="fragment">Try out analysis part (requires numpy, pandas, matplotlib, seaborn, sklearn to be installed)</p>
+            <pre class="fragment"><code class="no-highlight">python big-data-visualization/code/es/analysis_pandas.py</code></pre>
+            <p class="fragment">Try crossfiler as an interactive console</p>
+            <p class="fragment">Like <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a>, but without installation in the browser</p>
+            <p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console in Chrome for performance</a></p>
+            <p class="fragment">Question: What is the longest departure and the longest arrival delay?</p>
+            <!--arrDelay.top(10)-->
+            <!-- >; ArrDelay: "1473"-->
+            <!--depDelay.top(10)-->
+            <!-- >; DepDelay: "1477"-->
+            <!--Same flight!-->
+            <!--What is the story here?-->
+        </section>
+
+        <!--<section>-->
+            <!--<h1>Thank you</h1>-->
+            <!--<h2>Questions / Discussion</h2>-->
+
+            <!--<p>Complete Code:-->
+                <!--<a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>-->
+            <!--</p>-->
+            <!--<p>Slides: <a href="http://bit.ly/data-exploration-javazone">-->
+                <!--http://bit.ly/data-exploration-javazone</a></p>-->
+            <!--<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>-->
+        <!--</section>-->
 
 
 

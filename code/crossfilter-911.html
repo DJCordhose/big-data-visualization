@@ -5,15 +5,24 @@
     <title>Crossfilter Basics</title>
 </head>
 <body>
+<h1>Please wait, loading data</h1>
 <script src="lib/d3.js"></script>
 <script src="lib/crossfilter.v1.js"></script>
 <script src="processing.js"></script>
 <script src="flights.js"></script>
 <script>
+    function displayReady() {
+        document.body.innerHTML = '<div><h1>Data is loaded, open developer console to experiment</h1>' +
+                '<p>Look into processing.js for examples</p>' +
+                '<p>Example: Top 10 of longest arrival delays: <code>arrDelay.top(10)</code></p>' +
+                '</div>';
+    }
     // might look like a strange way of doing it, but creating global variables for crossfilter
     // and dimensions allows to play around in the browser console after loading data and
     // creating dimensions
-    load(process);
+    load(function() {
+        process(displayReady);
+    });
 </script>
 </body>
 </html>
