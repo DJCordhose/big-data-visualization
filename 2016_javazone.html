@@ -310,8 +310,10 @@ seaborn.corrplot(df[cols_for_correlation])
 
         <section>
             <h3>Correlations</h3>
-            <img src="analysis_talk/corr.png" height="500px">
-            <p><small>Interesting: Distance / Origin to Unique Carrier</small></p>
+            <div class="fragment">
+                <img src="analysis_talk/corr.png" height="500px">
+                <p><small>Interesting: Distance / Origin to Unique Carrier</small></p>
+            </div>
         </section>
 
         <section>
@@ -357,8 +359,10 @@ seaborn.corrplot(df[cols_for_correlation])
 
         <section>
             <h3>Arrival Time to Departure Time</h3>
-            <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
-            <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+            <div class="fragment">
+                <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
+                <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+            </div>
         </section>
 
         <section>
@@ -370,6 +374,8 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
 
         <section>
             <h3>Origin to Unique Carrier</h3>
+
+            <div class="fragment">
             <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
             <p><small>
                 <!--0 = AA(American Airlines),-->
@@ -377,16 +383,20 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
                 <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
             </small></p>
             <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+            </div>
         </section>
 
         <section>
             <h3>Distance to Unique Carrier</h3>
+            <div class="fragment">
+
             <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
             <p><small>
                 <em>1 = AQ (Aloha Airlines)</em>
                 <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
             </small></p>
             <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+                </div>
         </section>
 
         <section>
@@ -907,7 +917,7 @@ pieChartCarriers
 
         <section>
             <h3>Literally no one flying to Wyoming first half of December???</h3>
-            <div>
+            <div class="fragment">
                 <a href="code/dc-911-es.html" target="_blank">
                     <img src="screenshot_wy_dec.png">
                 </a>
@@ -1007,7 +1017,7 @@ pieChartCarriers
             <pre class="fragment"><code class="no-highlight">python big-data-visualization/code/es/analysis_pandas.py</code></pre>
             <p class="fragment">Try crossfiler as an interactive console</p>
             <p class="fragment">Like <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a>, but without installation in the browser</p>
-            <p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console in Chrome for performance</a></p>
+            <p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console (Chrome is my recommendation)</a></p>
             <p class="fragment">Question: What is the longest departure and the longest arrival delay?</p>
             <!--arrDelay.top(10)-->
             <!-- >; ArrDelay: "1473"-->
@@ -1147,8 +1157,8 @@ pieChartCarriers
 //    $('section').attr('data-background-image', "backgrounds/light-seestar.jpg")
 //    $('section').attr('data-background-image', "backgrounds/light-coral.jpg")
 //    $('section').attr('data-background-image', "backgrounds/light-silver.jpg");
-//    $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
-$('section').attr('data-background-image', "backgrounds/light-ring.jpg");
+    $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
+//$('section').attr('data-background-image', "backgrounds/light-ring.jpg");
 //$('section').attr('data-background-image', "backgrounds/light-fs.jpg");
 
 

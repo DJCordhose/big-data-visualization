@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Crossfilter Basics</title>
+    <title>Crossfilter REPL</title>
 </head>
 <body>
 <h1>Please wait, loading data</h1>
@@ -13,7 +13,8 @@
 <script>
     function displayReady() {
         document.body.innerHTML = '<div><h1>Data is loaded, open developer console to experiment</h1>' +
-                '<p>Look into processing.js for examples</p>' +
+                '<p>Look into <a target="_blank" href="https://github.com/DJCordhose/big-data-visualization/blob/gh-pages/code/processing.js">' +
+                'processing.js</a> for examples</p>' +
                 '<p>Example: Top 10 of longest arrival delays: <code>arrDelay.top(10)</code></p>' +
                 '</div>';
     }
