@@ -153,17 +153,17 @@
         <section>
             <h2>The raw data</h2>
             <p>approx. 6 million data sets</p>
-            <pre><code data-trim class="nohighlight">
+            <pre><code contenteditable data-trim class="nohighlight">
 > wc -l 2001.csv
 5967781 2001.csv
             </code></pre>
             <p>approx. 600 MB of data</p>
-            <pre><code data-trim class="nohighlight">
+            <pre><code contenteditable data-trim class="nohighlight">
 > ls -hl 2001.csv
 573M Jan 10  2016 2001.csv
             </code></pre>
             <p>29 colums, data has gaps, but looks consistent</p>
-            <pre><code data-trim class="nohighlight">
+            <pre><code contenteditable data-trim class="nohighlight">
 > head 2001.csv
 Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
 2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
@@ -295,7 +295,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <h3>Sample Code: Analysis</h3>
         <div>
             <p>Reading sample data</p>
-            <pre><code data-trim class="line-numbers">
+            <pre><code contenteditable data-trim class="line-numbers">
 s = 10000 # desired sample size
 n = 5967780 # complete data size
 skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
@@ -309,7 +309,7 @@ df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
 
         <section>
             <h3>Sample Code: Creating Correlation Chart</h3>
-            <pre><code data-trim class="line-numbers">
+            <pre><code contenteditable data-trim class="line-numbers">
 cols_for_correlation = [
     'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
     'UniqueCarrier_', 'Origin_', 'Dest_'
@@ -377,7 +377,7 @@ seaborn.corrplot(df[cols_for_correlation])
 
         <section>
             <h3>Sample Code: 2D Jointplot</h3>
-            <pre><code data-trim class="line-numbers">
+            <pre><code data-trim contenteditable class="line-numbers">
 seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             </code></pre>
         </section>
@@ -555,23 +555,23 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             </table>
         </section>
 
-        <section>
-            <h3>Example</h3>
-            <pre><code data-trim>
-PUT /megacorp/employee/1
-{
-    "first_name" : "John",
-    "last_name" :  "Smith",
-    "age" :        25
-}
-            </code></pre>
-            <ul>
-                <li class="fragment"><em>index</em>: megacorp
-                <li class="fragment"><em>type</em>: employee
-                <li class="fragment"><em>document</em>: &lt;json body>
-                <li class="fragment"><em>field(s)</em>: age
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>Example</h3>-->
+            <!--<pre><code contenteditable data-trim>-->
+<!--PUT /megacorp/employee/1-->
+<!--{-->
+    <!--"first_name" : "John",-->
+    <!--"last_name" :  "Smith",-->
+    <!--"age" :        25-->
+<!--}-->
+            <!--</code></pre>-->
+            <!--<ul>-->
+                <!--<li class="fragment"><em>index</em>: megacorp-->
+                <!--<li class="fragment"><em>type</em>: employee-->
+                <!--<li class="fragment"><em>document</em>: &lt;json body>-->
+                <!--<li class="fragment"><em>field(s)</em>: age-->
+            <!--</ul>-->
+        <!--</section>-->
         <section>
             <h2>Importing our data into Elasticsearch</h2>
             <h3>using <a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a></h3>
@@ -580,7 +580,7 @@ PUT /megacorp/employee/1
         <section>
             <h3>Sample Code: Preparing Elasticsearch</h3>
             <p>Create an index</p>
-            <pre><code data-trim class="line-numbers python">
+            <pre><code contenteditable data-trim class="line-numbers python">
 from pyelasticsearch import ElasticSearch, bulk_chunks
 es = ElasticSearch(ES_HOST)
 es.create_index(INDEX_NAME)
@@ -590,7 +590,7 @@ es.create_index(INDEX_NAME)
         <section>
             <h3>Sample Code: Preparing Elasticsearch</h3>
             <p>Create a mapping to make types clear to Elasticsearch</p>
-            <pre><code data-trim class="line-numbers python">
+            <pre><code contenteditable data-trim class="line-numbers python">
 mapping = {
     'flight': {
         'properties': {
@@ -614,7 +614,7 @@ es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
 
             <!--<div class="fragment">-->
             <!--<p>Reading and Cleaning</p>-->
-            <pre><code data-trim class="line-numbers python">
+            <pre><code contenteditable data-trim class="line-numbers python">
 # reads all data into data frame in memory
 df = pd.read_csv('../../data/2001/2001.csv')
 # missing value will be filled with -1
