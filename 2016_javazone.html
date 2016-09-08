@@ -239,7 +239,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         <section>
             <h2>I: Data Wrangling with Pandas</h2>
             <p>Preparing the data</p>
-            <p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>
+            <!--<p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>-->
             <!--<ul>-->
                 <!--<li>Add missing data-->
                 <!--<li>Recombine data-->
@@ -256,7 +256,18 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h2>Analysing Samples</h2>
+            <h2>Introducing Pandas and friends</h2>
+            <p>All live in the <em>Python</em> world</p>
+            <ul  class="fragment">
+                <li><a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a>: data structures and data analysis tools
+                <li><a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a>: fundamental package for scientific computing
+                <li><a href="http://matplotlib.org/" target="_blank">http://matplotlib.org/</a>: 2D plotting library
+                <li><a href="https://stanford.edu/~mwaskom/software/seaborn/" target="_blank">https://stanford.edu/~mwaskom/software/seaborn/</a>: statistical data visualization
+            </ul>
+        </section>
+
+        <section>
+            <h2>Step 1: Analysing Samples</h2>
             <p>Working on a reduced number of random samples</p>
             <ul>
                 <li>How is the data quality (e.g. missing or wrong data)?
@@ -264,30 +275,20 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                 <li>What might be interesting to explore?
             </ul>
 
-            <p><small>More on sampling and confidence in the sample:<br>
-                <a target="_blank"
-                        href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know.html">
-                    The Theorem Every Data Scientist Should Know</a>
-                and <br>
-                <a target="_blank"
-                   href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know-2.html">
-                    The Theorem Every Data Scientist Should Know (Part 2)</a>
-            </small></p>
+            <!--<p><small>More on sampling and confidence in the sample:<br>-->
+                <!--<a target="_blank"-->
+                   <!--href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know.html">-->
+                    <!--The Theorem Every Data Scientist Should Know</a>-->
+                <!--and <br>-->
+                <!--<a target="_blank"-->
+                   <!--href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know-2.html">-->
+                    <!--The Theorem Every Data Scientist Should Know (Part 2)</a>-->
+            <!--</small></p>-->
 
         </section>
+
 
         <section>
-            <h2>Introducing Pandas and friends</h2>
-            <p>All live in the <em>Python</em> world</p>
-            <ul>
-                <li class="fragment"><a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a>: data structures and data analysis tools
-                <li class="fragment"><a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a>: fundamental package for scientific computing
-                <li class="fragment"><a href="http://matplotlib.org/" target="_blank">http://matplotlib.org/</a>: 2D plotting library
-                <li class="fragment"><a href="https://stanford.edu/~mwaskom/software/seaborn/" target="_blank">https://stanford.edu/~mwaskom/software/seaborn/</a>: statistical data visualization
-            </ul>
-        </section>
-
-    <section>
             <h3>Sample Code: Analysis</h3>
         <div>
             <p>Reading sample data</p>
@@ -382,13 +383,21 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             <h3>Origin to Unique Carrier</h3>
 
             <div class="fragment">
-            <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
-            <p><small>
-                <!--0 = AA(American Airlines),-->
-                <em>4 = (DL) Delta</em>
-                <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
-            </small></p>
-            <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+                <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
+            </div>
+        </section>
+
+        <section  data-transition="none">
+            <h3>Origin to Unique Carrier</h3>
+
+            <div>
+                <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+                <p><small>
+                    <!--0 = AA(American Airlines),-->
+                    <em>4 = (DL) Delta</em>
+                    <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
+                </small></p>
+                <!--Answer DL in D3 part: that is ATL (Atlanta) -->
             </div>
         </section>
 
@@ -397,12 +406,20 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             <div class="fragment">
 
             <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
-            <p><small>
-                <em>1 = AQ (Aloha Airlines)</em>
-                <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
-            </small></p>
-            <!--Answer AQ in D3 part: mainly between Hawaii and California -->
                 </div>
+        </section>
+
+        <section data-transition="none">
+            <h3>Distance to Unique Carrier</h3>
+            <div>
+
+                <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+                <p><small>
+                    <em>1 = AQ (Aloha Airlines)</em>
+                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+                </small></p>
+                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+            </div>
         </section>
 
         <section>
@@ -417,7 +434,8 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         </section>
 
         <section>
-            <h2>So far</h2>
+            <h2>Isn't this good enough already?</h2>
+            <h3 class="fragment">So far</h3>
             <p class="fragment">working on random samples only</p>
             <p class="fragment">time series data not exploited</p>
             <p class="fragment">not interactive</p>
@@ -513,8 +531,8 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         <!--</section>-->
 
         <section>
-            <h2>Logical structures</h2>
-            <h3 class="fragment">Comparing to relational DB</h3>
+            <!--<h2>Logical structures</h2>-->
+            <h2>Comparing to relational DB</h2>
             <table>
                 <tr class="fragment">
                     <th>Relational Database</th>
@@ -912,6 +930,10 @@ pieChartCarriers
         </section>
 
         <section>
+            <h2>Previous examples worked on data dumps, not on dynamic queries to Elasticsearch</h2>
+        </section>
+
+        <section>
             <h2>D3 loading Segments from ELK</h2>
             <ul class="fragment">
                 <li>Elasticsearch delivers data over HTTP/JSON using query
@@ -1008,7 +1030,7 @@ pieChartCarriers
             <h2>Your turn</h2>
             <p class="fragment">Do you have (possibly large) data set worth exploring?</p>
             <p class="fragment">Best to have it as a CSV or similar (because that might be the hardest and most boring part)</p>
-            <p class="fragment">Try some of the techniques described here</p>
+            <p class="fragment">Maybe try some of the techniques described here</p>
             <p class="fragment">Complete Code:
                 <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
             </p>
