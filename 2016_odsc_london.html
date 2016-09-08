@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>The Macroscope</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!--https://www.odsc.com/london/detailed-speaker-page#oliver-zeigermann-->
+
+<!--Interactive visualizations of large sets of data allow for completely new ways of exploring it. -->
+<!--They are no longer static images that can be used to tell a story, -->
+<!--but rather allow to inspect the world at a macroscopic level. -->
+<!--Putting those visualizations into a zero-install environment like the browser -->
+<!--makes the data accessible to anyone who has the domain knowledge but not necessarily a very technical background.-->
+
+<!--Based on a real project I will lead you through the phases of data visualisation. -->
+<!--Preparation using pandas and pyelasticsearch. -->
+<!--Storing and providing the data using Elasticsearch. -->
+<!--Eventually, displaying data in the most interactive way in the browser using D3.-->
+
+<!--ODSC: 30 Minutes-->
+<!--ODSC:-->
+<!--Remove all details-->
+
+<!--Preparation: -->
+<!-- - Start ES-->
+<!-- - Start kibana-->
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h2>Interactive data exploration using Pandas, Elasticsearch, and D3</h2>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+            <p>
+                <a href="https://www.odsc.com/london/detailed-speaker-page#oliver-zeigermann"
+                   target="_blank">ODSC London 2016</a></p>
+            <p><small>Slides: <a href="http://bit.ly/data-exploration-odsc">
+                http://bit.ly/data-exploration-odsc</a></small></p>
+        </section>
+
+        <section>
+            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                <img src="twitter-creatuluw.png">
+            </a>
+        </section>
+
+        <section>
+            <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
+            <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
+                <img src="dataviz-cat.jpg" height="500px">
+            </a>
+            <p><small><a target="_blank" href="https://twitter.com/Creatuluw">@Creatuluw</a></small></p>
+
+        </section>
+
+        <section>
+            <h2>Example Project:</h2>
+            <h2>Exploring <em>all</em> domestic US flights</h2>
+            <h2>for 2001</h2>
+            <img src="airline-pictures/a26.jpg" height="200px">
+            <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
+        </section>
+
+        <section>
+            <h2>The raw data</h2>
+            <p>approx. 6 million data sets</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
+            </code></pre>
+            <p>approx. 600 MB of data</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
+            </code></pre>
+            <p>29 colums, data has gaps, but looks consistent</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
+        </section>
+
+        <section>
+            <h2>No specific task or question</h2>
+            <h3>Exploring what just might be interesting</h3>
+            <h3>Finding the unknown unknowns</h3>
+            <div>
+                <img src="icons/question-mark.jpg">
+            </div>
+        </section>
+
+        <section>
+            <h2>Why not just load it into Excel and fiddle about?</h2>
+            <p class="fragment">You simple can not</p>
+            <p class="fragment">too large</p>
+            <p class="fragment">and even if you could: way too slow</p>
+            <p class="fragment">even if it was fast enough: does not run in the Browser</p>
+            <p class="fragment">even if it does (360 or Google Sheets): is it most interactive?</p>
+            <h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
+        </section>
+
+        <section>
+            <h2>Other Standard tools</h2>
+            <ul>
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>loads data very fast with almost no memory overhead
+                        <li>all operations work smoothly, even editing and saving
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>Challenge</h2>-->
+            <!--<p class="fragment">Handling large amounts of data</p>-->
+            <!--<p class="fragment">while maintaining the interactivity and the intuitive UI</p>-->
+            <!--<p class="fragment">But: data needs to be (physically) close to processing / interaction to make it fast and thus most useful</p>-->
+            <!--<p class="fragment">Like: benefits of Excel and Access at the same time</p>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Content</h2>
+            <ol>
+                <li>Pandas: Preparing the data
+                <li>Elasticsearch: Store data and deliver digestible data chunks
+                <li>D3 with crossfilter and DC: Display data interactively
+                <li>Some data exploration
+            </ol>
+        </section>
+
+        <section>
+            <h2>I: Data Wrangling with Pandas</h2>
+            <p>Preparing the data</p>
+            <!--<p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>-->
+            <!--<ul>-->
+                <!--<li>Add missing data-->
+                <!--<li>Recombine data-->
+                <!--<li>Add type information / conversion-->
+                <!--<li>Do static pre-analysis to learn about data-->
+                    <!--<ul>-->
+                        <!--<li>What is the nature of the data (e.g. time series data)?</li>-->
+                        <!--<li>Does the data look plausible?</li>-->
+                        <!--<li>What visualizations seem most promising?</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support on this section</small></p>
+        </section>
+
+        <section>
+            <h2>Introducing Pandas and friends</h2>
+            <p>All live in the <em>Python</em> world</p>
+            <ul  class="fragment">
+                <li><a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a>: data structures and data analysis tools
+                <li><a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a>: fundamental package for scientific computing
+                <li><a href="http://matplotlib.org/" target="_blank">http://matplotlib.org/</a>: 2D plotting library
+                <li><a href="https://stanford.edu/~mwaskom/software/seaborn/" target="_blank">https://stanford.edu/~mwaskom/software/seaborn/</a>: statistical data visualization
+            </ul>
+        </section>
+
+        <section>
+            <h2>Step 1: Analysing Samples</h2>
+            <p>Working on a reduced number of random samples</p>
+            <ul>
+                <li>How is the data quality (e.g. missing or wrong data)?
+                <li>Is the data plausible?
+                <li>What might be interesting to explore?
+            </ul>
+
+            <!--<p><small>More on sampling and confidence in the sample:<br>-->
+                <!--<a target="_blank"-->
+                   <!--href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know.html">-->
+                    <!--The Theorem Every Data Scientist Should Know</a>-->
+                <!--and <br>-->
+                <!--<a target="_blank"-->
+                   <!--href="http://www.jeannicholashould.com/the-theorem-every-data-scientist-should-know-2.html">-->
+                    <!--The Theorem Every Data Scientist Should Know (Part 2)</a>-->
+            <!--</small></p>-->
+
+        </section>
+
+
+        <section>
+            <h3>Sample Code: Analysis</h3>
+        <div>
+            <p>Reading sample data</p>
+            <pre><code contenteditable data-trim class="line-numbers">
+s = 10000 # desired sample size
+n = 5967780 # complete data size
+skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
+
+# pandas dataframe (2-dim table structure)
+df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
+            </code></pre>
+        </div>
+    </section>
+
+
+        <section>
+            <h3>Sample Code: Creating Correlation Chart</h3>
+            <pre><code contenteditable data-trim class="line-numbers">
+cols_for_correlation = [
+    'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
+    'UniqueCarrier_', 'Origin_', 'Dest_'
+]
+seaborn.corrplot(df[cols_for_correlation])
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Correlations</h3>
+            <div class="fragment">
+                <img src="analysis_talk/corr.png" height="500px">
+                <p><small>Interesting: Distance / Origin to Unique Carrier</small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Pearson's r</h3>
+            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
+            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
+                <img src="Correlation_examples2.svg" height="400px">
+            </a>
+            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
+                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+            </a></small></p>
+            <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
+            <!--<img src="Correlation_coefficient.png">-->
+            <!--</a>-->
+            <!--<p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>-->
+        </section>
+
+        <!--<section>-->
+        <!--<h3>This is just linear correlation</h3>-->
+        <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
+        <!--<img src="Correlation_examples2.svg" height="350px">-->
+        <!--</a>-->
+        <!--<p><small>correlation coefficient (r) above each figure</small></p>-->
+        <!--<p>Notice: figures at the bottom row obviously are correlated, just not linearly </p>-->
+        <!--</section>-->
+
+        <!--For ODSC-->
+
+        <!--<section>-->
+            <!--<h3>Anscombe's quartet</h3>-->
+            <!--<p>all figures have the same summary statistics properties including Pearson's r</p>-->
+            <!--<a target="_blank" href="https://commons.wikimedia.org/wiki/User:Schutz#/media/File:Anscombe.svg">-->
+                <!--<img src="Anscombe's_quartet_3.svg" height="400px">-->
+            <!--</a>-->
+            <!--<p><small><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">-->
+                <!--https://en.wikipedia.org/wiki/Anscombe%27s_quartet-->
+            <!--</a></small></p>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Need to look at the individual figures</h2>
+        </section>
+
+        <section>
+            <h3>Arrival Time to Departure Time</h3>
+            <div class="fragment">
+                <img src="analysis_talk/ArrTime_DepTime.png" height="500px">
+                <p><small>Pearson's r: 0.77, plausible but trivial</small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Sample Code: 2D Jointplot</h3>
+            <pre><code data-trim contenteditable class="line-numbers">
+seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Origin to Unique Carrier</h3>
+
+            <div class="fragment">
+                <img src="analysis_talk/Origin__UniqueCarrier_.png" height="500px">
+            </div>
+        </section>
+
+        <section  data-transition="none">
+            <h3>Origin to Unique Carrier</h3>
+
+            <div>
+                <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+                <p><small>
+                    <!--0 = AA(American Airlines),-->
+                    <em>4 = (DL) Delta</em>
+                    <!--, 7 = NW (Northwest), 11 = WN (Southwest)-->
+                </small></p>
+                <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+            </div>
+        </section>
+
+        <section>
+            <h3>Distance to Unique Carrier</h3>
+            <div class="fragment">
+
+            <img src="analysis_talk/Distance_UniqueCarrier_.png" height="500px">
+                </div>
+        </section>
+
+        <section data-transition="none">
+            <h3>Distance to Unique Carrier</h3>
+            <div>
+
+                <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+                <p><small>
+                    <em>1 = AQ (Aloha Airlines)</em>
+                    <!--, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)-->
+                </small></p>
+                <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+            </div>
+        </section>
+
+        <section>
+            <h3>Results of Analysis</h3>
+            <ul>
+                <li>Data looks plausible
+                <li>Contains obvious correlations
+                <li>But also contains non-trivial correlations
+                <li>Has timestamps
+                <li>Storing and analysing as time series data sounds promising
+            </ul>
+        </section>
+
+        <section>
+            <h2>Isn't this good enough already?</h2>
+            <h3 class="fragment">So far</h3>
+            <p class="fragment">working on random samples only</p>
+            <p class="fragment">time series data not exploited</p>
+            <p class="fragment">not interactive</p>
+            <h3 class="fragment">Next Step: store data in db to make it flexibly accessible</h3>
+
+        </section>
+        <section>
+            <h2>II: Elasticsearch</h2>
+            <h3>Storing and Querying data</h3>
+        </section>
+
+        <section>
+        <h2>Introducing Elasticsearch</h2>
+            <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank">
+                https://www.elastic.co/products/elasticsearch
+            </a></p>
+            <ul>
+                <li>Search and Analytics Engine
+                <li>Indexes and stores structured or unstructured data
+                <li>Offers query language to search or aggregate data
+            </ul>
+        </section>
+
+
+        <!--<section>-->
+            <!--<h2>ELK Stack</h2>-->
+            <!--<ul>-->
+                <!--<li><a href="https://www.elastic.co/products/elasticsearch" target="_blank">Elasticsearch</a>-->
+                    <!--<ul>-->
+                        <!--<li>Search and Analytics Engine-->
+                        <!--<li>Indexes and stores structured or unstructured data-->
+                        <!--<li>Offers query language to search or aggregate data-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a href="https://www.elastic.co/products/logstash" target="_blank">Logstash</a>-->
+                    <!--<ul>-->
+                        <!--<li>alternative to our Pandas approach-->
+                        <!--<li>Ruby based import description-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a href="https://www.elastic.co/products/kibana" target="_blank">Kibana</a>-->
+                    <!--<ul>-->
+                        <!--<li>interactive querying-->
+                        <!--<li>visualization (in dashboards)-->
+                        <!--<li>browser based-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Introspecting Elasticsearch</h2>-->
+            <!--<h3>Looking at physical entities</h3>-->
+            <!--<p>Using <a href="https://github.com/lmenezes/elasticsearch-kopf" target="_blank">Kopf</a> plugin-->
+                <!--allowing for easy administration and introspection</p>-->
+            <!--<p>Open <a href="http://localhost:9200/_plugin/kopf" target="_blank">http://localhost:9200/_plugin/kopf</a></p>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Cluster</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>nodes grouped under cluster name</p>-->
+                <!--<img src="screenshot_cluster.png" height="400">-->
+                <!--<p>There always is one master node</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Node</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>Simple Elasticsearch instance</p>-->
+                <!--<img src="screenshot_nodes.png" height="400">-->
+                <!--<p>Coordinates access to shards</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Index</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>logical grouping over shards</p>-->
+                <!--<img src="screenshot_indices.png" height="400">-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Shard</h3>-->
+            <!--<div class="fragment">-->
+                <!--<p>part of an index</p>-->
+                <!--<p>can be distributed over many nodes for failover or performance</p>-->
+                <!--<img src="screenshot_shards.png" height="300">-->
+                <!--<p>technically a Lucene index</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <section>
+            <!--<h2>Logical structures</h2>-->
+            <h2>Comparing to relational DB</h2>
+            <table>
+                <tr class="fragment">
+                    <th>Relational Database</th>
+                    <td>Databases</td>
+                    <td>Tables</td>
+                    <td>Rows</td>
+                    <td>Columns</td>
+                </tr>
+                <tr class="fragment">
+                    <th style="border-bottom: hidden">Elasticsearch</th>
+                    <td>Indices</td>
+                    <td>Types</td>
+                    <td>Documents</td>
+                    <td>Fields</td>
+                </tr>
+                <!--<tr></tr>-->
+            </table>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Example</h3>-->
+            <!--<pre><code contenteditable data-trim>-->
+<!--PUT /megacorp/employee/1-->
+<!--{-->
+    <!--"first_name" : "John",-->
+    <!--"last_name" :  "Smith",-->
+    <!--"age" :        25-->
+<!--}-->
+            <!--</code></pre>-->
+            <!--<ul>-->
+                <!--<li class="fragment"><em>index</em>: megacorp-->
+                <!--<li class="fragment"><em>type</em>: employee-->
+                <!--<li class="fragment"><em>document</em>: &lt;json body>-->
+                <!--<li class="fragment"><em>field(s)</em>: age-->
+            <!--</ul>-->
+        <!--</section>-->
+        <section>
+            <h2>Importing our data into Elasticsearch</h2>
+            <h3>using <a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a></h3>
+        </section>
+
+        <section>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+            <p>Create an index</p>
+            <pre><code contenteditable data-trim class="line-numbers python">
+from pyelasticsearch import ElasticSearch, bulk_chunks
+es = ElasticSearch(ES_HOST)
+es.create_index(INDEX_NAME)
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+            <p>Create a mapping to make types clear to Elasticsearch</p>
+            <pre><code contenteditable data-trim class="line-numbers python">
+mapping = {
+    'flight': {
+        'properties': {
+            'SecurityDelay': {
+                'type': 'integer',
+                'null_value': -1
+            },
+            'Origin': {
+                'type': 'string'
+            },
+            'Cancelled': {
+                'type': 'boolean'
+            },
+            ...
+es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Sample Code: Reading and Cleaning</h3>
+
+            <!--<div class="fragment">-->
+            <!--<p>Reading and Cleaning</p>-->
+            <pre><code contenteditable data-trim class="line-numbers python">
+# reads all data into data frame in memory
+df = pd.read_csv('../../data/2001/2001.csv')
+# missing value will be filled with -1
+df.fillna(-1)
+# add a timestamp to each row
+df['@timestamp'] = df.apply(lambda row:
+    pd.Timestamp('%s-%s-%s;%04d'
+        %(row['Year'], row['Month'],
+          row['DayofMonth'], row['CRSDepTime'])))
+# custom convert cancelled into boolean
+df['Cancelled'] = df.apply(lambda row:
+    False if row['Cancelled'] == 0 else True)
+            </code></pre>
+            <!--</div>-->
+
+            <!--<div class="fragment">-->
+            <!--<p>Bulk Import</p>-->
+            <!--<pre><code data-trim class="line-numbers python">-->
+            <!--records = df.to_dict(orient='records')-->
+
+            <!--def documents(records):-->
+            <!--for flight in records:-->
+            <!--yield es.index_op(flight)-->
+
+            <!--for chunk in bulk_chunks(documents(records=records),-->
+            <!--docs_per_chunk=500,-->
+            <!--bytes_per_chunk=10000):-->
+            <!--es.bulk(chunk, doc_type='flight', index='expo2009')-->
+            <!--</code></pre>-->
+            <!--</div>-->
+        </section>
+
+
+        <!--<section>-->
+            <!--<h3>Sense - Making low level queries</h3>-->
+            <!--<p>Looking at our example using REST calls returning JSON</p>-->
+            <!--<a href="http://localhost:5601/app/sense" target="_blank">-->
+                <!--<img src="screenshot_sense.png" height="400">-->
+            <!--</a>-->
+            <!--<p><code>GET expo2009_airline/flight/_search</code></p>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Kibana</h2>-->
+            <!--<ul>-->
+                <!--<li>generic frontend for Elasticsearch-->
+                <!--<li>browser based-->
+                <!--<li>allows for dashboards-->
+                <!--<li>also allows to make arbitrary adhoc queries-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <section>
+            <h3>Checking time series data for the first time</h3>
+            <div class="fragment">
+                <p>using Kibana adhoc queries</p>
+                <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
+                    <img src="screenshot_kibana_discover.png">
+                </a>
+                <p>Demo: filter for <em>'Cancelled:false'</em></p>
+                <p><small>Interactive Dashboards also possible</small></p>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Demo</h3>-->
+            <!--<p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>-->
+            <!--<a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest%3DLAX,EWR%20AND%20Origin%3DDEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">-->
+                <!--<img src="screenshot_kibana_discover2.png" height="300">-->
+            <!--</a>-->
+        <!--</section>-->
+
+        <section>
+            <h2>III: Interactive Exploration in the Browser</h2>
+        </section>
+
+        <section>
+            <h2>But why in the Browser</h2>
+            <h3 class="fragment">1: Zero-Installation for the user</h3>
+            <h3 class="fragment">2: Interactivity coming naturally</h3>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Interactive Dashboard</h3>-->
+            <!--<p>Already possible with Kibana</p>-->
+
+            <!--<div class="fragment">-->
+                <!--<a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">-->
+                    <!--<img src="screenshot_kibana_dashboard.png" height="400">-->
+                <!--</a>-->
+                <!--<p>Demo: Clicks trigger requests, responses update graphics</em></p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>What is still missing?</h3>-->
+            <!--<p>Low-latency interaction</p>-->
+            <!--<p>(Limited) offline access</p>-->
+            <!--<p>Charts limited to what Kibana offers</p>-->
+        <!--</section>-->
+
+        <section>
+            <h3>D3.js: Dynamic graphics in the browser</h3>
+            <a target="_blank" href="d3-talks/20111116/#14">
+                <img src="d3-airport-connections.png" height="400px">
+            </a>
+            <p>Data based vector graphics (SVG)</p>
+            <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>D3.js</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>-->
+                <!--<li>Transforms your data into visualizations in the browser-->
+                <!--<li>Style of programming declarative-->
+                <!--<li>Main field of use are diagrams using SVG (but D3 is not limited to that)-->
+                <!--<li>Data is bound to SVG elements which change once the data changes-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <section>
+            <h3>Crossfilter: Filtering millions of data sets in real time</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://square.github.io/crossfilter/">http://square.github.io/crossfilter/</a>
+                <li>Can filter up to millions of data sets in real time in the browser
+                <li>Loads data in memory
+                <li>Data sets are indexed when loaded (also in memory)
+                <li>You specify what you want to filter using dimensions
+            </ul>
+        </section>
+
+        <section>
+        <h3>Crossfilter Sample Code</h3>
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
+// creating a new crossfilter (multi-dimensional dataset)
+// flights array contains all flights for a single month
+flight = crossfilter(flights);
+console.log(flight.size()); // 490698
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
+// creating a dimension for all carriers of all flights
+carrier = flight.dimension(d => d.UniqueCarrier);
+</code></pre>
+<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable>
+// group() reduces this dimension to distinct values
+var distrinctCarriersGroup = carrier.group();
+console.log("Distinct carriers: " + distrinctCarriersGroup.size());
+// 12
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
+// filter just for TW
+carrier.filter("TW");
+// groupAll() creates a group intersecting all current filters
+// Trans World Airlines, became part of American Airlines in 2001
+console.log("TW flights", flight.groupAll().value()); // 19427
+// display first 10 matches
+console.log(flight.top(10));
+</code></pre>
+            <p class="fragment">Could even be used as an interactive REPL in the browser</p>
+</section>
+
+        <section>
+            <h3>dc.js: Charting with D3 and Crossfilter</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/">http://dc-js.github.io/dc.js/</a>
+                <li>Prebuilt integration of D3 and Crossfilter
+                <li><a target="_blank" href="http://dc-js.github.io/dc.js/examples/">offers a couple of diagram types that are useful for exploring data</a>
+                    <ul>
+                        <li>bar
+                        <li>pie
+                        <li>many more
+                    </ul>
+                </li>
+                </li>
+            </ul>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Graphical Encodings</h3>-->
+            <!--<div class="fragment">-->
+                <!--<img src="visualizations.png" height="250px">-->
+                <!--<p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Initial Design of our Dashboard</h2>
+            <img class="fragment" src="design.jpg" height="500px">
+        </section>
+
+        <section>
+            <h1>Part #1: Order</h1>
+        </section>
+
+        <section>
+            <h3>Ordering Values: Possisbly first pie chart ever</h3>
+            <div  class="fragment">
+                <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="400px">
+                <p><small>http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
+
+            </div>
+        </section>
+
+        <section>
+            <h3>Display Carriers as a Pie Chart</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+                <section>
+            <h3>Code for creating the pie chart</h3>
+<pre><code data-trim contenteditable class="line-numbers">
+var pieChartCarriers = dc.pieChart("#pie");
+pieChartCarriers
+        .slicesCap(5)
+        .dimension(carrier)
+        .group(carrier.group().reduceCount());
+</code></pre>
+        </section>
+
+        <section>
+            <h1>Part #2: Connections</h1>
+        </section>
+
+        <section>
+            <h3>Origin, Destination, Carriers combined</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <section>
+            <h1>Part #3: Time</h1>
+        </section>
+
+        <section>
+            <h2>Time Series: London Underground ad from 1928</h2>
+            <div class="fragment">
+                <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
+                <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Filtering using Brushes</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Code for creating the line chart</h3>-->
+            <!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--var chart = dc.lineChart("#series");-->
+<!--chart-->
+    <!--.dimension(date)-->
+    <!--.group(date.group())-->
+    <!--.brushOn(true));-->
+<!--</code></pre>-->
+        <!--</section>-->
+
+        <section>
+            <h1>Part #4: Map</h1>
+        </section>
+
+        <section>
+            <h3>All flights from Hawaii</h3>
+            <div class="fragment">
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
+                <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Code for creating the map</h3>-->
+            <!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");-->
+<!--stateOriginMap.width(500)-->
+    <!--.height(250)-->
+    <!--.dimension(stateOrigin)-->
+    <!--.group(stateOrigin.group().reduceCount())-->
+    <!--.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))-->
+    <!--.colorDomain([0, 20000]));-->
+<!--</code></pre>-->
+        <!--</section>-->
+
+        <section>
+            <h3>Mixing Different data sources</h3>
+            <ul>
+                <li class="fragment">sometimes you need to mix data from different sources
+                <li class="fragment">in our case: states airports are in, and airport codes
+                    <ul>
+                        <li>states are not in our original data
+                        <li>so we load both data and merge
+                        <li>additional dimensions for the state
+                    </ul>
+                </li>
+                <li class="fragment">can be done at display time
+                <li class="fragment">Possible by total freedom due to using plain JavaScript here
+                <li class="fragment">Using just Pandas might have required this data at import time
+            </ul>
+        </section>
+
+        <section>
+            <h2>Previous examples worked on data dumps, not on dynamic queries to Elasticsearch</h2>
+        </section>
+
+        <section>
+            <h2>D3 loading Segments from ELK</h2>
+            <ul class="fragment">
+                <li>Elasticsearch delivers data over HTTP/JSON using query
+                <li>D3/Crossfiler/DC displays partition of data
+                <li>Partition could be month
+                <li>Manually selected by user
+            </ul>
+        </section>
+
+        <section>
+            <h3>Literally no one flying to Wyoming first half of December???</h3>
+            <div class="fragment">
+                <a href="code/dc-911-es.html" target="_blank">
+                    <img src="screenshot_wy_dec.png">
+                </a>
+            </div>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Accessing Elasticsearch via REST</h3>-->
+            <!--<p class="fragment">Problem: Making data calls from a web browser is not allowed because of Same-Origin-Policy (SOP)</p>-->
+            <!--<p class="fragment">Option 1: Use a (relay) web server to make calls to Elasticsearch</p>-->
+            <!--<p class="fragment">Option 2: <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html">-->
+                <!--enable Cross-Origin Resource Sharing (CORS)</a> to allow direct access from browser</p>-->
+            <!--<pre class="fragment"><code data-trim class="javascript">-->
+<!--http.cors.enabled: true-->
+<!--http.cors.allow-origin: '*'-->
+            <!--</code></pre>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Network, Timing, Data Sizes</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a href="code/dc-911-es.html" target="_blank">-->
+                    <!--<img src="screenshot_network_cors.png">-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <section>
+            <h2>IV: Data Exploration Examples</h2>
+            <h3>Coming back to questions from low level analysis in first part</h3>
+        </section>
+
+        <section>
+            <h3>Why only short flight distances for Carrier Aloha Airlines (AQ)?</h3>
+            <img src="analysis_talk/Distance_UniqueCarrier_AQ.png" height="500px">
+            <!--<p><small><em>1 = AQ (Aloha Airlines)</em>, 6 = MQ (Envoy Air), 9 = UA (United), 10 = US (US Airways)</small></p>-->
+            <!--Answer AQ in D3 part: mainly between Hawaii and California -->
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_aq.png" height="400px"></a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Aloha_Airlines" target="_blank">
+                Aloha Airlines (AQ) mainly flies between Hawaii and West Coast (California/Nevada)
+            </a></p>
+        </section>
+
+
+        <section>
+            <h3>What is the prominent Origin for Carrier Delta (DL)?</h3>
+            <img src="analysis_talk/Origin__UniqueCarrier_ATL.png" height="500px">
+            <!--<p><small>0 = AA(American Airlines), <em>4 = (DL) Delta</em>, 7 = NW (Northwest), 11 = WN (Southwest)</small></p>-->
+            <!--Answer DL in D3 part: that is ATL (Atlanta) -->
+        </section>
+
+        <section>
+            <h3>Answer</h3>
+            <div>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_ATL.png" height="400px"></a>
+            </div>
+            <p class="fragment"><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
+                Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
+            </a></p>
+        </section>
+
+        <section>
+            <h3>Wrapup</h3>
+            <ul>
+                <li class="fragment">Python based tools are most advanced in low level data analysis
+                <li class="fragment">They can be used to prepare data and give an analytical overview
+                <li class="fragment">Pyelasticsearch allows to push that data into Elasticsearch
+                <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
+                <li class="fragment">The Browser is the ideal platform to explore data
+                <li class="fragment">D3, crossfilter, and DC help you to interactively explore your data visually
+                <li class="fragment">Elasticsearch can deliver data in chunks the Browser can digest
+            </ul>
+        </section>
+
+        <section>
+            <h2>Your turn</h2>
+            <p class="fragment">Do you have (possibly large) data set worth exploring?</p>
+            <p class="fragment">Best to have it as a CSV or similar (because that might be the hardest and most boring part)</p>
+            <p class="fragment">Maybe try some of the techniques described here</p>
+            <p class="fragment">Complete Code:
+                <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
+            </p>
+            <p class="fragment">Slides: <a href="http://bit.ly/data-exploration-javazone">
+                http://bit.ly/data-exploration-javazone</a></p>
+            <p class="fragment">Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
+        </section>
+
+        <section>
+            <h3>Bonus Level: How to Start Experimenting?</h3>
+            <p class="fragment">Try out analysis part (requires numpy, pandas, matplotlib, seaborn, sklearn to be installed)</p>
+            <pre class="fragment"><code class="no-highlight">python big-data-visualization/code/es/analysis_pandas.py</code></pre>
+            <p class="fragment">Try crossfiler as an interactive console</p>
+            <p class="fragment">Like <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a>, but without installation in the browser</p>
+            <p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console (Chrome is my recommendation)</a></p>
+            <p class="fragment">Question: What is the longest departure and the longest arrival delay?</p>
+            <!--arrDelay.top(10)-->
+            <!-- >; ArrDelay: "1473"-->
+            <!--depDelay.top(10)-->
+            <!-- >; DepDelay: "1477"-->
+            <!--Same flight!-->
+            <!--What is the story here?-->
+        </section>
+
+        <!--<section>-->
+            <!--<h1>Thank you</h1>-->
+            <!--<h2>Questions / Discussion</h2>-->
+
+            <!--<p>Complete Code:-->
+                <!--<a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>-->
+            <!--</p>-->
+            <!--<p>Slides: <a href="http://bit.ly/data-exploration-javazone">-->
+                <!--http://bit.ly/data-exploration-javazone</a></p>-->
+            <!--<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>-->
+        <!--</section>-->
+
+
+
+        <!--<section>-->
+            <!--<h3>Adding a map to DC</h3>-->
+            <!--<p>Leaflet / OpenStreetMap</p>-->
+            <!--<div class="fragment">-->
+                <!--<img src="leaflet-dc-sample.png" height="300">-->
+                <!--<p><small><a target="_blank" href="http://intellipharm.github.io/dc-addons/#leafletjs">-->
+                    <!--http://intellipharm.github.io/dc-addons/#leafletjs-->
+                <!--</a></small></p>-->
+                <!--<p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-section-today.php">-->
+                    <!--Example from: http://cockpit.status-kanal.com/board-section-today.php-->
+                <!--</a></small></p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Use Case: Pipe Maintenance</h3>-->
+            <!--<div class="fragment">-->
+                <!--<img src="dc-use-case-pipe-maintenance.png" height="450">-->
+                <!--<p><small><a target="_blank" href="http://cockpit.status-kanal.com/board-damage.php">-->
+                    <!--Example from: http://cockpit.status-kanal.com/board-damage.php-->
+                <!--</a></small></p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+
+        <!--<section data-background="backgrounds/light-metal.jpg">-->
+            <!--<h3>Option #1: Interactive queries using Elasticsearch/Kibana</h3>-->
+            <!--<p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>-->
+            <!--<a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest:LAX,EWR%20AND%20Origin:DEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">-->
+                <!--<img src="screenshot_kibana_discover2.png" height="300">-->
+            <!--</a>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-table.jpg">-->
+            <!--<h3>Option #2: Kibana interactive Dashboard</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a href="http://localhost:5601/app/kibana#/dashboard/Flights-Arrival-Barchart?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,formattedValue:'-20',index:expo2009_airline,key:ArrDelay,negate:!f,value:'-100%20to%20100'),range:(ArrDelay:(gte:-100,lt:100)))),options:(darkTheme:!f),panels:!((col:4,id:Carier-Pie-Chart,panelIndex:1,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Total-Count,panelIndex:2,row:1,size_x:3,size_y:2,type:visualization),(col:1,id:Area,panelIndex:3,row:3,size_x:6,size_y:3,type:visualization),(col:7,id:Origin,panelIndex:4,row:1,size_x:3,size_y:2,type:visualization),(col:10,id:Destination,panelIndex:5,row:1,size_x:3,size_y:2,type:visualization),(col:7,id:ArrDelay,panelIndex:6,row:3,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:Flights-Arrival-Barchart,uiState:(P-3:(spy:(mode:(fill:!f,name:!n)))))" target="_blank">-->
+                    <!--<img src="screenshot_kibana_dashboard.png" height="400">-->
+                <!--</a>-->
+                <!--<p>Clicks re-run augmented Elasticsearch query</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Benefits</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>works on any size of data-->
+                <!--<li>with a little practice very easy to do-->
+                <!--<li>provides widgets out of the box-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Drawbacks</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li>limited in layout and widgets-->
+                <!--<li>each update takes time-->
+                <!--<li>smooth and continuous interaction limited-->
+            <!--</ul>-->
+        <!--</section>-->
+
+
+        <!--<section data-background="backgrounds/light-chalk.jpg">-->
+            <!--<h3>Option #3: Filtering directly in the browser using D3 with crossfilter and DC</h3>-->
+            <!--<h4 class="fragment">Example: All flights from Hawaii</h4>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="300px"></a>-->
+                <!--<div><small><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></small></div>-->
+                <!--<p>Data served from static JSON file</p>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-table.jpg">-->
+            <!--<h3>Sample Code using crossfilter, D3, and DC</h3>-->
+            <!--<p class="fragment"><code>crossfilter</code> allows to filter many data sets in the browser using dimensions</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var cf = crossfilter(flights); // flights is just an array-->
+<!--var stateOrigin = cf.dimension(function (d) {-->
+    <!--return d.stateOrigin;-->
+<!--});-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>DC</code> displays <code>crossfilter</code> dimensions as charts</p>-->
+<!--<pre class="fragment"><code data-trim contenteditable>-->
+<!--var stateOriginMap = dc.geoChoroplethChart("#state-origin-map");-->
+<!--stateOriginMap.width(500)-->
+    <!--.height(250)-->
+    <!--.dimension(stateOrigin)-->
+    <!--.group(stateOrigin.group().reduceCount())-->
+    <!--.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))-->
+    <!--.colorDomain([0, 20000]));-->
+<!--</code></pre>-->
+            <!--<p class="fragment"><code>D3</code> used as underlying technology to map data to SVG</p>-->
+        <!--</section>-->
+
+        <!--<section data-background="backgrounds/light-sky.jpg">-->
+            <!--<h2>Thank you</h2>-->
+            <!--<p>Code:-->
+                <!--<a href="https://github.com/DJCordhose/big-data-visualization">https://github.com/DJCordhose/big-data-visualization</a>-->
+                <!--/-->
+                <!--<a href="https://github.com/DJCordhose/introduction-to-elasticsearch">https://github.com/DJCordhose/introduction-to-elasticsearch</a>-->
+            <!--</p>-->
+            <!--<p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html">https://djcordhose.github.io/big-data-visualization/2016_pydata_berlin_lightning.html</a></p>-->
+            <!--<a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>-->
+        <!--</section>-->
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+//    $('section').attr('data-background-image', "backgrounds/light-sky3.jpg")
+//    $('section').attr('data-background-image', "backgrounds/light-seestar.jpg")
+//    $('section').attr('data-background-image', "backgrounds/light-coral.jpg")
+//    $('section').attr('data-background-image', "backgrounds/light-silver.jpg");
+    $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
+//$('section').attr('data-background-image', "backgrounds/light-ring.jpg");
+//$('section').attr('data-background-image', "backgrounds/light-fs.jpg");
+
+
+</script>
+<script>
+    // only presentation version has fragments
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        $('.fragment').removeClass('fragment');
+    }
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
