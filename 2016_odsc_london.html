@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>The Macroscope</title>
+    <title>Big Data Visualisation in the browser using Elasticsearch, Pandas, and D3</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -91,7 +91,7 @@
     <div class="slides">
 
         <section>
-            <h2>Interactive data exploration using Pandas, Elasticsearch, and D3</h2>
+            <h2>Big Data Visualisation in the browser using Elasticsearch, Pandas, and D3</h2>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
             </p>
@@ -102,11 +102,11 @@
                 http://bit.ly/data-exploration-odsc</a></small></p>
         </section>
 
-        <section>
-            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
-                <img src="twitter-creatuluw.png">
-            </a>
-        </section>
+        <!--<section>-->
+            <!--<a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">-->
+                <!--<img src="twitter-creatuluw.png">-->
+            <!--</a>-->
+        <!--</section>-->
 
         <section>
             <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
@@ -156,45 +156,45 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </div>
         </section>
 
-        <section>
-            <h2>Why not just load it into Excel and fiddle about?</h2>
-            <p class="fragment">You simple can not</p>
-            <p class="fragment">too large</p>
-            <p class="fragment">and even if you could: way too slow</p>
-            <p class="fragment">even if it was fast enough: does not run in the Browser</p>
-            <p class="fragment">even if it does (360 or Google Sheets): is it most interactive?</p>
-            <h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>
-        </section>
+        <!--<section>-->
+            <!--<h2>Why not just load it into Excel and fiddle about?</h2>-->
+            <!--<p class="fragment">You simple can not</p>-->
+            <!--<p class="fragment">too large</p>-->
+            <!--<p class="fragment">and even if you could: way too slow</p>-->
+            <!--<p class="fragment">even if it was fast enough: does not run in the Browser</p>-->
+            <!--<p class="fragment">even if it does (360 or Google Sheets): is it most interactive?</p>-->
+            <!--<h3 class="fragment" style="color: red">No known interactive out-of-the-box tool to efficiently work on that</h3>-->
+        <!--</section>-->
 
-        <section>
-            <h2>Other Standard tools</h2>
-            <ul>
-                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
-                    <ul>
-                        <li>loads data relatively fast
-                        <li>truncates after 1M lines
-                    </ul>
-                </li>
-                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
-                    <ul>
-                        <li>limited to 2.000.000 cells (not lines)
-                        <li>does not load data at all
-                    </ul>
-                </li>
-                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
-                    <ul>
-                        <li>loading takes long
-                        <li>truncates after 64k lines
-                    </ul>
-                </li>
-                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
-                    <ul>
-                        <li>loads data very fast with almost no memory overhead
-                        <li>all operations work smoothly, even editing and saving
-                    </ul>
-                </li>
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h2>Other Standard tools</h2>-->
+            <!--<ul>-->
+                <!--<li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>-->
+                    <!--<ul>-->
+                        <!--<li>loads data relatively fast-->
+                        <!--<li>truncates after 1M lines-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Google Sheets: <em style="color: red">nope</em>-->
+                    <!--<ul>-->
+                        <!--<li>limited to 2.000.000 cells (not lines)-->
+                        <!--<li>does not load data at all-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>-->
+                    <!--<ul>-->
+                        <!--<li>loading takes long-->
+                        <!--<li>truncates after 64k lines-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>-->
+                    <!--<ul>-->
+                        <!--<li>loads data very fast with almost no memory overhead-->
+                        <!--<li>all operations work smoothly, even editing and saving-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h2>Challenge</h2>-->
@@ -214,28 +214,28 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ol>
         </section>
 
-        <section>
-            <h2>I: Data Wrangling with Pandas</h2>
-            <p>Preparing the data</p>
-            <!--<p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>-->
-            <!--<ul>-->
-                <!--<li>Add missing data-->
-                <!--<li>Recombine data-->
-                <!--<li>Add type information / conversion-->
-                <!--<li>Do static pre-analysis to learn about data-->
-                    <!--<ul>-->
-                        <!--<li>What is the nature of the data (e.g. time series data)?</li>-->
-                        <!--<li>Does the data look plausible?</li>-->
-                        <!--<li>What visualizations seem most promising?</li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-            <p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support on this section</small></p>
-        </section>
+        <!--<section>-->
+            <!--<h2>I: Data Wrangling with Pandas</h2>-->
+            <!--<p>Preparing the data</p>-->
+            <!--&lt;!&ndash;<p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Add missing data&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Recombine data&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Add type information / conversion&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Do static pre-analysis to learn about data&ndash;&gt;-->
+                    <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>What is the nature of the data (e.g. time series data)?</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>Does the data look plausible?</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>What visualizations seem most promising?</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--<p><small>Kudos to <em>Chi Nhan Nguyen</em> for technical support on this section</small></p>-->
+        <!--</section>-->
 
         <section>
-            <h2>Introducing Pandas and friends</h2>
-            <p>All live in the <em>Python</em> world</p>
+            <h2>I: Data Analysing with Pandas and friends</h2>
+            <!--<p>All live in the <em>Python</em> world</p>-->
             <ul  class="fragment">
                 <li><a href="http://pandas.pydata.org/" target="_blank">http://pandas.pydata.org/</a>: data structures and data analysis tools
                 <li><a href="http://www.numpy.org/" target="_blank">http://www.numpy.org/</a>: fundamental package for scientific computing
@@ -244,14 +244,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </ul>
         </section>
 
-        <section>
-            <h2>Step 1: Analysing Samples</h2>
-            <p>Working on a reduced number of random samples</p>
-            <ul>
-                <li>How is the data quality (e.g. missing or wrong data)?
-                <li>Is the data plausible?
-                <li>What might be interesting to explore?
-            </ul>
+        <!--<section>-->
+            <!--<h2>Step 1: Analysing Samples</h2>-->
+            <!--<p>Working on a reduced number of random samples</p>-->
+            <!--<ul>-->
+                <!--<li>How is the data quality (e.g. missing or wrong data)?-->
+                <!--<li>Is the data plausible?-->
+                <!--<li>What might be interesting to explore?-->
+            <!--</ul>-->
 
             <!--<p><small>More on sampling and confidence in the sample:<br>-->
                 <!--<a target="_blank"-->
@@ -263,35 +263,35 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                     <!--The Theorem Every Data Scientist Should Know (Part 2)</a>-->
             <!--</small></p>-->
 
-        </section>
+        <!--</section>-->
 
 
-        <section>
-            <h3>Sample Code: Analysis</h3>
-        <div>
-            <p>Reading sample data</p>
-            <pre><code contenteditable data-trim class="line-numbers">
-s = 10000 # desired sample size
-n = 5967780 # complete data size
-skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))
+        <!--<section>-->
+            <!--<h3>Sample Code: Analysis</h3>-->
+        <!--<div>-->
+            <!--<p>Reading sample data</p>-->
+            <!--<pre><code contenteditable data-trim class="line-numbers">-->
+<!--s = 10000 # desired sample size-->
+<!--n = 5967780 # complete data size-->
+<!--skip_rows = sorted(numpy.random.choice(np.arange(1, n + 1), (n - s)))-->
 
-# pandas dataframe (2-dim table structure)
-df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
-            </code></pre>
-        </div>
-    </section>
+<!--# pandas dataframe (2-dim table structure)-->
+<!--df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)-->
+            <!--</code></pre>-->
+        <!--</div>-->
+    <!--</section>-->
 
 
-        <section>
-            <h3>Sample Code: Creating Correlation Chart</h3>
-            <pre><code contenteditable data-trim class="line-numbers">
-cols_for_correlation = [
-    'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',
-    'UniqueCarrier_', 'Origin_', 'Dest_'
-]
-seaborn.corrplot(df[cols_for_correlation])
-            </code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Sample Code: Creating Correlation Chart</h3>-->
+            <!--<pre><code contenteditable data-trim class="line-numbers">-->
+<!--cols_for_correlation = [-->
+    <!--'DayOfWeek', 'DepTime','ArrTime', 'ArrDelay', 'Distance',-->
+    <!--'UniqueCarrier_', 'Origin_', 'Dest_'-->
+<!--]-->
+<!--seaborn.corrplot(df[cols_for_correlation])-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h3>Correlations</h3>
@@ -301,20 +301,20 @@ seaborn.corrplot(df[cols_for_correlation])
             </div>
         </section>
 
-        <section>
-            <h3>Pearson's r</h3>
-            <p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">
-                <img src="Correlation_examples2.svg" height="400px">
-            </a>
-            <p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">
-                https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
-            </a></small></p>
+        <!--<section>-->
+            <!--<h3>Pearson's r</h3>-->
+            <!--<p><em>Pearson's r</em> is a measure of the degree of <em>linear(!)</em> dependence between two variables</p>-->
             <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">-->
-            <!--<img src="Correlation_coefficient.png">-->
+                <!--<img src="Correlation_examples2.svg" height="400px">-->
             <!--</a>-->
-            <!--<p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>-->
-        </section>
+            <!--<p><small><a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient" target="_blank">-->
+                <!--https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient-->
+            <!--</a></small></p>-->
+            <!--&lt;!&ndash;<a target="_blank" href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient#/media/File:Correlation_coefficient.png">&ndash;&gt;-->
+            <!--&lt;!&ndash;<img src="Correlation_coefficient.png">&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<p><small>By <a href="//commons.wikimedia.org/wiki/User:Kiatdd" title="User:Kiatdd">Kiatdd</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, https://commons.wikimedia.org/w/index.php?curid=37108966            </a></small></p>&ndash;&gt;-->
+        <!--</section>-->
 
         <!--<section>-->
         <!--<h3>This is just linear correlation</h3>-->
@@ -338,9 +338,9 @@ seaborn.corrplot(df[cols_for_correlation])
             <!--</a></small></p>-->
         <!--</section>-->
 
-        <section>
-            <h2>Need to look at the individual figures</h2>
-        </section>
+        <!--<section>-->
+            <!--<h2>Need to look at the individual figures</h2>-->
+        <!--</section>-->
 
         <section>
             <h3>Arrival Time to Departure Time</h3>
@@ -350,12 +350,12 @@ seaborn.corrplot(df[cols_for_correlation])
             </div>
         </section>
 
-        <section>
-            <h3>Sample Code: 2D Jointplot</h3>
-            <pre><code data-trim contenteditable class="line-numbers">
-seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
-            </code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Sample Code: 2D Jointplot</h3>-->
+            <!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h3>Origin to Unique Carrier</h3>
@@ -400,16 +400,16 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             </div>
         </section>
 
-        <section>
-            <h3>Results of Analysis</h3>
-            <ul>
-                <li>Data looks plausible
-                <li>Contains obvious correlations
-                <li>But also contains non-trivial correlations
-                <li>Has timestamps
-                <li>Storing and analysing as time series data sounds promising
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>Results of Analysis</h3>-->
+            <!--<ul>-->
+                <!--<li>Data looks plausible-->
+                <!--<li>Contains obvious correlations-->
+                <!--<li>But also contains non-trivial correlations-->
+                <!--<li>Has timestamps-->
+                <!--<li>Storing and analysing as time series data sounds promising-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h2>Isn't this good enough already?</h2>
@@ -508,27 +508,27 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             <!--</div>-->
         <!--</section>-->
 
-        <section>
-            <!--<h2>Logical structures</h2>-->
-            <h2>Comparing to relational DB</h2>
-            <table>
-                <tr class="fragment">
-                    <th>Relational Database</th>
-                    <td>Databases</td>
-                    <td>Tables</td>
-                    <td>Rows</td>
-                    <td>Columns</td>
-                </tr>
-                <tr class="fragment">
-                    <th style="border-bottom: hidden">Elasticsearch</th>
-                    <td>Indices</td>
-                    <td>Types</td>
-                    <td>Documents</td>
-                    <td>Fields</td>
-                </tr>
-                <!--<tr></tr>-->
-            </table>
-        </section>
+        <!--<section>-->
+            <!--&lt;!&ndash;<h2>Logical structures</h2>&ndash;&gt;-->
+            <!--<h2>Comparing to relational DB</h2>-->
+            <!--<table>-->
+                <!--<tr class="fragment">-->
+                    <!--<th>Relational Database</th>-->
+                    <!--<td>Databases</td>-->
+                    <!--<td>Tables</td>-->
+                    <!--<td>Rows</td>-->
+                    <!--<td>Columns</td>-->
+                <!--</tr>-->
+                <!--<tr class="fragment">-->
+                    <!--<th style="border-bottom: hidden">Elasticsearch</th>-->
+                    <!--<td>Indices</td>-->
+                    <!--<td>Types</td>-->
+                    <!--<td>Documents</td>-->
+                    <!--<td>Fields</td>-->
+                <!--</tr>-->
+                <!--&lt;!&ndash;<tr></tr>&ndash;&gt;-->
+            <!--</table>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h3>Example</h3>-->
@@ -549,60 +549,65 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
         <!--</section>-->
         <section>
             <h2>Importing our data into Elasticsearch</h2>
-            <h3>using <a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a></h3>
+            <div class="fragment">
+
+            <p>using</p>
+            <p>Pandas to claen and prepare data</p>
+            <p><a href="https://pyelasticsearch.readthedocs.io" target="_blank">pyelasticsearch</a> to interface between Pandas and Elasticsearch</p>
+            </div>
         </section>
 
-        <section>
-            <h3>Sample Code: Preparing Elasticsearch</h3>
-            <p>Create an index</p>
-            <pre><code contenteditable data-trim class="line-numbers python">
-from pyelasticsearch import ElasticSearch, bulk_chunks
-es = ElasticSearch(ES_HOST)
-es.create_index(INDEX_NAME)
-            </code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Sample Code: Preparing Elasticsearch</h3>-->
+            <!--<p>Create an index</p>-->
+            <!--<pre><code contenteditable data-trim class="line-numbers python">-->
+<!--from pyelasticsearch import ElasticSearch, bulk_chunks-->
+<!--es = ElasticSearch(ES_HOST)-->
+<!--es.create_index(INDEX_NAME)-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Sample Code: Preparing Elasticsearch</h3>
-            <p>Create a mapping to make types clear to Elasticsearch</p>
-            <pre><code contenteditable data-trim class="line-numbers python">
-mapping = {
-    'flight': {
-        'properties': {
-            'SecurityDelay': {
-                'type': 'integer',
-                'null_value': -1
-            },
-            'Origin': {
-                'type': 'string'
-            },
-            'Cancelled': {
-                'type': 'boolean'
-            },
-            ...
-es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
-            </code></pre>
-        </section>
+        <!--<section>-->
+            <!--<h3>Sample Code: Preparing Elasticsearch</h3>-->
+            <!--<p>Create a mapping to make types clear to Elasticsearch</p>-->
+            <!--<pre><code contenteditable data-trim class="line-numbers python">-->
+<!--mapping = {-->
+    <!--'flight': {-->
+        <!--'properties': {-->
+            <!--'SecurityDelay': {-->
+                <!--'type': 'integer',-->
+                <!--'null_value': -1-->
+            <!--},-->
+            <!--'Origin': {-->
+                <!--'type': 'string'-->
+            <!--},-->
+            <!--'Cancelled': {-->
+                <!--'type': 'boolean'-->
+            <!--},-->
+            <!--...-->
+<!--es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Sample Code: Reading and Cleaning</h3>
+        <!--<section>-->
+            <!--<h3>Sample Code: Reading and Cleaning</h3>-->
 
-            <!--<div class="fragment">-->
-            <!--<p>Reading and Cleaning</p>-->
-            <pre><code contenteditable data-trim class="line-numbers python">
-# reads all data into data frame in memory
-df = pd.read_csv('../../data/2001/2001.csv')
-# missing value will be filled with -1
-df.fillna(-1)
-# add a timestamp to each row
-df['@timestamp'] = df.apply(lambda row:
-    pd.Timestamp('%s-%s-%s;%04d'
-        %(row['Year'], row['Month'],
-          row['DayofMonth'], row['CRSDepTime'])))
-# custom convert cancelled into boolean
-df['Cancelled'] = df.apply(lambda row:
-    False if row['Cancelled'] == 0 else True)
-            </code></pre>
+            <!--&lt;!&ndash;<div class="fragment">&ndash;&gt;-->
+            <!--&lt;!&ndash;<p>Reading and Cleaning</p>&ndash;&gt;-->
+            <!--<pre><code contenteditable data-trim class="line-numbers python">-->
+<!--# reads all data into data frame in memory-->
+<!--df = pd.read_csv('../../data/2001/2001.csv')-->
+<!--# missing value will be filled with -1-->
+<!--df.fillna(-1)-->
+<!--# add a timestamp to each row-->
+<!--df['@timestamp'] = df.apply(lambda row:-->
+    <!--pd.Timestamp('%s-%s-%s;%04d'-->
+        <!--%(row['Year'], row['Month'],-->
+          <!--row['DayofMonth'], row['CRSDepTime'])))-->
+<!--# custom convert cancelled into boolean-->
+<!--df['Cancelled'] = df.apply(lambda row:-->
+    <!--False if row['Cancelled'] == 0 else True)-->
+            <!--</code></pre>-->
             <!--</div>-->
 
             <!--<div class="fragment">-->
@@ -620,7 +625,7 @@ df['Cancelled'] = df.apply(lambda row:
             <!--es.bulk(chunk, doc_type='flight', index='expo2009')-->
             <!--</code></pre>-->
             <!--</div>-->
-        </section>
+        <!--</section>-->
 
 
         <!--<section>-->
@@ -722,35 +727,35 @@ df['Cancelled'] = df.apply(lambda row:
             </ul>
         </section>
 
-        <section>
-        <h3>Crossfilter Sample Code</h3>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
-// creating a new crossfilter (multi-dimensional dataset)
-// flights array contains all flights for a single month
-flight = crossfilter(flights);
-console.log(flight.size()); // 490698
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
-// creating a dimension for all carriers of all flights
-carrier = flight.dimension(d => d.UniqueCarrier);
-</code></pre>
-<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable>
-// group() reduces this dimension to distinct values
-var distrinctCarriersGroup = carrier.group();
-console.log("Distinct carriers: " + distrinctCarriersGroup.size());
-// 12
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
-// filter just for TW
-carrier.filter("TW");
-// groupAll() creates a group intersecting all current filters
-// Trans World Airlines, became part of American Airlines in 2001
-console.log("TW flights", flight.groupAll().value()); // 19427
-// display first 10 matches
-console.log(flight.top(10));
-</code></pre>
-            <p class="fragment">Could even be used as an interactive REPL in the browser</p>
-</section>
+        <!--<section>-->
+        <!--<h3>Crossfilter Sample Code</h3>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">-->
+<!--// creating a new crossfilter (multi-dimensional dataset)-->
+<!--// flights array contains all flights for a single month-->
+<!--flight = crossfilter(flights);-->
+<!--console.log(flight.size()); // 490698-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">-->
+<!--// creating a dimension for all carriers of all flights-->
+<!--carrier = flight.dimension(d => d.UniqueCarrier);-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable>-->
+<!--// group() reduces this dimension to distinct values-->
+<!--var distrinctCarriersGroup = carrier.group();-->
+<!--console.log("Distinct carriers: " + distrinctCarriersGroup.size());-->
+<!--// 12-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">-->
+<!--// filter just for TW-->
+<!--carrier.filter("TW");-->
+<!--// groupAll() creates a group intersecting all current filters-->
+<!--// Trans World Airlines, became part of American Airlines in 2001-->
+<!--console.log("TW flights", flight.groupAll().value()); // 19427-->
+<!--// display first 10 matches-->
+<!--console.log(flight.top(10));-->
+<!--</code></pre>-->
+            <!--<p class="fragment">Could even be used as an interactive REPL in the browser</p>-->
+<!--</section>-->
 
         <section>
             <h3>dc.js: Charting with D3 and Crossfilter</h3>
@@ -776,23 +781,23 @@ console.log(flight.top(10));
             <!--</div>-->
         <!--</section>-->
 
-        <section>
-            <h2>Initial Design of our Dashboard</h2>
-            <img class="fragment" src="design.jpg" height="500px">
-        </section>
+        <!--<section>-->
+            <!--<h2>Initial Design of our Dashboard</h2>-->
+            <!--<img class="fragment" src="design.jpg" height="500px">-->
+        <!--</section>-->
 
-        <section>
-            <h1>Part #1: Order</h1>
-        </section>
+        <!--<section>-->
+            <!--<h1>Part #1: Order</h1>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Ordering Values: Possisbly first pie chart ever</h3>
-            <div  class="fragment">
-                <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="400px">
-                <p><small>http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
+        <!--<section>-->
+            <!--<h3>Ordering Values: Possisbly first pie chart ever</h3>-->
+            <!--<div  class="fragment">-->
+                <!--<img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="400px">-->
+                <!--<p><small>http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>-->
 
-            </div>
-        </section>
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h3>Display Carriers as a Pie Chart</h3>
@@ -802,20 +807,20 @@ console.log(flight.top(10));
             </div>
         </section>
 
-                <section>
-            <h3>Code for creating the pie chart</h3>
-<pre><code data-trim contenteditable class="line-numbers">
-var pieChartCarriers = dc.pieChart("#pie");
-pieChartCarriers
-        .slicesCap(5)
-        .dimension(carrier)
-        .group(carrier.group().reduceCount());
-</code></pre>
-        </section>
+                <!--<section>-->
+            <!--<h3>Code for creating the pie chart</h3>-->
+<!--<pre><code data-trim contenteditable class="line-numbers">-->
+<!--var pieChartCarriers = dc.pieChart("#pie");-->
+<!--pieChartCarriers-->
+        <!--.slicesCap(5)-->
+        <!--.dimension(carrier)-->
+        <!--.group(carrier.group().reduceCount());-->
+<!--</code></pre>-->
+        <!--</section>-->
 
-        <section>
-            <h1>Part #2: Connections</h1>
-        </section>
+        <!--<section>-->
+            <!--<h1>Part #2: Connections</h1>-->
+        <!--</section>-->
 
         <section>
             <h3>Origin, Destination, Carriers combined</h3>
@@ -825,17 +830,17 @@ pieChartCarriers
             </div>
         </section>
 
-        <section>
-            <h1>Part #3: Time</h1>
-        </section>
+        <!--<section>-->
+            <!--<h1>Part #3: Time</h1>-->
+        <!--</section>-->
 
-        <section>
-            <h2>Time Series: London Underground ad from 1928</h2>
-            <div class="fragment">
-                <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
-                <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h2>Time Series: London Underground ad from 1928</h2>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>-->
+                <!--<p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h3>Filtering using Brushes</h3>
@@ -856,12 +861,12 @@ pieChartCarriers
 <!--</code></pre>-->
         <!--</section>-->
 
-        <section>
-            <h1>Part #4: Map</h1>
-        </section>
+        <!--<section>-->
+            <!--<h1>Part #4: Map</h1>-->
+        <!--</section>-->
 
         <section>
-            <h3>All flights from Hawaii</h3>
+            <h3>Map</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
@@ -881,39 +886,39 @@ pieChartCarriers
 <!--</code></pre>-->
         <!--</section>-->
 
-        <section>
-            <h3>Mixing Different data sources</h3>
-            <ul>
-                <li class="fragment">sometimes you need to mix data from different sources
-                <li class="fragment">in our case: states airports are in, and airport codes
-                    <ul>
-                        <li>states are not in our original data
-                        <li>so we load both data and merge
-                        <li>additional dimensions for the state
-                    </ul>
-                </li>
-                <li class="fragment">can be done at display time
-                <li class="fragment">Possible by total freedom due to using plain JavaScript here
-                <li class="fragment">Using just Pandas might have required this data at import time
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>Mixing Different data sources</h3>-->
+            <!--<ul>-->
+                <!--<li class="fragment">sometimes you need to mix data from different sources-->
+                <!--<li class="fragment">in our case: states airports are in, and airport codes-->
+                    <!--<ul>-->
+                        <!--<li>states are not in our original data-->
+                        <!--<li>so we load both data and merge-->
+                        <!--<li>additional dimensions for the state-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment">can be done at display time-->
+                <!--<li class="fragment">Possible by total freedom due to using plain JavaScript here-->
+                <!--<li class="fragment">Using just Pandas might have required this data at import time-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Previous examples worked on data dumps, not on dynamic queries to Elasticsearch</h2>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>D3 loading Segments from ELK</h2>-->
+            <!--<ul class="fragment">-->
+                <!--<li>Elasticsearch delivers data over HTTP/JSON using query-->
+                <!--<li>D3/Crossfiler/DC displays partition of data-->
+                <!--<li>Partition could be month-->
+                <!--<li>Manually selected by user-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
-            <h2>Previous examples worked on data dumps, not on dynamic queries to Elasticsearch</h2>
-        </section>
-
-        <section>
-            <h2>D3 loading Segments from ELK</h2>
-            <ul class="fragment">
-                <li>Elasticsearch delivers data over HTTP/JSON using query
-                <li>D3/Crossfiler/DC displays partition of data
-                <li>Partition could be month
-                <li>Manually selected by user
-            </ul>
-        </section>
-
-        <section>
-            <h3>Literally no one flying to Wyoming first half of December???</h3>
+            <h3>User can choose partition with dynamic Query to Elasticsearch</h3>
             <div class="fragment">
                 <a href="code/dc-911-es.html" target="_blank">
                     <img src="screenshot_wy_dec.png">
@@ -985,8 +990,7 @@ pieChartCarriers
         <section>
             <h3>Wrapup</h3>
             <ul>
-                <li class="fragment">Python based tools are most advanced in low level data analysis
-                <li class="fragment">They can be used to prepare data and give an analytical overview
+                <li class="fragment">Python based tools are most advanced to prepare data and give an analytical overview
                 <li class="fragment">Pyelasticsearch allows to push that data into Elasticsearch
                 <li class="fragment">Elasticsearch allows for very flexible and fast queries on large amounts of data
                 <li class="fragment">The Browser is the ideal platform to explore data
@@ -995,34 +999,47 @@ pieChartCarriers
             </ul>
         </section>
 
-        <section>
-            <h2>Your turn</h2>
-            <p class="fragment">Do you have (possibly large) data set worth exploring?</p>
-            <p class="fragment">Best to have it as a CSV or similar (because that might be the hardest and most boring part)</p>
-            <p class="fragment">Maybe try some of the techniques described here</p>
-            <p class="fragment">Complete Code:
-                <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
-            </p>
-            <p class="fragment">Slides: <a href="http://bit.ly/data-exploration-javazone">
-                http://bit.ly/data-exploration-javazone</a></p>
-            <p class="fragment">Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
-        </section>
 
         <section>
-            <h3>Bonus Level: How to Start Experimenting?</h3>
-            <p class="fragment">Try out analysis part (requires numpy, pandas, matplotlib, seaborn, sklearn to be installed)</p>
-            <pre class="fragment"><code class="no-highlight">python big-data-visualization/code/es/analysis_pandas.py</code></pre>
-            <p class="fragment">Try crossfiler as an interactive console</p>
-            <p class="fragment">Like <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a>, but without installation in the browser</p>
-            <p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console (Chrome is my recommendation)</a></p>
-            <p class="fragment">Question: What is the longest departure and the longest arrival delay?</p>
-            <!--arrDelay.top(10)-->
-            <!-- >; ArrDelay: "1473"-->
-            <!--depDelay.top(10)-->
-            <!-- >; DepDelay: "1477"-->
-            <!--Same flight!-->
-            <!--What is the story here?-->
+            <h1>Thank you!</h1>
+
+            <p>Slides: <a href="http://bit.ly/data-exploration-odsc">
+                http://bit.ly/data-exploration-odsc</a></p>
+            <p>Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
         </section>
+
+        <!--<section>-->
+            <!--<h2>Your turn</h2>-->
+            <!--<p class="fragment">Do you have (possibly large) data set worth exploring?</p>-->
+            <!--<p class="fragment">Best to have it as a CSV or similar (because that might be the hardest and most boring part)</p>-->
+            <!--<p class="fragment">Maybe try some of the techniques described here</p>-->
+            <!--<p class="fragment">Complete Code:-->
+                <!--<a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>-->
+            <!--</p>-->
+            <!--<p class="fragment">Slides: <a href="http://bit.ly/data-exploration-javazone">-->
+                <!--http://bit.ly/data-exploration-javazone</a></p>-->
+            <!--<p class="fragment">Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Bonus Level: How to Start Experimenting?</h3>-->
+            <!--<p class="fragment">Try out analysis part (requires numpy, pandas, matplotlib, seaborn, sklearn to be installed)</p>-->
+            <!--<pre class="fragment"><code class="no-highlight">python big-data-visualization/code/es/analysis_pandas.py</code></pre>-->
+            <!--<p class="fragment">Try crossfiler as an interactive console</p>-->
+            <!--<p class="fragment">Like <a href="http://jupyter.org/" target="_blank">Jupyter Notebook</a>, but without installation in the browser</p>-->
+            <!--<p class="fragment"><a target="_blank" href="code/crossfilter-911.html">Open interactive console (Chrome is my recommendation)</a></p>-->
+            <!--<p class="fragment">Question: What is the longest departure and the longest arrival delay?</p>-->
+            <!--&lt;!&ndash;arrDelay.top(10)&ndash;&gt;-->
+            <!--&lt;!&ndash; >; ArrDelay: "1473"&ndash;&gt;-->
+            <!--&lt;!&ndash;depDelay.top(10)&ndash;&gt;-->
+            <!--&lt;!&ndash; >; DepDelay: "1477"&ndash;&gt;-->
+            <!--&lt;!&ndash;Same flight!&ndash;&gt;-->
+            <!--&lt;!&ndash;What is the story here?&ndash;&gt;-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h1>Thank you</h1>-->
