@@ -567,27 +567,27 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--</code></pre>-->
         <!--</section>-->
 
-        <!--<section>-->
-            <!--<h3>Sample Code: Preparing Elasticsearch</h3>-->
-            <!--<p>Create a mapping to make types clear to Elasticsearch</p>-->
-            <!--<pre><code contenteditable data-trim class="line-numbers python">-->
-<!--mapping = {-->
-    <!--'flight': {-->
-        <!--'properties': {-->
-            <!--'SecurityDelay': {-->
-                <!--'type': 'integer',-->
-                <!--'null_value': -1-->
-            <!--},-->
-            <!--'Origin': {-->
-                <!--'type': 'string'-->
-            <!--},-->
-            <!--'Cancelled': {-->
-                <!--'type': 'boolean'-->
-            <!--},-->
-            <!--...-->
-<!--es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )-->
-            <!--</code></pre>-->
-        <!--</section>-->
+        <section>
+            <h3>Sample Code: Preparing Elasticsearch</h3>
+            <p>Create a mapping to make types clear to Elasticsearch</p>
+            <pre><code contenteditable data-trim class="line-numbers python">
+mapping = {
+    'flight': {
+        'properties': {
+            'SecurityDelay': {
+                'type': 'integer',
+                'null_value': -1
+            },
+            'Origin': {
+                'type': 'string'
+            },
+            'Cancelled': {
+                'type': 'boolean'
+            },
+            ...
+es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
+            </code></pre>
+        </section>
 
         <!--<section>-->
             <!--<h3>Sample Code: Reading and Cleaning</h3>-->
@@ -781,10 +781,21 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--</div>-->
         <!--</section>-->
 
-        <!--<section>-->
-            <!--<h2>Initial Design of our Dashboard</h2>-->
-            <!--<img class="fragment" src="design.jpg" height="500px">-->
-        <!--</section>-->
+        <section>
+            <h2>Initial Design of our Dashboard</h2>
+            <img class="fragment" src="design.jpg" height="500px">
+        </section>
+
+        <section>
+            <h2>Implementation</h2>
+            <div class="fragment">
+                <a href="code/dc-911-es.html" target="_blank">
+                    <img src="screenshot_wy_dec.png">
+                </a>
+                <p>User can choose partition with dynamic query to Elasticsearch</p>
+            </div>
+        </section>
+
 
         <!--<section>-->
             <!--<h1>Part #1: Order</h1>-->
@@ -799,36 +810,36 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--</div>-->
         <!--</section>-->
 
-        <section>
-            <h3>Display Carriers as a Pie Chart</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
-
-                <!--<section>-->
-            <!--<h3>Code for creating the pie chart</h3>-->
-<!--<pre><code data-trim contenteditable class="line-numbers">-->
-<!--var pieChartCarriers = dc.pieChart("#pie");-->
-<!--pieChartCarriers-->
-        <!--.slicesCap(5)-->
-        <!--.dimension(carrier)-->
-        <!--.group(carrier.group().reduceCount());-->
-<!--</code></pre>-->
+        <!--<section>-->
+            <!--<h3>Display Carriers as a Pie Chart</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>-->
+            <!--</div>-->
         <!--</section>-->
+
+        <section>
+            <h3>Code Sample: creating the pie chart</h3>
+<pre><code data-trim contenteditable class="line-numbers">
+var pieChartCarriers = dc.pieChart("#pie");
+pieChartCarriers
+        .slicesCap(5)
+        .dimension(carrier)
+        .group(carrier.group().reduceCount());
+</code></pre>
+        </section>
 
         <!--<section>-->
             <!--<h1>Part #2: Connections</h1>-->
         <!--</section>-->
 
-        <section>
-            <h3>Origin, Destination, Carriers combined</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Origin, Destination, Carriers combined</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h1>Part #3: Time</h1>-->
@@ -842,13 +853,13 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--</div>-->
         <!--</section>-->
 
-        <section>
-            <h3>Filtering using Brushes</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Filtering using Brushes</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h3>Code for creating the line chart</h3>-->
@@ -865,13 +876,13 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--<h1>Part #4: Map</h1>-->
         <!--</section>-->
 
-        <section>
-            <h3>Map</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Map</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>-->
+                <!--<div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h3>Code for creating the map</h3>-->
@@ -917,14 +928,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <!--</ul>-->
         <!--</section>-->
 
-        <section>
-            <h3>User can choose partition with dynamic Query to Elasticsearch</h3>
-            <div class="fragment">
-                <a href="code/dc-911-es.html" target="_blank">
-                    <img src="screenshot_wy_dec.png">
-                </a>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>User can choose partition with dynamic Query to Elasticsearch</h3>-->
+            <!--<div class="fragment">-->
+                <!--<a href="code/dc-911-es.html" target="_blank">-->
+                    <!--<img src="screenshot_wy_dec.png">-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h3>Accessing Elasticsearch via REST</h3>-->
@@ -1005,6 +1016,10 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
             <p>Slides: <a href="http://bit.ly/data-exploration-odsc">
                 http://bit.ly/data-exploration-odsc</a></p>
+            <p>Complete Code:
+                <a href="https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code">https://github.com/DJCordhose/big-data-visualization/tree/gh-pages/code</a>
+            </p>
+
             <p>Ping me for questions / help / comments: <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></p>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
