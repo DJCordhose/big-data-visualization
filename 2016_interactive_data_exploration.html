@@ -127,24 +127,6 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section class="todo">
-            <h3>TODO</h3>
-            <ol>
-                <li>Klare Beispiele für überraschende Erkenntnisse durch klicken herausarbeiten:
-                <ul>
-                    <li>Z.B.: was ist die Samstags-Beule?
-                    <li>Gibt es eine Geschichte für die extrem Lange Verzögerung?
-                </ul>
-                </li>
-            </ol>
-            <pre>
-- Fragments aus Folien heraus nehmen
-- Screenshots in Größe einpassen
-- Ausdünnen
-- Benefits und Drawbacks aktualisieren
-            </pre>
-        </section>
-
         <section>
             <h1>Interactive Data Exploration in the Browser</h1>
             <p>
@@ -153,10 +135,19 @@
         </section>
 
         <section>
-            <h1>Using Interactive Data Visualization to
-                <br><em>explore the world</em></h1>
+        <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+        <img src="twitter-creatuluw.png">
+        </a>
         </section>
 
+        <section>
+            <h3><small>Try showing your #data from another perspective with #dataviz</small></h3>
+            <a href="https://twitter.com/Creatuluw/status/749151998415634432" target="_blank">
+                <img src="dataviz-cat.jpg" height="500px">
+            </a>
+            <p><small><a target="_blank" href="https://twitter.com/Creatuluw">@Creatuluw</a></small></p>
+
+        </section>
 
         <section>
             <h2>But why in the Browser</h2>
@@ -165,35 +156,42 @@
         </section>
 
         <section>
-            <h2>Example: Exploring all data sets of domestic US air-traffic</h2>
-            <h2>for September 2001</h2>
+            <h2>Example Project:</h2>
+            <h2>Exploring <em>all</em> domestic US flights</h2>
+            <h2>for 2001</h2>
+            <img src="airline-pictures/a26.jpg" height="200px">
+            <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
         </section>
 
         <section>
             <h2>The raw data</h2>
-            <h3>approx. 400,000 data sets</h3>
-            <h3>approx. 11MB of data</h3>
-            <h3>9 colums</h3>
-            <pre><code data-trim class="nohighlight">
-> head 09.csv
-Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
-9,5,US,67,22,31,MCO,CLT,468
-9,6,US,73,14,19,MCO,CLT,468
-9,7,US,70,43,54,MCO,CLT,468
-</code></pre>
-            <pre><code data-trim class="nohighlight">
-> ls -hl 09.csv
--rw-r--r--  1 olli  staff    11M Oct 27  2015 09.csv
+            <p>approx. 6 million data sets</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> wc -l 2001.csv
+5967781 2001.csv
             </code></pre>
-            <pre><code data-trim class="nohighlight">
-> wc -l 09.csv
-391375 09.csv
+            <p>approx. 600 MB of data</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> ls -hl 2001.csv
+573M Jan 10  2016 2001.csv
             </code></pre>
+            <p>29 colums, data has gaps, but looks consistent</p>
+            <pre><code contenteditable data-trim class="nohighlight">
+> head 2001.csv
+Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay
+2001,1,17,3,1806,1810,1931,1934,US,375,N700��,85,84,60,-3,-4,BWI,CLT,361,5,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,18,4,1805,1810,1938,1934,US,375,N713��,93,84,64,4,-5,BWI,CLT,361,9,20,0,NA,0,NA,NA,NA,NA,NA
+2001,1,19,5,1821,1810,1957,1934,US,375,N702��,96,84,80,23,11,BWI,CLT,361,6,10,0,NA,0,NA,NA,NA,NA,NA
+2001,1,20,6,1807,1810,1944,1934,US,375,N701��,97,84,66,10,-3,BWI,CLT,361,4,27,0,NA,0,NA,NA,NA,NA,NA</code></pre>
         </section>
 
         <section>
             <h2>No specific task or question</h2>
             <h3>Exploring what just might be interesting</h3>
+            <h3>Finding the unknown unknowns</h3>
+            <div>
+                <img src="icons/question-mark.jpg">
+            </div>
         </section>
 
         <section>
@@ -207,7 +205,7 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
         </section>
 
         <section>
-            <h1>Google Sheets</h1>
+            <h1>I: Google Sheets</h1>
             <!--To begin with something familiar to the audience -->
         </section>
 
@@ -229,51 +227,72 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             </code></pre>
         </section>
 
-        <section>
-            <h2>Import</h2>
-            <img src="google_sheets/screenshot_import.png">
-        </section>
+        <!--<section>-->
+            <!--<h2>Import</h2>-->
+            <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
 
-        <section>
-            <h2>Data</h2>
-            <img src="google_sheets/screenshot_data.png">
-        </section>
+            <!--<img src="google_sheets/screenshot_import.png">-->
+                <!--</a>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Data</h2>-->
+            <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
+            <!--<img src="google_sheets/screenshot_data.png">-->
+                <!--</a>-->
+        <!--</section>-->
 
         <section>
             <h2>Filters</h2>
-            <img src="google_sheets/screenshot_filters.png">
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+
+            <img src="google_sheets/screenshot_filters.png" height="500px">
+                </a>
         </section>
 
         <section>
             <h2>Filters: All flights between JFK and STL</h2>
             <p>Physically change the data</p>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+
             <img src="google_sheets/screenshot_jfk_stl.png">
+                </a>
         </section>
 
         <section>
             <h2>Filters Views</h2>
             <p>Just a view on the data, more than one possible</p>
             <p>Departure Delay > 200 minutes</p>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+
             <img src="google_sheets/screenshot_filter_view.png">
+                </a>
         </section>
 
         <section>
             <h2>Diagram</h2>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+
+            <img src="google_sheets/screenshot_chart_per_day.png" height="400px">
+                </a>
             <p>How many flights per day?</p>
-            <img src="google_sheets/screenshot_chart_per_day.png">
         </section>
 
         <section>
             <h2>Mini Dashboard</h2>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+            <img src="google_sheets/screenshot_mini_dashboard.png" height="400px">
+                </a>
             <p>flights per day / carriers / delay</p>
-            <img src="google_sheets/screenshot_mini_dashboard.png">
         </section>
 
-        <section>
-            <h2>Pivot Tables</h2>
-            <p>Flights from NYC to SFO or LAX</p>
-            <img src="google_sheets/screenshot_pivot.png">
-        </section>
+        <!--<section>-->
+            <!--<h2>Pivot Tables</h2>-->
+            <!--<p>Flights from NYC to SFO or LAX</p>-->
+            <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
+            <!--<img src="google_sheets/screenshot_pivot.png">-->
+                <!--</a>-->
+        <!--</section>-->
 
         <section>
             <h2>Explore</h2>
@@ -306,64 +325,41 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             <h2>What I have learned</h2>
             <p>Without asking</p>
             <ul>
-                <li>long arrival delays are caused be departure delays
+                <li>long arrival delays are caused by departure delays
                 <li>per 100 minutes you can fly around 857 miles
                 <li>some flights where delayed more than 1000 minutes (more than 16 hours)
                 <li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)
             </ul>
         </section>
 
-        <section>
-            <h2>There are no limits</h2>
-            <p>You can express any programm in a Spreadsheet</p>
-            <a target="_blank" href="http://www.slideshare.net/Felienne/spreadsheets-for-developers">
-                http://www.slideshare.net/Felienne/spreadsheets-for-developers
-            </a>
-        </section>
+        <!--<section>-->
+            <!--<h2>There are no limits</h2>-->
+            <!--<p>You can express any programm in a Spreadsheet</p>-->
+            <!--<a target="_blank" href="http://www.slideshare.net/Felienne/spreadsheets-for-developers">-->
+                <!--http://www.slideshare.net/Felienne/spreadsheets-for-developers-->
+            <!--</a>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Live Sample</h2>-->
+            <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
+                <!--https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing-->
+            <!--</a>-->
+        <!--</section>-->
 
         <section>
-            <h2>Live Sample</h2>
-            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
-                https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing
-            </a>
-        </section>
-
-        <section class="todo">
-            <h3>Benefits</h3>
-            <ul>
-                <li>
-            </ul>
-        </section>
-
-        <section class="todo">
-            <h3>Drawbacks</h3>
-            <ul>
-                <li>
-            </ul>
-        </section>
-
-        <section class="todo">
-            <h1>D3 with crossfilter and DC</h1>
+            <h1>II: D3 with crossfilter and DC</h1>
             <p>Things get more interactive and connected</p>
             <p>Using full data set of September (10x the data)</p>
         </section>
 
         <section>
-        <h3>D3.js: Dynamic graphics in the browser</h3>
-        <a target="_blank" href="d3-talks/20111116/#14">
-            <img src="d3-airport-connections.png" height="400px">
-        </a>
-        </section>
-
-        <section>
-            <h3>D3.js</h3>
-            <ul class="fragment">
-                <li><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
-                <li>Transform your data into visualizations in the browser
-                <li>Style of programming declarative
-                <li>Main field of use are diagrams using SVG (but D3 is not limited to that)
-                <li>Data is bound to SVG elements which change once the data changes
-            </ul>
+            <h3>D3.js: Dynamic graphics in the browser</h3>
+            <a target="_blank" href="d3-talks/20111116/#14">
+                <img src="d3-airport-connections.png" height="400px">
+            </a>
+            <p>Data based vector graphics (SVG)</p>
+            <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
         </section>
 
         <section>
@@ -392,13 +388,13 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             </ul>
         </section>
 
-        <section>
-            <h3>Graphical Encodings</h3>
-            <div class="fragment">
-                <img src="visualizations.png" height="250px">
-                <p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>
-            </div>
-        </section>
+        <!--<section>-->
+            <!--<h3>Graphical Encodings</h3>-->
+            <!--<div class="fragment">-->
+                <!--<img src="visualizations.png" height="250px">-->
+                <!--<p><small>http://strataconf.com/big-data-conference-ny-2015/public/schedule/detail/43411</small></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h2>Initial Design</h2>
@@ -406,95 +402,18 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
         </section>
 
         <section>
-            <h1>Order</h1>
-        </section>
-
-        <section>
-            <h3>Ordering Values: Possisbly first pie chart ever</h3>
-            <div  class="fragment">
-                <img src="proportions-of-the-turkish-empire_502910c4b1b6b_w1500.jpeg" height="400px">
-                <p><small>http://blog.visual.ly/12-great-visualizations-that-made-history/</small></p>
-
-            </div>
-        </section>
-
-        <section>
-            <h3>Order (Part #1): Display Carriers as a Pie Chart</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-pie-carrier.html"><img src="screenshot-pie.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-pie-carrier.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
-
-        <section>
-            <h1>Connect</h1>
-        </section>
-
-        <section>
-            <h3>Connect (Part #2): Origin, Destination, Carriers combined</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-select-dest.html"><img src="screenshot-org-dest-carrier.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-select-dest.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
-
-        <section>
-            <h1>Time</h1>
-        </section>
-
-        <section>
-            <h2>Time Series: London Underground ad from 1928</h2>
-            <div class="fragment">
-                <a target="_blank" href="http://www.citymetric.com/sites/default/files/bodyimage_201505/old_tube_ad_1.jpg"><img src="old_tube_ad_1.jpg" height="400px"></a>
-                <p><small>via <a target="_blank" href="http://www.citymetric.com/transport/1928-ad-london-underground-combines-data-awesome-1513">http://www.citymetric.com/</a></small></p>
-            </div>
-        </section>
-
-        <section>
-            <h3>Time Series (Part #3): Filtering using Brushes</h3>
-            <div class="fragment">
-                <a target="_blank" href="code/dc-911-select-dest-timeline.html"><img src="screenshot-aa-ua-to-nyc.png" height="400px"></a>
-                <div><a target="_blank" href="code/dc-911-select-dest-timeline.html">Run (have a little bit patience)</a></div>
-            </div>
-        </section>
-
-        <section>
-            <h1>Map</h1>
-        </section>
-
-        <section>
-            <h3>Map (Part #4): All flights from Hawaii</h3>
+            <h3>Implementation using a static dump of September</h3>
             <div class="fragment">
                 <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
             </div>
         </section>
 
-        <section class="todo">
-            <h3>Benefits</h3>
-            <ul>
-                <li>
-            </ul>
-        </section>
-
-        <section class="todo">
-            <h3>Drawbacks</h3>
-            <ul>
-                <li>
-            </ul>
-        </section>
-
-        <section class="todo">
-            <h1>ELK</h1>
+        <section>
+            <h1>III: ELK</h1>
             <p>Things scale</p>
             <p>Using all of 2001 (once more 10x the data)</p>
-
-            <pre>
-- Grundproblem: Access vs Excel, oder: große Datenmengen vs Interaktivität
-- Data needs to be (physically) close to the interaction to make it fast and thus most useful
-- Beliebige Datenmengen mit Interaktionen: ELK
-</pre>
-
+            <p>Data needs to be (physically) close to the interaction to make it fast and thus most useful</p>
         </section>
 
         <section>
@@ -522,12 +441,12 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             </ul>
         </section>
 
-        <section>
-            <img src="twitter_big_data_ram.png">
-            <p><small><a target="_blank" href="https://twitter.com/garybernhardt/status/600783000331112449">
-                https://twitter.com/garybernhardt/status/600783000331112449
-            </a></small></p>
-        </section>
+        <!--<section>-->
+            <!--<img src="twitter_big_data_ram.png">-->
+            <!--<p><small><a target="_blank" href="https://twitter.com/garybernhardt/status/600783000331112449">-->
+                <!--https://twitter.com/garybernhardt/status/600783000331112449-->
+            <!--</a></small></p>-->
+        <!--</section>-->
 
         <section>
             <h2>Kibana</h2>
@@ -542,19 +461,13 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
         <section>
             <h3>Discover Data</h3>
             <div class="fragment">
-                <p>using adhoc queries</p>
+                <p>using Kibana adhoc queries</p>
                 <a href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-08-31T22:00:00.000Z',mode:quick,to:'2001-09-30T22:00:00.000Z'))&_a=(columns:!(Cancelled,Origin,Dest,UniqueCarrier),filters:!(),index:expo2009_airline,interval:h,query:(query_string:(analyze_wildcard:!t,query:'*')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:ArrDelay,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
                     <img src="screenshot_kibana_discover.png">
                 </a>
+                <p>Demo: filter for <em>'Cancelled:false'</em></p>
+                <p><small>Interactive Dashboards also possible</small></p>
             </div>
-        </section>
-
-        <section>
-            <h3>Demo</h3>
-            <p class="fragment">Flights from LA or Newyark to Denver or Clinton between September 10th 2001, 11:12 and 15:38?</p>
-            <a class="fragment" href="http://localhost:5601/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2001-09-10T09:12:45.957Z',mode:absolute,to:'2001-09-10T13:38:17.872Z'))&_a=(columns:!(_type,_index,Dest,Origin),filters:!(),index:expo2009_airline,interval:auto,query:(query_string:(analyze_wildcard:!t,query:'Dest%3DLAX,EWR%20AND%20Origin%3DDEN,CLT')),sort:!('@timestamp',desc),vis:(aggs:!((params:(field:_type,orderBy:'2',size:20),schema:segment,type:terms),(id:'2',schema:metric,type:count)),type:histogram))&indexPattern=expo2009_airline&type=histogram" target="_blank">
-                <img src="screenshot_kibana_discover2.png" height="300">
-            </a>
         </section>
 
         <section>
@@ -578,25 +491,7 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
         </section>
 
         <section>
-            <h3>Benefits</h3>
-            <ul class="fragment">
-                <li>works on any size of data
-                <li>with a little practice very easy to do
-                <li>provides widgets out of the box
-            </ul>
-        </section>
-
-        <section>
-            <h3>Drawbacks</h3>
-            <ul class="fragment">
-                <li>limited in layout and widgets
-                <li>each update takes time
-                <li>smooth and continuous interaction limited
-            </ul>
-        </section>
-
-        <section>
-            <h1>D3 loading Segments from ELK</h1>
+            <h1>IV: D3 loading Segments from ELK</h1>
             <ul class="fragment">
                 <li>Elasticsearch delivers data over HTTP/JSON using query
                 <li>D3/Crossfiler/DC display partion of data
@@ -605,7 +500,7 @@ Month,DayofMonth,UniqueCarrier,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance
             </ul>
         </section>
         <section>
-            <h3>Literally no one flying to Wyoming first half of December???</h3>
+            <h3>DC/D3/Crossfilter Dashboard loading segments from Elasticsearch</h3>
             <div>
                 <a href="code/dc-911-es.html" target="_blank">
                     <img src="screenshot_wy_dec.png">
