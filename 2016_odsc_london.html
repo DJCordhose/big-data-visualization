@@ -84,18 +84,15 @@
 <!-- - Start ES-->
 <!-- - Start kibana-->
 
+<!--Connect phone via USB-->
+<!--Turn on USB debugging-->
+<!--Turn on Show Taps-->
+<!--Connect via Vysor-->
+
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-
-        <!--<section class="todo">-->
-            <!--<pre>-->
-<!-- - Use-->
-  <!-- - http://rocketdatascience.org/?p=567q-->
-  <!-- - http://panelpicker.sxsw.com/vote/64388-->
-            <!--</pre>-->
-        <!--</section>-->
 
         <section>
             <h2>Big Data Visualisation in the browser using Elasticsearch, Pandas, and D3</h2>
@@ -232,6 +229,17 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
+            <h2>Sources for data</h2>
+            <ul>
+                <li><a href="https://www.google.com/publicdata/directory?hl=en_US&dl=en_US" target="_blank">Google Public Data Explorer</a>
+                <li><a href="http://ourworldindata.org/" target="_blank">Our World in Data: Loads of visualizations about how living standards changed</a>
+                <li><a href="http://data.worldbank.org/developers" target="_blank">
+                    World Bank Data</a>
+            </ul>
+        </section>
+
+
+        <section>
             <h2>Your turn #1</h2>
             <p class="fragment">Discuss these questions with your neighbors</p>
             <ol class="fragment">
@@ -240,6 +248,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                 <li>What kind of data do you already have in an accessible format?
                 <li>What tools do you use now to analyze your data? Do they work well?
             </ol>
+            <p class="fragment">You can get inspiration from data sources listed on previous slide</p>
             <p class="fragment">After 5 minutes report interesting results to full audience</p>
         </section>
 
@@ -825,19 +834,33 @@ console.log(flight.top(10));
             </ul>
         </section>
 
-        <!--<section>-->
-            <!--<h3>dc.js Demo</h3>-->
-            <!--<a target="_blank" href="http://dc-js.github.io/dc.js/"><img src="dc-nasdaq-screenshot.png" height="400px"></a>-->
-            <!--<p><small><a target="_blank" href="http://dc-js.github.io/dc.js/">Nasdaq 100 Index 1985-2012</a></small></p>-->
+        <section>
+            <h3>dc.js Demo</h3>
+            <a target="_blank" href="http://dc-js.github.io/dc.js/"><img src="dc-nasdaq-screenshot.png" height="400px"></a>
+            <p><small><a target="_blank" href="http://dc-js.github.io/dc.js/">Nasdaq 100 Index 1985-2012</a></small></p>
 
-            <!--&lt;!&ndash;-->
-            <!--Local version (needs WebStorm and an open visualization project)-->
-            <!--http://localhost:8888/web-->
-            <!--http://localhost:8888/web/vc-->
-            <!--http://localhost:8888/web/examples-->
-            <!--&ndash;&gt;-->
-        <!--</section>-->
+            <!--
+            Local version (needs WebStorm and an open visualization project)
+            http://localhost:8888/web
+            http://localhost:8888/web/vc
+            http://localhost:8888/web/examples
+            -->
+        </section>
 
+        <section>
+            <h2>This is very impressive</h2>
+            <p class="fragment">but is it also useful?</p>
+            <p class="fragment">Be careful not to overdo things</p>
+            <p class="fragment">Try not to display too many dimensions in order not to overwhelm the user</p>
+            <h3 class="fragment">3-4 should be a save choice, 5-6 might be possible if not too different in nature</h3>
+        </section>
+
+        <section>
+            <h2>The brain is great at recognizing patterns</h2>
+            <p class="fragment">Don't make it too hard for it, though</p>
+            <h3 class="fragment">Choose the graphical encodings...</h3>
+            <h3 class="fragment">... that are best visually decoded.</h3>
+        </section>
 
         <section>
             <h3>Graphical Encodings</h3>
@@ -1077,6 +1100,56 @@ chart
             <p><a href="https://en.wikipedia.org/wiki/Delta_Air_Lines" target="_blank">
                 Delta (DL) mainly flies from Atlanta (ATL) its headquarter and largest hub
             </a></p>
+        </section>
+
+        <section>
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="http://thegamma.net" target="_blank">TheGamma: Simple code behind interactive articles</a>
+                    <!--<li><a href="https://medium.com/accurat-studio/sketching-with-data-opens-the-mind-s-eye-92d78554565#.pv7dcyb43" target="_blank">-->
+                    <!--From Data to Story</a>-->
+                    <!--<li><a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">-->
+                    <!--Alternative / Possible Addition: PCA</a>-->
+                    <!--<li><a href="http://r2d3.us" target="_blank">-->
+                    <!--Mind blowing visual introduction to machine learning with D3</a>-->
+                    <!--<li><a href="https://medium.com/@mbostock/what-makes-software-good-943557f8a488" target="_blank">-->
+                    <!--Improvements in D3 4.0</a>-->
+                <li><a href="http://kyrandale.com/" target="_blank">Kyran Dale</a>: <a href="https://www.youtube.com/watch?v=h6BtbVioBz8" target="_blank">
+                    Data-visualization with Python and Javascript; Crafting a data-viz toolchain for the web</a>
+                <li><a href="http://setosa.io" target="_blank">
+                    Great D3 visualizations</a>
+                    <!--https://datanice.wordpress.com/2016/04/10/step-by-step-kaggle-competition-tutorial-->
+                    <!--<li><a href="https://www.kaggle.com/benhamner/d/uciml/iris/python-data-visualizations/notebook" target="_blank">-->
+                    <!--Python notebook style data visualizations tutorial-->
+                    <!--</a>-->
+                    <!--<li><a href="https://www.kaggle.com/msjgriffiths/d/kaggle/sf-salaries/explore-sf-salary-data" target="_blank">-->
+                    <!--Explore SF Salary Data-->
+                    <!--</a>-->
+                <li><a href="https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed/data-visualization-for-human-perception" target="_blank">
+                    Data Visualization for Human Perception
+                </a>
+                <li><a href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A404107" target="_blank">
+                    When Data Viz Trumps Statistics
+                </a>
+                <li><a href="http://rocketdatascience.org/?p=567q" target="_blank">
+                    Discovering and understanding patterns in highly dimensional data
+                </a>
+                <li><a href="https://www.youtube.com/watch?v=vc1bq0qIKoA" target="_blank">
+                The Future of Data Visualization
+                </a>
+                <li><a href="https://medium.com/@moritz_stefaner/well-formed-data-worlds-not-storieshere-is-the-video-of-my-talk-at-visualized-presenting-the-83d2da54c2d3#.8bwwn4tg2" target="_blank">
+                    Worlds, not Stories: data visualization as a macroscope
+                </a>
+                    <!--<li><a href="https://vis4.net/blog/posts/mastering-multi-hued-color-scales/" target="_blank">-->
+                    <!--Mastering Multi-hued Color Scales with Chroma.js-->
+                    <!--</a>-->
+
+
+
+                    <!--<li><a href="http://www.infoworld.com/article/3040708/analytics/data-visualization-showing-isnt-always-telling.html" target="_blank">-->
+                    <!--Data Visualization useful for gaining novel insights?-->
+                    <!--</a>-->
+            </ul>
         </section>
 
         <section>
