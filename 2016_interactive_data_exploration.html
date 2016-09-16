@@ -122,6 +122,10 @@
 <!--Englisch!-->
 <!--40 Minuten-->
 
+<!--Preparation: -->
+<!-- - Start ES-->
+<!-- - Start kibana-->
+
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
@@ -134,8 +138,8 @@
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p><a href="http://bit.ly/ml-data2day">
-                http://bit.ly/ml-data2day
+            <p><a href="http://bit.ly/dataviz-data2day">
+                http://bit.ly/dataviz-data2day
             </a></p>
 
         </section>
@@ -211,7 +215,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h1>I: Google Sheets</h1>
+            <h2>I: Google Sheets</h2>
             <!--To begin with something familiar to the audience -->
         </section>
 
@@ -354,7 +358,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         <!--</section>-->
 
         <section>
-            <h1>II: D3 with crossfilter and DC</h1>
+            <h2>II: D3 with crossfilter and DC</h2>
             <p>Things get more interactive and connected</p>
             <p>Using full data set of September (10x the data)</p>
         </section>
@@ -416,7 +420,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h1>III: ELK</h1>
+            <h2>III: ELK</h2>
             <p>Things scale</p>
             <p>Using all of 2001 (once more 10x the data)</p>
             <p>Data needs to be (physically) close to the interaction to make it fast and thus most useful</p>
@@ -472,7 +476,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                     <img src="screenshot_kibana_discover.png">
                 </a>
                 <p>Demo: filter for <em>'Cancelled:false'</em></p>
-                <p><small>Interactive Dashboards also possible</small></p>
+                <!--<p><small>Interactive Dashboards also possible</small></p>-->
             </div>
         </section>
 
@@ -497,7 +501,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h1>IV: D3 loading Segments from ELK</h1>
+            <h2>IV: D3 loading Segments from ELK</h2>
             <ul class="fragment">
                 <li>Elasticsearch delivers data over HTTP/JSON using query
                 <li>D3/Crossfiler/DC display partion of data
@@ -542,7 +546,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             position: relative;
             top: -40px">Final Matrix</h3>
 
-            <div style="transform: scale(0.75);
+            <div class="fragment" style="transform: scale(0.75);
             position: relative;
             top: -120px">
             <small>
@@ -721,7 +725,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             <p>Code for all examples:
                 <a href="https://github.com/DJCordhose/big-data-visualization/code">https://github.com/DJCordhose/big-data-visualization/code</a>
             </p>
-            <p>Slides: <a href="https://djcordhose.github.io/big-data-visualization/2016_interactive_data_exploration.html">https://djcordhose.github.io/big-data-visualization/2016_interactive_data_exploration.html</a></p>
+            <p>Slides: <a href="http://bit.ly/dataviz-data2day">http://bit.ly/dataviz-data2day</a></p>
             <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
         </section>
     </div>
