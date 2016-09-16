@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>The Macroscope</title>
+    <title>Interactive Data Exploration in the Browser</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -128,10 +128,16 @@
     <div class="slides">
 
         <section>
-            <h1>Interactive Data Exploration in the Browser</h1>
+            <h2>Interactive Data Exploration in the Browser</h2>
+            <h4>data2day 2016</h4>
             <p>
-                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
             </p>
+            <p><a href="http://bit.ly/ml-data2day">
+                http://bit.ly/ml-data2day
+            </a></p>
+
         </section>
 
         <section>
@@ -728,6 +734,12 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 <script>
 //    $('section').attr('data-background-image', "backgrounds/light-sky3.jpg");
     $('section').attr('data-background-image', "backgrounds/light-transparent.jpg");
+</script>
+<script>
+    // only presentation version has fragments
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        $('.fragment').removeClass('fragment');
+    }
 </script>
 
 <script>
