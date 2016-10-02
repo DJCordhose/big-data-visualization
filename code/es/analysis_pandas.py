@@ -40,9 +40,9 @@ for c in text_cols:
     # print(flist)
     le.fit(flist)
     leo = le.transform(flist)
-    print (c,flist,leo)
+    # print (c,flist,leo)
     df[c+'_'] = df[c]
-    df[c+'_'].replace(flist,value=leo,inplace=True,axis=0)
+    df[c+'_'].replace(flist,value=leo,inplace=True)
 
 df.fillna(-1, inplace=True)
 
@@ -57,9 +57,17 @@ cols_for_correlation = [
     u'Dest_'
 ]
 plt.clf()
-sns.corrplot(df[cols_for_correlation])
+# deprecated and removed:
+# sns.corrplot(df[cols_for_correlation])
+# https://github.com/mwaskom/seaborn/issues/663
+# https://stanford.edu/~mwaskom/software/seaborn/examples/network_correlations.html
+# https://stanford.edu/~mwaskom/software/seaborn/generated/seaborn.heatmap.html#seaborn.heatmap
+corrmat = df[cols_for_correlation].corr()
+sns.heatmap(corrmat, annot=True)
 figure = plt.gcf()
-figure.set_size_inches(8, 6)
+figure.set_size_inches(10, 10)
+# for notebook
+# plt.show()
 plt.savefig(IMG_DIR+'/corr.png', dpi = DPI)
 
 
@@ -68,7 +76,9 @@ def plot(col1, col2):
     # https://stanford.edu/~mwaskom/software/seaborn/generated/seaborn.jointplot.html#seaborn.jointplot
     sns.jointplot(df[col1],df[col2],dropna=True, kind="hex")
     figure = plt.gcf()
-    figure.set_size_inches(8, 6)
+    figure.set_size_inches(10, 10)
+    # for notebook
+    # plt.show()
     plt.savefig('%s/%s_%s.png'%(IMG_DIR, col1, col2), dpi = DPI)
 
 # more details for correlations found
