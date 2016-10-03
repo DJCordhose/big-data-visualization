@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Interactive Data Exploration in the Browser</title>
+    <title>Big Data Exploration Tools</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -132,9 +132,11 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section>
-            <h2>Interactive Data Exploration in the Browser</h2>
-            <h4>data2day 2016</h4>
+        <section data-transition="zoom">
+            <h2>Interactive Big Data Exploration Tools in the Browser</h2>
+            <h3>A Survey</h3>
+            <h4><a target="_blank" href="http://www.data2day.de/veranstaltung-5122-interaktive-datenanalyse-im-browser.html?id=5122">
+                data2day 2016</a></h4>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
@@ -145,7 +147,7 @@
 
         </section>
 
-        <section>
+        <section data-transition="zoom">
             <p>
                 <a target="_blank" href="https://entwickler.de/press/javascript-fuer-java-entwickler-4-168852.html">
                     <img src="intro/s-k_JavaScript_fuer_JavaEntwickler_Auflage3_2400x_rgb-220x353@2x.jpg" width="200">
@@ -180,7 +182,8 @@
         <section>
             <h2>But why in the Browser</h2>
             <h3 class="fragment">1: Zero-Installation for the user</h3>
-            <h3 class="fragment">2: Interactivity coming naturally</h3>
+            <h3 class="fragment">2: Available on almost every device</h3>
+            <h3 class="fragment">3: Interactivity comes naturally</h3>
         </section>
 
         <section>
@@ -223,12 +226,13 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Options</h3>
+            <h3>Options for Tools</h3>
             <ol>
                 <li>Google Sheets
                 <li>Elasticsearch / Kibana (ELK)
                 <li>D3 with crossfilter and DC
                 <li>D3 loading Segments from ELK
+                <li>(Jupyter Notebooks)
             </ol>
         </section>
 
@@ -255,6 +259,36 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </code></pre>
         </section>
 
+        <section>
+            <h2>Other Standard tools</h2>
+            <ul>
+                <li class="fragment">Excel (2011 Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loads data relatively fast
+                        <li>truncates after 1M lines
+                    </ul>
+                </li>
+                <li class="fragment">Google Sheets: <em style="color: red">nope</em>
+                    <ul>
+                        <li>limited to 2.000.000 cells (not lines)
+                        <li>does not load data at all
+                    </ul>
+                </li>
+                <li class="fragment">Numbers (Mac): <em style="color: red">truncates</em>
+                    <ul>
+                        <li>loading takes long
+                        <li>truncates after 64k lines
+                    </ul>
+                </li>
+                <li class="fragment">Emacs: <em style="color: red">Low-level operations possible</em>
+                    <ul>
+                        <li>loads data very fast with almost no memory overhead
+                        <li>all operations work smoothly, even editing and saving
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
         <!--<section>-->
             <!--<h2>Import</h2>-->
             <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
@@ -276,16 +310,16 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
             <img src="google_sheets/screenshot_filters.png" height="500px">
                 </a>
+            <p>Physically change the data, just one possible</p>
         </section>
 
-        <section>
-            <h2>Filters: All flights between JFK and STL</h2>
-            <p>Physically change the data</p>
-            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+        <!--<section>-->
+            <!--<h2>Filters: All flights between JFK and STL</h2>-->
+            <!--<a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">-->
 
-            <img src="google_sheets/screenshot_jfk_stl.png">
-                </a>
-        </section>
+            <!--<img src="google_sheets/screenshot_jfk_stl.png">-->
+                <!--</a>-->
+        <!--</section>-->
 
         <section>
             <h2>Filters Views</h2>
@@ -295,6 +329,19 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
             <img src="google_sheets/screenshot_filter_view.png">
                 </a>
+        </section>
+
+        <section>
+            <h2>Can already be used for interactive data exploration ...</h2>
+            <h3 class="fragment">... even possible without logging in (for you)</h3>
+        </section>
+
+        <section>
+            <h3>Demo: Creating a filter view</h3>
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+                <img src="google_sheets/create_filter_view.png" height="500px">
+            </a>
+            <p>Origins of Delta flights to STL</p>
         </section>
 
         <section>
@@ -308,7 +355,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
 
         <section>
             <h2>Mini Dashboard</h2>
-            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit#gid=1273912450">
             <img src="google_sheets/screenshot_mini_dashboard.png" height="400px">
                 </a>
             <p>flights per day / carriers / delay</p>
@@ -325,9 +372,18 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         <section>
             <h2>Explore</h2>
             <p>The best is yet to come</p>
-            <img src="google_sheets/screenshot_explore.png">
-            <br>
-            <img height="300px" src="google_sheets/screenshot_explore2.png">
+            <a target="_blank" href="https://docs.google.com/spreadsheets/d/1WrexNeH8WD00YbFhnr5m-oIywza4-XtOUr3viu1Q0aM/edit?usp=sharing">
+            <div>
+                    <img src="google_sheets/screenshot_explore.png">
+                    <br>
+                    <img height="300px" src="google_sheets/screenshot_explore2.png">
+
+            </div>
+                </a>
+        </section>
+
+        <section>
+            <h2>After quite some time, you get this: </h2>
         </section>
 
         <section>
@@ -349,16 +405,16 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
             </div>
         </section>
 
-        <section>
-            <h2>What I have learned</h2>
-            <p>Without asking</p>
-            <ul>
-                <li>long arrival delays are caused by departure delays
-                <li>per 100 minutes you can fly around 857 miles
-                <li>some flights where delayed more than 1000 minutes (more than 16 hours)
-                <li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h2>What I have learned</h2>-->
+            <!--<p>Without asking</p>-->
+            <!--<ul>-->
+                <!--<li>long arrival delays are caused by departure delays-->
+                <!--<li>per 100 minutes you can fly around 857 miles-->
+                <!--<li>some flights where delayed more than 1000 minutes (more than 16 hours)-->
+                <!--<li>there seems to be a flight distance of 4962 miles in the US (around 10 hours of flight)-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h2>There are no limits</h2>-->
@@ -430,11 +486,19 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Implementation using a static dump of September</h3>
+            <h3>Introducing sophisticated and responsive Widgets</h3>
             <div class="fragment">
-                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png" height="400px"></a>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_hawaii_map.png"></a>
+            </div>
+        </section>
+
+        <section>
+            <h3>Demo: Implementation using a static dump of September</h3>
+            <div>
+                <a target="_blank" href="code/dc-911-map.html"><img src="screenshot_dl_stl.png" height="400px"></a>
                 <div><a target="_blank" href="code/dc-911-map.html">Run (have a little bit patience)</a></div>
             </div>
+            <p>Again: Origins of Delta flights to STL</p>
         </section>
 
         <section>
@@ -499,13 +563,14 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
-            <h3>Flights Dashboard #1</h3>
-            <div class="fragment">
+            <h3>Demo: Flights Dashboard</h3>
+            <div>
                 <a href="http://localhost:5601/app/kibana#/dashboard/Flights" target="_blank">
                     <img src="screenshot_kibana_dashboard.png" height="400">
                 </a>
                 <p>Clicks trigger requests, responses update graphics</p>
             </div>
+            <p>Again: Origins of Delta flights to STL</p>
         </section>
 
         <section>
@@ -602,7 +667,7 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
                     <td class="pos"></td>
                     <td class="neutral"></td>
                     <td class="pos"></td>
-                    <td class="neg"></td>
+                    <td class="neutral"><center><small>(with Bokeh)</small></center></td>
                 </tr>
                 <tr>
                     <th>Unlimited data size</th>
