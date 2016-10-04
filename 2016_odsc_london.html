@@ -328,6 +328,38 @@ df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
         </div>
     </section>
 
+        <section>
+            <h3>Missing data?</h3>
+            <div>
+                <pre>
+> df.count()
+DepTime               9611
+CRSDepTime           10000
+ArrTime               9590
+CRSArrTime           10000
+UniqueCarrier        10000
+FlightNum            10000
+TailNum              10000
+ActualElapsedTime     9590
+CRSElapsedTime       10000
+AirTime               9590
+ArrDelay              9590
+DepDelay              9611
+Origin               10000
+Dest                 10000
+Distance             10000
+TaxiIn               10000
+TaxiOut              10000
+Cancelled            10000
+CancellationCode         0
+Diverted             10000
+CarrierDelay             0
+WeatherDelay             0
+NASDelay                 0
+SecurityDelay            0
+LateAircraftDelay        0</pre>
+            </div>
+        </section>
 
         <section>
             <h3>Sample Code: Creating Correlation Chart</h3>
