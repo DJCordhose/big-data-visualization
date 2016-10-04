@@ -134,7 +134,7 @@
     <div class="slides">
 
         <section data-transition="zoom">
-            <h2>Interactive Big Data Exploration Tools in the Browser</h2>
+            <h2>Interactive Big Data Exploration Tools for the Browser</h2>
             <h3>A Survey</h3>
             <h4><a target="_blank" href="http://www.data2day.de/veranstaltung-5122-interaktive-datenanalyse-im-browser.html?id=5122">
                 data2day 2016</a></h4>
@@ -517,6 +517,7 @@ pieChartCarriers
         .dimension(carrier)
         .group(carrier.group().reduceCount());
 </code></pre>
+            <p>Not very hard, but definitely requires programming skills</p>
         </section>
 
         <section>
@@ -631,16 +632,16 @@ pieChartCarriers
             <!--</code></pre>-->
         <!--</section>-->
 
-        <!--<section>-->
-            <!--<h3>Network, Timing, Data Sizes</h3>-->
-            <!--<div>-->
-                <!--<a href="code/dc-911-es.html" target="_blank">-->
-                    <!--<img src="screenshot_network_cors.png">-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<p>same amount of data sets, but almost 8x the size</p>-->
-            <!--<p>can be optimized by just tranferring fields you really need</p>-->
-        <!--</section>-->
+        <section>
+            <h3>Network, Timing, Data Sizes</h3>
+            <div>
+                <a href="code/dc-911-es.html" target="_blank">
+                    <img src="screenshot_network_cors.png">
+                </a>
+            </div>
+            <p>same amount of data sets, but almost 8x the size</p>
+            <p>can be optimized by just tranferring fields you really need</p>
+        </section>
 
         <section>
             <h3 style="
@@ -888,7 +889,7 @@ pieChartCarriers
             </a>
             <p><small>
                     <a href="http://bokeh.pydata.org/en/latest/docs/user_guide/interaction/callbacks.html#userguide-interaction-callbacks" target="_blank">
-                        Default interactions relatively basic (select, pan, zoom, label), custom callbacks very basic</a>
+                        Default interactions relatively basic (select, pan, zoom, label), custom callbacks possible, but low level</a>
             </small></p>
 
             </a>
