@@ -95,7 +95,7 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-        <section>
+        <section data-transition="zoom">
             <h2>Big Data Visualisation in the browser using Elasticsearch, Pandas, and D3</h2>
             <p>
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -105,6 +105,20 @@
                    target="_blank">ODSC London 2016</a></p>
             <p><small>Slides: <a href="http://bit.ly/data-exploration-odsc">
                 http://bit.ly/data-exploration-odsc</a></small></p>
+        </section>
+
+        <section data-transition="zoom">
+            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
+                <img src="twitter-creatuluw.png">
+            </a>
+        </section>
+
+        <section data-transition="zoom">
+            <h2>Target audience</h2>
+            <ul>
+                <li>Domain Expert: What is possible in visual exploration?
+                <li>Technical Expert: What tools can I use to support the Domain Expert?
+            </ul>
         </section>
 
         <section>
@@ -128,18 +142,12 @@
         </section>
 
         <section>
-            <h2>Example Project:</h2>
-            <h2>Exploring <em>all</em> domestic US flights</h2>
+            <h2>A journey through exploring <em>all</em> domestic US flights</h2>
             <h2>for 2001</h2>
             <img src="airline-pictures/a26.jpg" height="200px">
             <p><a target="_blank" href="http://stat-computing.org/dataexpo/2009/">http://stat-computing.org/dataexpo/2009/</a></p>
         </section>
 
-        <section>
-            <a href="https://twitter.com/Creatuluw/status/770519427771170816" target="_blank">
-                <img src="twitter-creatuluw.png">
-            </a>
-        </section>
 
         <section>
             <h2>No specific task or question</h2>
@@ -331,15 +339,13 @@ df = pandas.read_csv('../../data/2001/2001.csv', skiprows=skip_rows)
         <section>
             <h3>Missing data?</h3>
             <div>
-                <pre>
+                <pre><code data-trim>
 > df.count()
 DepTime               9611
 CRSDepTime           10000
 ArrTime               9590
 CRSArrTime           10000
 UniqueCarrier        10000
-FlightNum            10000
-TailNum              10000
 ActualElapsedTime     9590
 CRSElapsedTime       10000
 AirTime               9590
@@ -348,8 +354,6 @@ DepDelay              9611
 Origin               10000
 Dest                 10000
 Distance             10000
-TaxiIn               10000
-TaxiOut              10000
 Cancelled            10000
 CancellationCode         0
 Diverted             10000
@@ -357,7 +361,7 @@ CarrierDelay             0
 WeatherDelay             0
 NASDelay                 0
 SecurityDelay            0
-LateAircraftDelay        0</pre>
+LateAircraftDelay        0</code></pre>
             </div>
         </section>
 
@@ -513,7 +517,7 @@ seaborn.jointplot(df['ArrTime], df['DepTime'], kind="hex")
             <h2>Isn't this good enough already?</h2>
             <h3 class="fragment">So far</h3>
             <p class="fragment">working on random samples only</p>
-            <p class="fragment">time series data not exploited</p>
+            <p class="fragment">time series data not exploited (would be possible with Pandas)</p>
             <p class="fragment">not interactive</p>
             <h3 class="fragment">Next Step: store data in db to make it flexibly accessible</h3>
 
@@ -680,6 +684,7 @@ mapping = {
             ...
 es.put_mapping(index=INDEX_NAME, doc_type=DOC_TYPE,mapping=mapping )
             </code></pre>
+            <p>Good for performance, query hints, and index size</p>
         </section>
 
         <section>
@@ -884,8 +889,8 @@ console.log(flight.top(10));
 
         <section>
         <h2>Is that a pleasant experience?</h2>
-        <h3 class="fragment">Do you think non-technical people could hanlde that?</h3>
-        <h3 class="fragment">What about putting some graphics on top of that?</h3>
+        <p class="fragment">Do you think non-technical people could hanlde that?</p>
+        <p class="fragment">What about putting some interactive widgets on top of that?</p>
         </section>
 
         <section>
