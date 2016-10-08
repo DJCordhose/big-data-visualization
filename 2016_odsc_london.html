@@ -271,6 +271,12 @@ Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarr
         </section>
 
         <section>
+            <h2>The Journey</h2>
+            <h3 class="fragment">Making sense of the data step by step</h3>
+            <h3 class="fragment">All software shown here is Open Source and Free of Charge</h3>
+        </section>
+
+        <section>
             <h2>I: Data Wrangling with Pandas</h2>
             <p>Preparing the data</p>
             <!--<p style="color: red"><em>Caution</em>: Preparing and even collecting data already is interpretation</p>-->
@@ -803,7 +809,8 @@ df['Cancelled'] = df.apply(lambda row:
 
         <section>
             <h3>What is still missing?</h3>
-            <p>Low-latency interaction</p>
+            <p>Low-latency interaction
+                (Latency more obvious when Elasticsearch and Browser are not co-located on the same machine)</p>
             <p>(Limited) offline access</p>
             <p>Charts limited to what Kibana offers</p>
         </section>
@@ -815,6 +822,15 @@ df['Cancelled'] = df.apply(lambda row:
             </a>
             <p>Data based vector graphics (SVG)</p>
             <p><a target="_blank" href="http://d3js.org/">http://d3js.org/</a></p>
+        </section>
+
+        <section>
+            <h2>D3.js</h2>
+            <ul class="fragment">
+            <li>Predominant Open Source visualization framework
+            <li>Hard to master, as quite low level
+            <li>Good idea to put an abstraction on top of it
+            </ul>
         </section>
 
         <!--<section>-->
@@ -839,35 +855,35 @@ df['Cancelled'] = df.apply(lambda row:
             </ul>
         </section>
 
-        <section>
-        <h3>Crossfilter Sample Code</h3>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">
-// creating a new crossfilter (multi-dimensional dataset)
-// flights array contains all flights for a single month
-flight = crossfilter(flights);
-console.log(flight.size()); // 490698
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers"  data-num-start="5">
-// creating a dimension for all carriers of all flights
-carrier = flight.dimension(d => d.UniqueCarrier);
-</code></pre>
-<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable  data-num-start="7">
-// group() reduces this dimension to distinct values
-var distrinctCarriersGroup = carrier.group();
-console.log("Distinct carriers: " + distrinctCarriersGroup.size());
-// 12
-</code></pre>
-<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers"  data-num-start="11">
-// filter just for TW
-carrier.filter("TW");
-// groupAll() creates a group intersecting all current filters
-// Trans World Airlines, became part of American Airlines in 2001
-console.log("TW flights", flight.groupAll().value()); // 19427
-// display first 10 matches
-console.log(flight.top(10));
-</code></pre>
-            <p class="fragment">Could even be used as an interactive REPL in the browser</p>
-</section>
+        <!--<section>-->
+        <!--<h3>Crossfilter Sample Code</h3>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers">-->
+<!--// creating a new crossfilter (multi-dimensional dataset)-->
+<!--// flights array contains all flights for a single month-->
+<!--flight = crossfilter(flights);-->
+<!--console.log(flight.size()); // 490698-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers"  data-num-start="5">-->
+<!--// creating a dimension for all carriers of all flights-->
+<!--carrier = flight.dimension(d => d.UniqueCarrier);-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code class="javascript line-numbers" data-trim contenteditable  data-num-start="7">-->
+<!--// group() reduces this dimension to distinct values-->
+<!--var distrinctCarriersGroup = carrier.group();-->
+<!--console.log("Distinct carriers: " + distrinctCarriersGroup.size());-->
+<!--// 12-->
+<!--</code></pre>-->
+<!--<pre class="fragment"><code data-trim contenteditable class="javascript line-numbers"  data-num-start="11">-->
+<!--// filter just for TW-->
+<!--carrier.filter("TW");-->
+<!--// groupAll() creates a group intersecting all current filters-->
+<!--// Trans World Airlines, became part of American Airlines in 2001-->
+<!--console.log("TW flights", flight.groupAll().value()); // 19427-->
+<!--// display first 10 matches-->
+<!--console.log(flight.top(10));-->
+<!--</code></pre>-->
+            <!--<p class="fragment">Could even be used as an interactive REPL in the browser</p>-->
+<!--</section>-->
 
         <!--<section>-->
             <!--<h2>Hands-on</h2>-->
@@ -887,11 +903,11 @@ console.log(flight.top(10));
             <!--<p class="fragment">Give it 5 minutes max. </p>-->
         <!--</section>-->
 
-        <section>
-        <h2>Is that a pleasant experience?</h2>
-        <p class="fragment">Do you think non-technical people could hanlde that?</p>
-        <p class="fragment">What about putting some interactive widgets on top of that?</p>
-        </section>
+        <!--<section>-->
+        <!--<h2>Is that a pleasant experience?</h2>-->
+        <!--<p class="fragment">Do you think non-technical people could hanlde that?</p>-->
+        <!--<p class="fragment">What about putting some interactive widgets on top of that?</p>-->
+        <!--</section>-->
 
         <section>
             <h3>dc.js: Charting with D3 and Crossfilter</h3>
