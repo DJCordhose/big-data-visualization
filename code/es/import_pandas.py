@@ -133,7 +133,7 @@ print('Loading data')
 #                  encoding='iso-8859-1', engine='c')
 offset = 0
 number_rows = 1000
-df = pd.read_csv('../../data/2001/2001.csv',
+df = pd.read_csv('../../data/2001.csv',
                  encoding='iso-8859-1', engine='c',
                  skiprows=offset, nrows=number_rows)
 
@@ -153,13 +153,13 @@ print("NaN filled:", round(time() - t0, 3), "s")
 
 # (2)
 # 2400 is not a valid time
-df['CRSDepTime'] = df.apply(lambda row: 2359 if row['CRSDepTime'] == 2400 else row['CRSDepTime'],axis=1)
-df['@timestamp'] = df.apply(lambda row: pd.Timestamp('%s-%s-%s;%04d'%(row['Year'], row['Month'], row['DayofMonth'], row['CRSDepTime'])),axis=1)
+df['CRSDepTime'] = df.apply(lambda row: 2359 if row['CRSDepTime'] == 2400 else row['CRSDepTime'], axis='columns')
+df['@timestamp'] = df.apply(lambda row: pd.Timestamp('%s-%s-%s;%04d'%(row['Year'], row['Month'], row['DayofMonth'], row['CRSDepTime'])), axis='columns')
 print("Timestamps added:", round(time() - t0, 3), "s")
 
 # (3)
-df['Cancelled'] = df.apply(lambda row: False if row['Cancelled'] == 0 else True,axis=1)
-df['Diverted'] = df.apply(lambda row: False if row['Diverted'] == 0 else True,axis=1)
+df['Cancelled'] = df.apply(lambda row: False if row['Cancelled'] == 0 else True, axis='columns')
+df['Diverted'] = df.apply(lambda row: False if row['Diverted'] == 0 else True, axis='columns')
 print("Booleans converted:", round(time() - t0, 3), "s")
 
 # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_dict.html

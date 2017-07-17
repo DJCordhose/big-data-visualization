@@ -23,7 +23,7 @@ print("Time generating: ", round(time() - t0, 3), "s")
 
 print('Loading data')
 # http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html
-df = pd.read_csv('../../data/2001/2001.csv',
+df = pd.read_csv('../../data/2001.csv',
                  encoding='iso-8859-1', engine='c',
                  skiprows=rows_to_skip)
 print("Time loading", len(df), "rows, total: 6M rows, 573M total size:", round(time() - t0, 3), "s")

@@ -5,9 +5,9 @@
       <configuration sdkName="Python 3.5.2 (~/anaconda/bin/python)" />
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.6.0 (C:\Users\olive\Anaconda3\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Python 3.5.2 (~/anaconda/bin/python) interpreter library" level="application" />
   </component>
